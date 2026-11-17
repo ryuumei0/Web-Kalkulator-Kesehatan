@@ -8,13 +8,14 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
   <header class="topbar">
     <div class="wrap topbar-in">
-      <a class="brand" href="index.html">SehatKu</a>
+      <a class="brand" href="index.html">SehatKu<span class="brand-dot">.</span></a>
       <nav class="menu" aria-label="Menu utama">
         <a href="index.html">Beranda</a>
         <a href="index.html" aria-current="page">Kalkulator</a>
@@ -27,7 +28,10 @@
     <section class="hero">
       <div class="wrap">
         <p class="crumb"><a href="index.html">Beranda</a> / Kalkulator Kesehatan</p>
-        <h1>Kalkulator Kesehatan</h1>
+        <h1 class="judul-hero">
+          <span class="judul-ikon" aria-hidden="true"><i class="fa-solid fa-calculator"></i></span>
+          Kalkulator Kesehatan
+        </h1>
         <p class="lead">Hitung sendiri indeks kesehatan yang umum dipakai: IMT, fungsi ginjal, kalori, masa subur, tekanan darah, hingga risiko stroke, diabetes, dan kontrol asma. Hasil langsung muncul tanpa daftar.</p>
       </div>
     </section>
@@ -58,58 +62,85 @@
 
       <div class="grid" id="grid">
         <a class="card" data-cat="berat-badan" href="kalkulator/imt.html">
-          <span class="tag">Berat badan</span>
-          <h3>Kalkulator IMT & Berat Badan Ideal</h3>
-          <p>Hitung IMT dan berat badan ideal dengan klasifikasi Asia-Pasifik (WHO/Perki).</p>
-          <span class="go">Mulai hitung</span>
+          <span class="card-media"><i class="fa-solid fa-weight-scale" aria-hidden="true"></i></span>
+          <span class="card-body">
+            <span class="tag">Berat badan</span>
+            <h3>Kalkulator IMT &amp; Berat Badan Ideal</h3>
+            <p>Hitung IMT dan berat badan ideal dengan klasifikasi Asia-Pasifik (WHO/Perki).</p>
+            <span class="go">Mulai hitung <span aria-hidden="true">&#8594;</span></span>
+          </span>
         </a>
         <a class="card" data-cat="ginjal" href="kalkulator/egfr-ginjal.html">
-          <span class="tag">Ginjal</span>
-          <h3>Kalkulator Fungsi Ginjal (eGFR)</h3>
-          <p>Hitung eGFR dari hasil kreatinin dengan rumus CKD-EPI 2021 dan stadium penyakit ginjal kronik (KDIGO).</p>
-          <span class="go">Mulai hitung</span>
+          <span class="card-media"><i class="fa-solid fa-vial" aria-hidden="true"></i></span>
+          <span class="card-body">
+            <span class="tag">Ginjal</span>
+            <h3>Kalkulator Fungsi Ginjal (eGFR)</h3>
+            <p>Hitung eGFR dari hasil kreatinin dengan rumus CKD-EPI 2021 dan stadium penyakit ginjal kronik (KDIGO).</p>
+            <span class="go">Mulai hitung <span aria-hidden="true">&#8594;</span></span>
+          </span>
         </a>
         <a class="card" data-cat="nutrisi" href="kalkulator/kalori.html">
-          <span class="tag">Nutrisi</span>
-          <h3>Kalkulator Kebutuhan Kalori Harian</h3>
-          <p>Hitung BMR dan total kebutuhan kalori harian (TDEE) dengan rumus Mifflin-St Jeor.</p>
-          <span class="go">Mulai hitung</span>
+          <span class="card-media"><i class="fa-solid fa-apple-whole" aria-hidden="true"></i></span>
+          <span class="card-body">
+            <span class="tag">Nutrisi</span>
+            <h3>Kalkulator Kebutuhan Kalori Harian</h3>
+            <p>Hitung BMR dan total kebutuhan kalori harian (TDEE) dengan rumus Mifflin-St Jeor.</p>
+            <span class="go">Mulai hitung <span aria-hidden="true">&#8594;</span></span>
+          </span>
         </a>
         <a class="card" data-cat="kehamilan" href="kalkulator/masa-subur.html">
-          <span class="tag">Kehamilan</span>
-          <h3>Kalkulator Masa Subur & HPL</h3>
-          <p>Perkirakan masa subur, tanggal ovulasi, dan Hari Perkiraan Lahir dari HPHT dan panjang siklus haid.</p>
-          <span class="go">Mulai hitung</span>
+          <span class="card-media"><i class="fa-solid fa-baby" aria-hidden="true"></i></span>
+          <span class="card-body">
+            <span class="tag">Kehamilan</span>
+            <h3>Kalkulator Masa Subur &amp; HPL</h3>
+            <p>Perkirakan masa subur, tanggal ovulasi, dan Hari Perkiraan Lahir dari HPHT dan panjang siklus haid.</p>
+            <span class="go">Mulai hitung <span aria-hidden="true">&#8594;</span></span>
+          </span>
         </a>
         <a class="card" data-cat="jantung" href="kalkulator/tekanan-darah.html">
-          <span class="tag">Jantung</span>
-          <h3>Cek Kategori Tekanan Darah</h3>
-          <p>Cek apakah tekanan darah normal, meningkat, hipertensi stadium 1-2, atau krisis (panduan AHA).</p>
-          <span class="go">Mulai hitung</span>
+          <span class="card-media"><i class="fa-solid fa-gauge-high" aria-hidden="true"></i></span>
+          <span class="card-body">
+            <span class="tag">Jantung</span>
+            <h3>Cek Kategori Tekanan Darah</h3>
+            <p>Cek apakah tekanan darah normal, meningkat, hipertensi stadium 1-2, atau krisis (panduan AHA).</p>
+            <span class="go">Mulai hitung <span aria-hidden="true">&#8594;</span></span>
+          </span>
         </a>
         <a class="card" data-cat="jantung" href="kalkulator/detak-jantung.html">
-          <span class="tag">Jantung</span>
-          <h3>Kalkulator Zona Detak Jantung</h3>
-          <p>Hitung detak jantung maksimal dan 5 zona latihan berdasarkan umur dengan rumus Tanaka.</p>
-          <span class="go">Mulai hitung</span>
+          <span class="card-media"><i class="fa-solid fa-heart-pulse" aria-hidden="true"></i></span>
+          <span class="card-body">
+            <span class="tag">Jantung</span>
+            <h3>Kalkulator Zona Detak Jantung</h3>
+            <p>Hitung detak jantung maksimal dan 5 zona latihan berdasarkan umur dengan rumus Tanaka.</p>
+            <span class="go">Mulai hitung <span aria-hidden="true">&#8594;</span></span>
+          </span>
         </a>
         <a class="card" data-cat="stroke" href="kalkulator/risiko-stroke.html">
-          <span class="tag">Stroke</span>
-          <h3>Kalkulator Risiko Stroke (CHA2DS2-VASc)</h3>
-          <p>Nilai risiko stroke per tahun dengan skor CHA2DS2-VASc, alat yang dipakai dokter untuk menentukan kebutuhan antikoagulan.</p>
-          <span class="go">Mulai hitung</span>
+          <span class="card-media"><i class="fa-solid fa-brain" aria-hidden="true"></i></span>
+          <span class="card-body">
+            <span class="tag">Stroke</span>
+            <h3>Kalkulator Risiko Stroke (CHA2DS2-VASc)</h3>
+            <p>Nilai risiko stroke per tahun dengan skor CHA2DS2-VASc, alat yang dipakai dokter untuk menentukan kebutuhan antikoagulan.</p>
+            <span class="go">Mulai hitung <span aria-hidden="true">&#8594;</span></span>
+          </span>
         </a>
         <a class="card" data-cat="gula-darah" href="kalkulator/risiko-diabetes.html">
-          <span class="tag">Gula darah</span>   
-          <h3>Kalkulator Risiko Diabetes</h3>
-          <p>Skrining risiko diabetes tipe 2 dengan ADA Diabetes Risk Test (skor 0-10, batas risiko 5).</p>
-          <span class="go">Mulai hitung</span>
+          <span class="card-media"><i class="fa-solid fa-syringe" aria-hidden="true"></i></span>
+          <span class="card-body">
+            <span class="tag">Gula darah</span>
+            <h3>Kalkulator Risiko Diabetes</h3>
+            <p>Skrining risiko diabetes tipe 2 dengan ADA Diabetes Risk Test (skor 0-10, batas risiko 5).</p>
+            <span class="go">Mulai hitung <span aria-hidden="true">&#8594;</span></span>
+          </span>
         </a>
         <a class="card" data-cat="paru" href="kalkulator/asma-act.html">
-          <span class="tag">Paru</span>
-          <h3>Tes Kontrol Asma (ACT)</h3>
-          <p>Isi 5 pertanyaan Asthma Control Test untuk menilai apakah asma sudah terkontrol.</p>
-          <span class="go">Mulai hitung</span>
+          <span class="card-media"><i class="fa-solid fa-lungs" aria-hidden="true"></i></span>
+          <span class="card-body">
+            <span class="tag">Paru</span>
+            <h3>Tes Kontrol Asma (ACT)</h3>
+            <p>Isi 5 pertanyaan Asthma Control Test untuk menilai apakah asma sudah terkontrol.</p>
+            <span class="go">Mulai hitung <span aria-hidden="true">&#8594;</span></span>
+          </span>
         </a>
       </div>
 
