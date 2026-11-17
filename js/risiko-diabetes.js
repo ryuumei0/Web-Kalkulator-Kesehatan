@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const formDiabetes = document.getElementById("form-diabetes");
 const hasilDiabetes = document.getElementById("hasil-diabetes");
 
@@ -16,12 +15,13 @@ formDiabetes.addEventListener("submit", function(event) {
     const aktivitas = document.getElementById("aktivitas").value;
     const tekanan = document.getElementById("tekanan").value;
 
-    // Validasi data
+    // Validasi input
     if (
-        usia <= 0 || usia > 120 ||
-        berat <= 0 || tinggi <= 0 ||
-        lingkar <= 0 || !gender ||
-        !keluarga || !aktivitas || !tekanan
+        !Number.isFinite(usia) || usia <= 0 || usia > 120 ||
+        !Number.isFinite(berat) || berat <= 0 ||
+        !Number.isFinite(tinggi) || tinggi <= 0 ||
+        !Number.isFinite(lingkar) || lingkar <= 0 ||
+        !gender || !keluarga || !aktivitas || !tekanan
     ) {
         alert("Mohon isi semua data dengan benar!");
         return;
@@ -30,6 +30,11 @@ formDiabetes.addEventListener("submit", function(event) {
     // Menghitung IMT
     const tinggiMeter = tinggi / 100;
     const imt = berat / (tinggiMeter * tinggiMeter);
+
+    if (!Number.isFinite(imt)) {
+        alert("Data tinggi atau berat badan tidak valid!");
+        return;
+    }
 
     // Menghitung skor simulasi
     let skor = 0;
@@ -70,7 +75,7 @@ formDiabetes.addEventListener("submit", function(event) {
         saran = "Perbaiki pola makan, olahraga, dan pantau kesehatan.";
     } else {
         kategori = "Faktor risiko lebih banyak ditemukan";
-        saran = "Disarankan berkonsultasi dengan tenaga kesehatan dan mempertimbangkan pemeriksaan gula darah.";
+        saran = "Konsultasikan kondisi kesehatan dan pertimbangkan pemeriksaan gula darah.";
     }
 
     // Menampilkan hasil
@@ -94,11 +99,8 @@ formDiabetes.addEventListener("submit", function(event) {
     });
 });
 
-// Menghapus hasil ketika tombol reset diklik
+// Reset hasil perhitungan
 formDiabetes.addEventListener("reset", function() {
     hasilDiabetes.style.display = "none";
     hasilDiabetes.innerHTML = "";
 });
-=======
- 
->>>>>>> 65573933b3e4791ced979bf462fe3dfbbd1914db
