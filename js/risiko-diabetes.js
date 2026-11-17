@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const formDiabetes = document.getElementById("form-diabetes");
 const hasilDiabetes = document.getElementById("hasil-diabetes");
 
@@ -98,3 +99,6 @@ formDiabetes.addEventListener("reset", function() {
     hasilDiabetes.style.display = "none";
     hasilDiabetes.innerHTML = "";
 });
+=======
+ 
+>>>>>>> 65573933b3e4791ced979bf462fe3dfbbd1914db
