@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Asma ACT</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+
+    <style>
+        .asma-container {
+            max-width: 750px;
+            margin: 30px auto;
+            padding: 25px;
+            background: white;
+            border-radius: 12px;
+        }
+
+        .asma-question {
+            padding: 18px;
+            margin: 15px 0;
+            background: #f1f7f7;
+            border-radius: 8px;
+        }
+
+        .asma-question label {
+            display: block;
+            margin: 10px 0;
+            cursor: pointer;
+        }
+
+        .asma-btn {
+            background: #168b83;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 7px;
+            cursor: pointer;
+        }
+
+        .asma-btn:hover {
+            background: #106b65;
+        }
+
+        #hasil-asma {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background: #e5f5f0;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="asma-container">
+
+    <h1>Kalkulator Asma ACT</h1>
+
+    <p>
+        Penilaian sederhana untuk membantu mengetahui
+        tingkat kendali gejala asma dalam 4 minggu terakhir.
+    </p>
+
+    <form id="form-asma">
+
+        <div class="asma-question">
+            <h3>1. Seberapa sering asma mengganggu aktivitas sehari-hari?</h3>
+
+            <label><input type="radio" name="q1" value="1"> Sangat sering</label>
+            <label><input type="radio" name="q1" value="2"> Sering</label>
+            <label><input type="radio" name="q1" value="3"> Kadang-kadang</label>
+            <label><input type="radio" name="q1" value="4"> Jarang</label>
+            <label><input type="radio" name="q1" value="5"> Tidak pernah</label>
+        </div>
+
+        <div class="asma-question">
+            <h3>2. Seberapa sering mengalami sesak napas?</h3>
+
+            <label><input type="radio" name="q2" value="1"> Sangat sering</label>
+            <label><input type="radio" name="q2" value="2"> Sering</label>
+            <label><input type="radio" name="q2" value="3"> Kadang-kadang</label>
+            <label><input type="radio" name="q2" value="4"> Jarang</label>
+            <label><input type="radio" name="q2" value="5"> Tidak pernah</label>
+        </div>
+
+        <div class="asma-question">
+            <h3>3. Seberapa sering terbangun malam karena gejala asma?</h3>
+
+            <label><input type="radio" name="q3" value="1"> Sangat sering</label>
+            <label><input type="radio" name="q3" value="2"> Sering</label>
+            <label><input type="radio" name="q3" value="3"> Kadang-kadang</label>
+            <label><input type="radio" name="q3" value="4"> Jarang</label>
+            <label><input type="radio" name="q3" value="5"> Tidak pernah</label>
+        </div>
+
+        <div class="asma-question">
+            <h3>4. Seberapa sering menggunakan obat pelega asma?</h3>
+
+            <label><input type="radio" name="q4" value="1"> Sangat sering</label>
+            <label><input type="radio" name="q4" value="2"> Sering</label>
+            <label><input type="radio" name="q4" value="3"> Kadang-kadang</label>
+            <label><input type="radio" name="q4" value="4"> Jarang</label>
+            <label><input type="radio" name="q4" value="5"> Tidak pernah</label>
+        </div>
+
+        <div class="asma-question">
+            <h3>5. Bagaimana kondisi asma secara keseluruhan?</h3>
+
+            <label><input type="radio" name="q5" value="1"> Sangat buruk</label>
+            <label><input type="radio" name="q5" value="2"> Buruk</label>
+            <label><input type="radio" name="q5" value="3"> Cukup</label>
+            <label><input type="radio" name="q5" value="4"> Baik</label>
+            <label><input type="radio" name="q5" value="5"> Sangat baik</label>
+        </div>
+
+        <button type="submit" class="asma-btn">
+            Hitung Hasil
+        </button>
+
+        <button type="reset" class="asma-btn">
+            Reset
+        </button>
+
+    </form>
+
+    <div id="hasil-asma" aria-live="polite"></div>
+
+    <p style="font-size: 13px; color: #666;">
+        Catatan: Ini merupakan simulasi edukasi dengan sistem skor
+        5–25, bukan kuesioner ACT resmi dan bukan diagnosis medis.
+    </p>
+
+</div>
+
+<script src="../js/asma-act.js"></script>
+
+</body>
+</html>
