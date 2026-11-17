@@ -37,55 +37,104 @@
     </section>
 
     <div class="wrap konten-utama">
-      <section class="kalkulator" aria-labelledby="judul-hitung">
-        <div class="kalkulator-grid">
-          <form class="kalkulator-form" id="form-imt" novalidate>
-            <h2 id="judul-hitung">Masukkan data Anda</h2>
-            <p>Gunakan angka hasil penimbangan dan pengukuran terakhir agar hasil lebih akurat.</p>
+      <div class="konten-kiri">
+        <section class="kalkulator" aria-labelledby="judul-hitung">
+          <div class="kalkulator-grid">
+            <form class="kalkulator-form" id="form-imt" novalidate>
+              <h2 id="judul-hitung">Masukkan data Anda</h2>
+              <p>Gunakan angka hasil penimbangan dan pengukuran terakhir agar hasil lebih akurat.</p>
 
-            <div class="field">
-              <label for="berat"><i class="fa-solid fa-weight-scale" aria-hidden="true"></i> Berat badan (kg)</label>
-              <input type="number" id="berat" step="0.1" min="1" placeholder="Contoh: 62" required>
-            </div>
+              <div class="field">
+                <label for="berat"><i class="fa-solid fa-weight-scale" aria-hidden="true"></i> Berat badan (kg)</label>
+                <input type="number" id="berat" step="0.1" min="1" placeholder="Contoh: 62" required>
+              </div>
 
-            <div class="field">
-              <label for="tinggi"><i class="fa-solid fa-ruler-vertical" aria-hidden="true"></i> Tinggi badan (cm)</label>
-              <input type="number" id="tinggi" step="0.1" min="1" placeholder="Contoh: 170" required>
-            </div>
+              <div class="field">
+                <label for="tinggi"><i class="fa-solid fa-ruler-vertical" aria-hidden="true"></i> Tinggi badan (cm)</label>
+                <input type="number" id="tinggi" step="0.1" min="1" placeholder="Contoh: 170" required>
+              </div>
 
-            <p class="error" id="imt-error" hidden>Masukkan berat dan tinggi badan dengan angka yang valid.</p>
+              <p class="error" id="imt-error" hidden>Masukkan berat dan tinggi badan dengan angka yang valid.</p>
 
-            <button class="btn-hitung" type="submit">
-              <i class="fa-solid fa-calculator" aria-hidden="true"></i> Hitung IMT
-            </button>
-          </form>
+              <button class="btn-hitung" type="submit">
+                <i class="fa-solid fa-calculator" aria-hidden="true"></i> Hitung IMT
+              </button>
+            </form>
 
-          <div class="hasil" id="hasil-imt" hidden aria-live="polite">
-            <div class="hasil-atas">
-              <span class="hasil-label">Nilai IMT Anda</span>
-              <strong class="hasil-angka" id="imt-nilai">0,0</strong>
-              <span class="badge-kategori" id="imt-kategori">Normal</span>
+            <div class="hasil" id="hasil-imt" hidden aria-live="polite">
+              <div class="hasil-atas">
+                <span class="hasil-label">Nilai IMT Anda</span>
+                <strong class="hasil-angka" id="imt-nilai">0,0</strong>
+                <span class="badge-kategori" id="imt-kategori">Normal</span>
+              </div>
+              <div class="hasil-baris">
+                <span>Berat badan ideal</span>
+                <strong id="imt-ideal">–</strong>
+              </div>
+              <div class="hasil-baris">
+                <span>Klasifikasi</span>
+                <strong>Asia-Pasifik (WHO/Perki)</strong>
+              </div>
+              <p class="saran" id="imt-saran"></p>
+              <p class="rumus">Rumus: IMT = berat (kg) &divide; tinggi (m)&sup2;</p>
             </div>
-            <div class="hasil-baris">
-              <span>Berat badan ideal</span>
-              <strong id="imt-ideal">–</strong>
-            </div>
-            <div class="hasil-baris">
-              <span>Klasifikasi</span>
-              <strong>Asia-Pasifik (WHO/Perki)</strong>
-            </div>
-            <p class="saran" id="imt-saran"></p>
-            <p class="rumus">Rumus: IMT = berat (kg) &divide; tinggi (m)&sup2;</p>
           </div>
-        </div>
+        </section>
 
-        <p class="notice"><strong>Hanya untuk edukasi.</strong> IMT tidak membedakan massa otot dan lemak. Hasil ini bukan pengganti pemeriksaan dokter, terutama jika Anda memiliki kondisi khusus.</p>
-      </section>
+        <section class="lainnya" aria-labelledby="judul-lain">
+          <div class="tools-head">
+            <h2 id="judul-lain">Coba kalkulator lain</h2>
+            <p class="count">8 alat tersedia</p>
+          </div>
+          <div class="grid grid-kecil">
+            <a class="card-kecil" href="egfr-ginjal.html">
+              <span class="mini-ikon" aria-hidden="true"><i class="fa-solid fa-vial"></i></span>
+              <h3>Fungsi Ginjal (eGFR)</h3>
+              <span class="go" aria-hidden="true">&#8594;</span>
+            </a>
+            <a class="card-kecil" href="kalori.html">
+              <span class="mini-ikon" aria-hidden="true"><i class="fa-solid fa-apple-whole"></i></span>
+              <h3>Kebutuhan Kalori Harian</h3>
+              <span class="go" aria-hidden="true">&#8594;</span>
+            </a>
+            <a class="card-kecil" href="masa-subur.html">
+              <span class="mini-ikon" aria-hidden="true"><i class="fa-solid fa-baby"></i></span>
+              <h3>Masa Subur &amp; HPL</h3>
+              <span class="go" aria-hidden="true">&#8594;</span>
+            </a>
+            <a class="card-kecil" href="tekanan-darah.html">
+              <span class="mini-ikon" aria-hidden="true"><i class="fa-solid fa-gauge-high"></i></span>
+              <h3>Tekanan Darah</h3>
+              <span class="go" aria-hidden="true">&#8594;</span>
+            </a>
+            <a class="card-kecil" href="detak-jantung.html">
+              <span class="mini-ikon" aria-hidden="true"><i class="fa-solid fa-heart-pulse"></i></span>
+              <h3>Zona Detak Jantung</h3>
+              <span class="go" aria-hidden="true">&#8594;</span>
+            </a>
+            <a class="card-kecil" href="risiko-stroke.html">
+              <span class="mini-ikon" aria-hidden="true"><i class="fa-solid fa-brain"></i></span>
+              <h3>Risiko Stroke</h3>
+              <span class="go" aria-hidden="true">&#8594;</span>
+            </a>
+            <a class="card-kecil" href="risiko-diabetes.html">
+              <span class="mini-ikon" aria-hidden="true"><i class="fa-solid fa-syringe"></i></span>
+              <h3>Risiko Diabetes</h3>
+              <span class="go" aria-hidden="true">&#8594;</span>
+            </a>
+            <a class="card-kecil" href="asma-act.html">
+              <span class="mini-ikon" aria-hidden="true"><i class="fa-solid fa-lungs"></i></span>
+              <h3>Tes Kontrol Asma</h3>
+              <span class="go" aria-hidden="true">&#8594;</span>
+            </a>
+          </div>
+        </section>
+      </div>
 
       <aside class="artikel" aria-labelledby="judul-artikel">
-        <div class="artikel-head">
+        <div class="tools-head">
           <h2 id="judul-artikel">Artikel terkait</h2>
-          <p>Bacaan singkat seputar berat badan dan kesehatan.</p>
+          <p class="count">Bacaan seputar berat badan</p>
         </div>
 
         <div class="artikel-grid">
@@ -119,55 +168,6 @@
         </div>
       </aside>
     </div>
-
-    <section class="wrap lainnya" aria-labelledby="judul-lain">
-      <div class="tools-head">
-        <h2 id="judul-lain">Coba kalkulator lain</h2>
-        <p class="count">8 alat tersedia</p>
-      </div>
-      <div class="grid grid-kecil">
-        <a class="card-kecil" href="egfr-ginjal.html">
-          <span class="mini-ikon" aria-hidden="true"><i class="fa-solid fa-vial"></i></span>
-          <h3>Fungsi Ginjal (eGFR)</h3>
-          <span class="go" aria-hidden="true">&#8594;</span>
-        </a>
-        <a class="card-kecil" href="kalori.html">
-          <span class="mini-ikon" aria-hidden="true"><i class="fa-solid fa-apple-whole"></i></span>
-          <h3>Kebutuhan Kalori Harian</h3>
-          <span class="go" aria-hidden="true">&#8594;</span>
-        </a>
-        <a class="card-kecil" href="masa-subur.html">
-          <span class="mini-ikon" aria-hidden="true"><i class="fa-solid fa-baby"></i></span>
-          <h3>Masa Subur &amp; HPL</h3>
-          <span class="go" aria-hidden="true">&#8594;</span>
-        </a>
-        <a class="card-kecil" href="tekanan-darah.html">
-          <span class="mini-ikon" aria-hidden="true"><i class="fa-solid fa-gauge-high"></i></span>
-          <h3>Tekanan Darah</h3>
-          <span class="go" aria-hidden="true">&#8594;</span>
-        </a>
-        <a class="card-kecil" href="detak-jantung.html">
-          <span class="mini-ikon" aria-hidden="true"><i class="fa-solid fa-heart-pulse"></i></span>
-          <h3>Zona Detak Jantung</h3>
-          <span class="go" aria-hidden="true">&#8594;</span>
-        </a>
-        <a class="card-kecil" href="risiko-stroke.html">
-          <span class="mini-ikon" aria-hidden="true"><i class="fa-solid fa-brain"></i></span>
-          <h3>Risiko Stroke</h3>
-          <span class="go" aria-hidden="true">&#8594;</span>
-        </a>
-        <a class="card-kecil" href="risiko-diabetes.html">
-          <span class="mini-ikon" aria-hidden="true"><i class="fa-solid fa-syringe"></i></span>
-          <h3>Risiko Diabetes</h3>
-          <span class="go" aria-hidden="true">&#8594;</span>
-        </a>
-        <a class="card-kecil" href="asma-act.html">
-          <span class="mini-ikon" aria-hidden="true"><i class="fa-solid fa-lungs"></i></span>
-          <h3>Tes Kontrol Asma</h3>
-          <span class="go" aria-hidden="true">&#8594;</span>
-        </a>
-      </div>
-    </section>
   </main>
 
   <footer class="foot" id="tentang">

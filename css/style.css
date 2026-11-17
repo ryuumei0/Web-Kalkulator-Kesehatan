@@ -428,7 +428,10 @@ h1, h2, h3 {
   gap: 24px;
   align-items: start;
   padding-top: 44px;
+  padding-bottom: 72px;
 }
+
+.konten-kiri { min-width: 0; }
 
 .kalkulator { padding: 0; }
 
@@ -586,15 +589,9 @@ h1, h2, h3 {
 
 .rumus { margin: 14px 0 0; font-size: 0.8rem; color: var(--abu-500); }
 
-/* ---------- Artikel terkait (sidebar kanan) ---------- */
-.lainnya { padding-top: 46px; padding-bottom: 72px; }
-
-.artikel-head h2 { font-size: 1.25rem; }
-.artikel-head p {
-  margin: 6px 0 18px;
-  font-size: 0.85rem;
-  color: var(--abu-500);
-}
+/* ---------- Kalkulator lain & artikel terkait ---------- */
+.lainnya { padding-top: 30px; }
+.artikel { padding: 0; }
 
 .artikel-grid {
   display: grid;
