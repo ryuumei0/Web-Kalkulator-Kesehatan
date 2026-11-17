@@ -1,11 +1,130 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kalkulator Kesehatan Online</title>
+  <meta name="description" content="Kumpulan kalkulator kesehatan gratis: IMT, fungsi ginjal, kalori, masa subur, tekanan darah, detak jantung, risiko stroke, diabetes, dan asma.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    
+
+  <header class="topbar">
+    <div class="wrap topbar-in">
+      <a class="brand" href="index.html">SehatKu</a>
+      <nav class="menu" aria-label="Menu utama">
+        <a href="index.html">Beranda</a>
+        <a href="index.html" aria-current="page">Kalkulator</a>
+        <a href="#tentang">Tentang</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <p class="crumb"><a href="index.html">Beranda</a> / Kalkulator Kesehatan</p>
+        <h1>Kalkulator Kesehatan</h1>
+        <p class="lead">Hitung sendiri indeks kesehatan yang umum dipakai: IMT, fungsi ginjal, kalori, masa subur, tekanan darah, hingga risiko stroke, diabetes, dan kontrol asma. Hasil langsung muncul tanpa daftar.</p>
+      </div>
+    </section>
+
+    <section class="wrap tools" aria-labelledby="judul-pilih">
+      <div class="tools-head">
+        <h2 id="judul-pilih">Pilih kalkulator</h2>
+        <p id="jumlah" class="count" aria-live="polite">9 alat tersedia</p>
+      </div>
+
+      <div class="controls">
+        <div class="filters" id="filters" role="group" aria-label="Filter kategori">
+          <button class="chip is-active" data-filter="semua">Semua <span>9</span></button>
+          <button class="chip" data-filter="berat-badan">Berat badan <span>1</span></button>
+          <button class="chip" data-filter="ginjal">Ginjal <span>1</span></button>
+          <button class="chip" data-filter="nutrisi">Nutrisi <span>1</span></button>
+          <button class="chip" data-filter="kehamilan">Kehamilan <span>1</span></button>
+          <button class="chip" data-filter="jantung">Jantung <span>2</span></button>
+          <button class="chip" data-filter="stroke">Stroke <span>1</span></button>
+          <button class="chip" data-filter="gula-darah">Gula darah <span>1</span></button>
+          <button class="chip" data-filter="paru">Paru <span>1</span></button>
+        </div>
+        <label class="search">
+          <span class="sr-only">Cari kalkulator</span>
+          <input type="search" id="cari" placeholder="Cari kalkulator, misalnya kalori">
+        </label>
+      </div>
+
+      <div class="grid" id="grid">
+        <a class="card" data-cat="berat-badan" href="kalkulator/imt.html">
+          <span class="tag">Berat badan</span>
+          <h3>Kalkulator IMT & Berat Badan Ideal</h3>
+          <p>Hitung IMT dan berat badan ideal dengan klasifikasi Asia-Pasifik (WHO/Perki).</p>
+          <span class="go">Mulai hitung</span>
+        </a>
+        <a class="card" data-cat="ginjal" href="kalkulator/egfr-ginjal.html">
+          <span class="tag">Ginjal</span>
+          <h3>Kalkulator Fungsi Ginjal (eGFR)</h3>
+          <p>Hitung eGFR dari hasil kreatinin dengan rumus CKD-EPI 2021 dan stadium penyakit ginjal kronik (KDIGO).</p>
+          <span class="go">Mulai hitung</span>
+        </a>
+        <a class="card" data-cat="nutrisi" href="kalkulator/kalori.html">
+          <span class="tag">Nutrisi</span>
+          <h3>Kalkulator Kebutuhan Kalori Harian</h3>
+          <p>Hitung BMR dan total kebutuhan kalori harian (TDEE) dengan rumus Mifflin-St Jeor.</p>
+          <span class="go">Mulai hitung</span>
+        </a>
+        <a class="card" data-cat="kehamilan" href="kalkulator/masa-subur.html">
+          <span class="tag">Kehamilan</span>
+          <h3>Kalkulator Masa Subur & HPL</h3>
+          <p>Perkirakan masa subur, tanggal ovulasi, dan Hari Perkiraan Lahir dari HPHT dan panjang siklus haid.</p>
+          <span class="go">Mulai hitung</span>
+        </a>
+        <a class="card" data-cat="jantung" href="kalkulator/tekanan-darah.html">
+          <span class="tag">Jantung</span>
+          <h3>Cek Kategori Tekanan Darah</h3>
+          <p>Cek apakah tekanan darah normal, meningkat, hipertensi stadium 1-2, atau krisis (panduan AHA).</p>
+          <span class="go">Mulai hitung</span>
+        </a>
+        <a class="card" data-cat="jantung" href="kalkulator/detak-jantung.html">
+          <span class="tag">Jantung</span>
+          <h3>Kalkulator Zona Detak Jantung</h3>
+          <p>Hitung detak jantung maksimal dan 5 zona latihan berdasarkan umur dengan rumus Tanaka.</p>
+          <span class="go">Mulai hitung</span>
+        </a>
+        <a class="card" data-cat="stroke" href="kalkulator/risiko-stroke.html">
+          <span class="tag">Stroke</span>
+          <h3>Kalkulator Risiko Stroke (CHA2DS2-VASc)</h3>
+          <p>Nilai risiko stroke per tahun dengan skor CHA2DS2-VASc, alat yang dipakai dokter untuk menentukan kebutuhan antikoagulan.</p>
+          <span class="go">Mulai hitung</span>
+        </a>
+        <a class="card" data-cat="gula-darah" href="kalkulator/risiko-diabetes.html">
+          <span class="tag">Gula darah</span>
+          <h3>Kalkulator Risiko Diabetes</h3>
+          <p>Skrining risiko diabetes tipe 2 dengan ADA Diabetes Risk Test (skor 0-10, batas risiko 5).</p>
+          <span class="go">Mulai hitung</span>
+        </a>
+        <a class="card" data-cat="paru" href="kalkulator/asma-act.html">
+          <span class="tag">Paru</span>
+          <h3>Tes Kontrol Asma (ACT)</h3>
+          <p>Isi 5 pertanyaan Asthma Control Test untuk menilai apakah asma sudah terkontrol.</p>
+          <span class="go">Mulai hitung</span>
+        </a>
+      </div>
+
+      <p id="kosong" class="empty" hidden>Tidak ada kalkulator yang cocok. Coba kata kunci lain atau pilih kategori Semua.</p>
+
+      <p class="notice"><strong>Hanya untuk edukasi.</strong> Kalkulator ini bukan pengganti pemeriksaan dokter. Jika ada keluhan atau hasil yang mengkhawatirkan, segera konsultasi ke dokter.</p>
+    </section>
+  </main>
+
+  <footer class="foot" id="tentang">
+    <div class="wrap">
+      <p>Proyek tugas web kelompok. Rumus mengacu pada panduan kesehatan yang dicantumkan di tiap kalkulator.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
 </body>
 </html>
