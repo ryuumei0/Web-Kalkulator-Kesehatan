@@ -1,11 +1,181 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kalkulator IMT &amp; Berat Badan Ideal</title>
+  <meta name="description" content="Hitung Indeks Massa Tubuh (IMT) dan perkiraan berat badan ideal dengan klasifikasi Asia-Pasifik WHO/Perki.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-    <h1>ini imt </h1>
+
+  <header class="topbar">
+    <div class="wrap topbar-in">
+      <a class="brand" href="../index.html">SehatKu<span class="brand-dot">.</span></a>
+      <nav class="menu" aria-label="Menu utama">
+        <a href="../index.html">Beranda</a>
+        <a href="../index.html#kalkulator" aria-current="location">Kalkulator</a>
+        <a href="#tentang">Tentang</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero hero-kecil">
+      <div class="wrap">
+        <p class="crumb"><a href="../index.html">Beranda</a> / <a href="../index.html#kalkulator">Kalkulator Kesehatan</a> / IMT</p>
+        <h1 class="judul-hero">
+          <span class="judul-ikon" aria-hidden="true"><i class="fa-solid fa-weight-scale"></i></span>
+          Kalkulator IMT
+        </h1>
+        <p class="lead">Hitung Indeks Massa Tubuh (IMT) dan perkiraan berat badan ideal berdasarkan klasifikasi Asia-Pasifik WHO/Perki. Cukup masukkan berat dan tinggi badan, hasil langsung muncul.</p>
+      </div>
+    </section>
+
+    <div class="wrap konten-utama">
+      <section class="kalkulator" aria-labelledby="judul-hitung">
+        <div class="kalkulator-grid">
+          <form class="kalkulator-form" id="form-imt" novalidate>
+            <h2 id="judul-hitung">Masukkan data Anda</h2>
+            <p>Gunakan angka hasil penimbangan dan pengukuran terakhir agar hasil lebih akurat.</p>
+
+            <div class="field">
+              <label for="berat"><i class="fa-solid fa-weight-scale" aria-hidden="true"></i> Berat badan (kg)</label>
+              <input type="number" id="berat" step="0.1" min="1" placeholder="Contoh: 62" required>
+            </div>
+
+            <div class="field">
+              <label for="tinggi"><i class="fa-solid fa-ruler-vertical" aria-hidden="true"></i> Tinggi badan (cm)</label>
+              <input type="number" id="tinggi" step="0.1" min="1" placeholder="Contoh: 170" required>
+            </div>
+
+            <p class="error" id="imt-error" hidden>Masukkan berat dan tinggi badan dengan angka yang valid.</p>
+
+            <button class="btn-hitung" type="submit">
+              <i class="fa-solid fa-calculator" aria-hidden="true"></i> Hitung IMT
+            </button>
+          </form>
+
+          <div class="hasil" id="hasil-imt" hidden aria-live="polite">
+            <div class="hasil-atas">
+              <span class="hasil-label">Nilai IMT Anda</span>
+              <strong class="hasil-angka" id="imt-nilai">0,0</strong>
+              <span class="badge-kategori" id="imt-kategori">Normal</span>
+            </div>
+            <div class="hasil-baris">
+              <span>Berat badan ideal</span>
+              <strong id="imt-ideal">–</strong>
+            </div>
+            <div class="hasil-baris">
+              <span>Klasifikasi</span>
+              <strong>Asia-Pasifik (WHO/Perki)</strong>
+            </div>
+            <p class="saran" id="imt-saran"></p>
+            <p class="rumus">Rumus: IMT = berat (kg) &divide; tinggi (m)&sup2;</p>
+          </div>
+        </div>
+
+        <p class="notice"><strong>Hanya untuk edukasi.</strong> IMT tidak membedakan massa otot dan lemak. Hasil ini bukan pengganti pemeriksaan dokter, terutama jika Anda memiliki kondisi khusus.</p>
+      </section>
+
+      <aside class="artikel" aria-labelledby="judul-artikel">
+        <div class="artikel-head">
+          <h2 id="judul-artikel">Artikel terkait</h2>
+          <p>Bacaan singkat seputar berat badan dan kesehatan.</p>
+        </div>
+
+        <div class="artikel-grid">
+          <a class="artikel-card" href="https://www.alodokter.com/pemahaman-seputar-indeks-massa-tubuh.html" target="_blank" rel="noopener noreferrer">
+            <img class="artikel-thumb" src="https://images.alodokter.com/dk0z4ums3/image/upload/v1622452222/attached_image/pemahaman-seputar-indeks-massa-tubuh.jpg" alt="Ilustrasi pengukuran indeks massa tubuh" loading="lazy" width="480" height="240">
+            <span class="artikel-isi">
+              <span class="tag">IMT</span>
+              <h3>Memahami Indeks Massa Tubuh</h3>
+              <p>Pengertian IMT, cara mengetahui kategorinya, serta manfaatnya untuk memantau berat badan.</p>
+              <span class="go">Baca artikel <span aria-hidden="true">&#8594;</span></span>
+            </span>
+          </a>
+          <a class="artikel-card" href="https://www.alodokter.com/cara-menghitung-imt-dan-perannya-dalam-status-gizi" target="_blank" rel="noopener noreferrer">
+            <img class="artikel-thumb" src="https://images.alodokter.com/dk0z4ums3/image/upload/v1789097059/attached_image/cara-menghitung-imt-dan-perannya-dalam-status-gizi.jpg" alt="Ilustrasi cara menghitung IMT dan status gizi" loading="lazy" width="480" height="240">
+            <span class="artikel-isi">
+              <span class="tag">Status gizi</span>
+              <h3>Cara Menghitung IMT dan Status Gizi</h3>
+              <p>Rumus IMT menurut Kemenkes RI dan arti tiap kategori status gizi yang dihasilkan.</p>
+              <span class="go">Baca artikel <span aria-hidden="true">&#8594;</span></span>
+            </span>
+          </a>
+          <a class="artikel-card" href="https://www.alodokter.com/berat-badan-ideal-begini-cara-menghitung-dan-memperolehnya" target="_blank" rel="noopener noreferrer">
+            <img class="artikel-thumb" src="https://images.alodokter.com/dk0z4ums3/image/upload/v1711895978/attached_image/berat-badan-ideal-begini-cara-menghitung-dan-memperolehnya.jpg" alt="Ilustrasi berat badan ideal dan tips mendapatkannya" loading="lazy" width="480" height="240">
+            <span class="artikel-isi">
+              <span class="tag">Berat badan</span>
+              <h3>Berat Badan Ideal: Cara Hitung dan Tipsnya</h3>
+              <p>Cara menghitung berat badan ideal dengan IMT, disertai langkah sederhana untuk mencapainya.</p>
+              <span class="go">Baca artikel <span aria-hidden="true">&#8594;</span></span>
+            </span>
+          </a>
+        </div>
+      </aside>
+    </div>
+
+    <section class="wrap lainnya" aria-labelledby="judul-lain">
+      <div class="tools-head">
+        <h2 id="judul-lain">Coba kalkulator lain</h2>
+        <p class="count">8 alat tersedia</p>
+      </div>
+      <div class="grid grid-kecil">
+        <a class="card-kecil" href="egfr-ginjal.html">
+          <span class="mini-ikon" aria-hidden="true"><i class="fa-solid fa-vial"></i></span>
+          <h3>Fungsi Ginjal (eGFR)</h3>
+          <span class="go" aria-hidden="true">&#8594;</span>
+        </a>
+        <a class="card-kecil" href="kalori.html">
+          <span class="mini-ikon" aria-hidden="true"><i class="fa-solid fa-apple-whole"></i></span>
+          <h3>Kebutuhan Kalori Harian</h3>
+          <span class="go" aria-hidden="true">&#8594;</span>
+        </a>
+        <a class="card-kecil" href="masa-subur.html">
+          <span class="mini-ikon" aria-hidden="true"><i class="fa-solid fa-baby"></i></span>
+          <h3>Masa Subur &amp; HPL</h3>
+          <span class="go" aria-hidden="true">&#8594;</span>
+        </a>
+        <a class="card-kecil" href="tekanan-darah.html">
+          <span class="mini-ikon" aria-hidden="true"><i class="fa-solid fa-gauge-high"></i></span>
+          <h3>Tekanan Darah</h3>
+          <span class="go" aria-hidden="true">&#8594;</span>
+        </a>
+        <a class="card-kecil" href="detak-jantung.html">
+          <span class="mini-ikon" aria-hidden="true"><i class="fa-solid fa-heart-pulse"></i></span>
+          <h3>Zona Detak Jantung</h3>
+          <span class="go" aria-hidden="true">&#8594;</span>
+        </a>
+        <a class="card-kecil" href="risiko-stroke.html">
+          <span class="mini-ikon" aria-hidden="true"><i class="fa-solid fa-brain"></i></span>
+          <h3>Risiko Stroke</h3>
+          <span class="go" aria-hidden="true">&#8594;</span>
+        </a>
+        <a class="card-kecil" href="risiko-diabetes.html">
+          <span class="mini-ikon" aria-hidden="true"><i class="fa-solid fa-syringe"></i></span>
+          <h3>Risiko Diabetes</h3>
+          <span class="go" aria-hidden="true">&#8594;</span>
+        </a>
+        <a class="card-kecil" href="asma-act.html">
+          <span class="mini-ikon" aria-hidden="true"><i class="fa-solid fa-lungs"></i></span>
+          <h3>Tes Kontrol Asma</h3>
+          <span class="go" aria-hidden="true">&#8594;</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot" id="tentang">
+    <div class="wrap">
+      <p>Proyek tugas web kelompok. Rumus mengacu pada panduan kesehatan yang dicantumkan di tiap kalkulator.</p>
+    </div>
+  </footer>
+
+  <script src="../js/imt.js"></script>
 </body>
 </html>

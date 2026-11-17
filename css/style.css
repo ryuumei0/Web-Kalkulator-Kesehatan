@@ -114,11 +114,14 @@ h1, h2, h3 {
 .menu a:hover,
 .menu a:focus-visible { color: var(--hijau-700); }
 
-.menu a[aria-current="page"] {
+.menu a[aria-current] {
   color: var(--hijau-700);
   border-bottom-color: var(--hijau-500);
   font-weight: 600;
 }
+
+/* Supaya anchor tidak tertutup header yang sticky */
+.hero, .tools, .foot { scroll-margin-top: 68px; }
 
 /* ---------- Hero ---------- */
 .hero {
@@ -416,7 +419,296 @@ h1, h2, h3 {
   text-align: center;
 }
 
+/* ---------- Halaman kalkulator ---------- */
+.hero-kecil { padding: 38px 0 42px; }
+
+.konten-utama {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 24px;
+  align-items: start;
+  padding-top: 44px;
+}
+
+.kalkulator { padding: 0; }
+
+.kalkulator-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.kalkulator-form,
+.hasil {
+  background: var(--putih);
+  border: 1px solid var(--abu-200);
+  border-radius: var(--radius);
+  padding: 26px;
+  box-shadow: var(--bayang);
+}
+
+.kalkulator-form h2 { font-size: 1.35rem; margin-bottom: 6px; }
+
+.kalkulator-form > p {
+  margin: 0 0 22px;
+  font-size: 0.9rem;
+  color: var(--abu-500);
+}
+
+.field { margin-bottom: 16px; }
+
+.field label {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--hijau-800);
+  margin-bottom: 7px;
+}
+
+.field label i { color: var(--hijau-500); width: 18px; }
+
+.field input {
+  width: 100%;
+  font: inherit;
+  font-size: 0.95rem;
+  color: var(--hijau-900);
+  background: var(--putih);
+  border: 1px solid var(--abu-200);
+  border-radius: 10px;
+  padding: 12px 14px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.field input::placeholder { color: #9aa8a0; }
+
+.field input:focus {
+  border-color: var(--hijau-500);
+  box-shadow: 0 0 0 3px var(--hijau-100);
+}
+
+.btn-hitung {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--putih);
+  background: var(--hijau-700);
+  border: 0;
+  border-radius: 10px;
+  padding: 13px 16px;
+  margin-top: 4px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.btn-hitung:hover { background: var(--hijau-800); transform: translateY(-1px); }
+.btn-hitung:focus-visible { outline: 3px solid var(--hijau-500); outline-offset: 3px; }
+
+.error {
+  margin: 0 0 14px;
+  padding: 10px 12px;
+  font-size: 0.85rem;
+  color: #8b1e1e;
+  background: #fdecea;
+  border-radius: 8px;
+}
+
+.hasil { border-top: 4px solid var(--hijau-500); }
+
+.hasil-atas {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--abu-200);
+}
+
+.hasil-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--abu-500);
+}
+
+.hasil-angka {
+  font-family: var(--font-judul);
+  font-size: 3.4rem;
+  line-height: 1;
+  color: var(--hijau-700);
+}
+
+.badge-kategori {
+  font-size: 0.84rem;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: var(--hijau-100);
+  color: var(--hijau-800);
+}
+
+.badge-kategori.kurang { background: #fff1c9; color: #7a5600; }
+.badge-kategori.normal { background: var(--hijau-100); color: var(--hijau-800); }
+.badge-kategori.gemuk { background: #ffe6d2; color: #8f4700; }
+.badge-kategori.obes1 { background: #fbdcd6; color: #922e1a; }
+.badge-kategori.obes2 { background: #f6d4d4; color: #842020; }
+
+.hasil-baris {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--abu-200);
+  font-size: 0.92rem;
+}
+
+.hasil-baris span { color: var(--abu-500); }
+.hasil-baris strong { color: var(--hijau-900); text-align: right; }
+
+.saran {
+  margin: 18px 0 0;
+  padding: 14px 16px;
+  font-size: 0.9rem;
+  color: var(--abu-700);
+  background: var(--hijau-50);
+  border-radius: 10px;
+}
+
+.rumus { margin: 14px 0 0; font-size: 0.8rem; color: var(--abu-500); }
+
+/* ---------- Artikel terkait (sidebar kanan) ---------- */
+.lainnya { padding-top: 46px; padding-bottom: 72px; }
+
+.artikel-head h2 { font-size: 1.25rem; }
+.artikel-head p {
+  margin: 6px 0 18px;
+  font-size: 0.85rem;
+  color: var(--abu-500);
+}
+
+.artikel-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+.artikel-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--putih);
+  border: 1px solid var(--abu-200);
+  border-radius: 14px;
+  text-decoration: none;
+  box-shadow: var(--bayang);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.artikel-card:hover,
+.artikel-card:focus-visible {
+  transform: translateY(-4px);
+  border-color: var(--hijau-500);
+  box-shadow: var(--bayang-hover);
+}
+
+.artikel-thumb {
+  width: 100%;
+  height: 118px;
+  object-fit: cover;
+  background: var(--hijau-100);
+}
+
+.artikel-isi {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  padding: 15px 16px 17px;
+}
+
+.artikel-card h3 { font-size: 0.98rem; line-height: 1.35; }
+
+.artikel-card p {
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--abu-500);
+  flex: 1;
+}
+
+/* ---------- Kartu kalkulator lain (versi kecil) ---------- */
+.grid-kecil {
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 10px;
+}
+
+.card-kecil {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: var(--putih);
+  border: 1px solid var(--abu-200);
+  border-radius: 12px;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(13, 66, 41, 0.05);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-kecil:hover,
+.card-kecil:focus-visible {
+  transform: translateY(-2px);
+  border-color: var(--hijau-500);
+  box-shadow: var(--bayang-hover);
+}
+
+.card-kecil:focus-visible { outline: 3px solid var(--hijau-500); outline-offset: 3px; }
+
+.mini-ikon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  background: var(--hijau-50);
+  color: var(--hijau-700);
+  font-size: 0.95rem;
+}
+
+.card-kecil h3 {
+  flex: 1;
+  font-family: var(--font-teks);
+  font-size: 0.83rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--hijau-900);
+}
+
+.card-kecil .go {
+  flex: none;
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--hijau-500);
+}
+
 /* ---------- Responsif ---------- */
+@media (max-width: 960px) {
+  .konten-utama { grid-template-columns: 1fr; }
+  .artikel-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+}
+
 @media (max-width: 640px) {
   .wrap { width: min(100% - 28px, 1120px); }
   .topbar-in { min-height: 60px; gap: 12px; }
@@ -429,6 +721,9 @@ h1, h2, h3 {
   .controls { align-items: stretch; }
   .search { max-width: none; }
   .grid { grid-template-columns: 1fr; }
+  .kalkulator-grid { grid-template-columns: 1fr; }
+  .artikel-grid { grid-template-columns: 1fr; }
+  .kalkulator-form, .hasil { padding: 20px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
