@@ -1,1 +1,200 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kalkulator Risiko Stroke (CHA₂DS₂-VASc) — SehatKu</title>
+  <meta name="description" content="Hitung risiko stroke per tahun dengan skor CHA₂DS₂-VASc.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .field select {
+      width: 100%;
+      font: inherit;
+      font-size: 0.95rem;
+      color: var(--hijau-900);
+      background: var(--putih);
+      border: 1px solid var(--abu-200);
+      border-radius: 10px;
+      padding: 12px 14px;
+      outline: none;
+      cursor: pointer;
+      transition: border-color .2s ease, box-shadow .2s ease;
+    }
+    .field select:focus {
+      border-color: var(--hijau-500);
+      box-shadow: 0 0 0 3px var(--hijau-100);
+    }
+  </style>
+</head>
+<body>
 
+  <header class="topbar">
+    <div class="wrap topbar-in">
+      <a class="brand" href="../index.html">SehatKu<span class="brand-dot">.</span></a>
+      <nav class="menu" aria-label="Menu utama">
+        <a href="../index.html">Beranda</a>
+        <a href="../index.html#kalkulator" aria-current="page">Kalkulator</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero hero-kecil">
+      <div class="wrap">
+        <p class="crumb">
+          <a href="../index.html">Beranda</a> /
+          <a href="../index.html#kalkulator">Kalkulator</a> /
+          Risiko Stroke
+        </p>
+        <h1 class="judul-hero">
+          <span class="judul-ikon" aria-hidden="true"><i class="fa-solid fa-brain"></i></span>
+          Kalkulator Risiko Stroke
+        </h1>
+        <p class="lead">Nilai risiko stroke per tahun dengan skor <strong>CHA₂DS₂-VASc</strong> — alat klinis untuk pasien fibrilasi atrium yang membantu dokter menentukan kebutuhan antikoagulan.</p>
+      </div>
+    </section>
+
+    <div class="wrap konten-utama">
+      <div class="konten-kiri">
+        <section class="kalkulator" aria-labelledby="judul-kalkulator">
+          <div class="kalkulator-grid">
+
+            <form class="kalkulator-form" id="strokeForm" novalidate>
+              <h2 id="judul-kalkulator">Data Pasien</h2>
+              <p>Isi sesuai kondisi saat ini.</p>
+
+              <div class="field">
+                <label for="jk"><i class="fa-solid fa-venus-mars"></i> Jenis Kelamin</label>
+                <select id="jk" required>
+                  <option value="L">Laki-laki</option>
+                  <option value="P">Perempuan</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="usia"><i class="fa-solid fa-cake-candles"></i> Kelompok Usia</label>
+                <select id="usia" required>
+                  <option value="0">&lt; 65 tahun</option>
+                  <option value="1">65 – 74 tahun</option>
+                  <option value="2">≥ 75 tahun</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="chf"><i class="fa-solid fa-heart-crack"></i> Gagal Jantung Kongestif</label>
+                <select id="chf">
+                  <option value="0">Tidak</option>
+                  <option value="1">Ya</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="htn"><i class="fa-solid fa-gauge-high"></i> Hipertensi</label>
+                <select id="htn">
+                  <option value="0">Tidak</option>
+                  <option value="1">Ya</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="dm"><i class="fa-solid fa-droplet"></i> Diabetes Melitus</label>
+                <select id="dm">
+                  <option value="0">Tidak</option>
+                  <option value="1">Ya</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="stroke"><i class="fa-solid fa-brain"></i> Riwayat Stroke / TIA</label>
+                <select id="stroke">
+                  <option value="0">Tidak</option>
+                  <option value="2">Ya (+2)</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="vaskular"><i class="fa-solid fa-heart-pulse"></i> Penyakit Vaskular</label>
+                <select id="vaskular">
+                  <option value="0">Tidak</option>
+                  <option value="1">Ya</option>
+                </select>
+              </div>
+
+              <p class="error" id="error" hidden></p>
+              <button type="submit" class="btn-hitung">
+                <i class="fa-solid fa-calculator"></i> Hitung Risiko
+              </button>
+            </form>
+
+            <div class="hasil" id="hasil" aria-live="polite">
+              <div class="hasil-atas">
+                <span class="hasil-label">Skor CHA₂DS₂-VASc</span>
+                <span class="hasil-angka" id="angka">&mdash;</span>
+                <span class="badge-kategori" id="badge">Menunggu input</span>
+              </div>
+              <p class="saran">Isi form di samping lalu klik tombol <strong>Hitung Risiko</strong> untuk melihat estimasi.</p>
+            </div>
+
+          </div>
+        </section>
+      </div>
+
+      <aside>
+        <section class="artikel">
+          <h2 style="font-size:1.1rem;margin:0 0 14px;">Artikel terkait</h2>
+          <div class="artikel-grid">
+            <a class="artikel-card" href="#" onclick="return false;">
+              <div class="artikel-thumb" style="display:grid;place-items:center;color:var(--hijau-700);font-size:2rem;"><i class="fa-solid fa-triangle-exclamation"></i></div>
+              <div class="artikel-isi">
+                <h3>Kenali Gejala Stroke dengan Metode FAST</h3>
+                <p><em>Face drooping, Arm weakness, Speech difficulty, Time to call 119.</em> Deteksi dini selamatkan nyawa.</p>
+              </div>
+            </a>
+            <a class="artikel-card" href="#" onclick="return false;">
+              <div class="artikel-thumb" style="display:grid;place-items:center;color:var(--hijau-700);font-size:2rem;"><i class="fa-solid fa-heart-pulse"></i></div>
+              <div class="artikel-isi">
+                <h3>Fibrilasi Atrium: Pemicu Stroke yang Sering Tak Disadari</h3>
+                <p>Detak jantung tidak teratur bisa memicu penggumpalan darah di jantung.</p>
+              </div>
+            </a>
+            <a class="artikel-card" href="#" onclick="return false;">
+              <div class="artikel-thumb" style="display:grid;place-items:center;color:var(--hijau-700);font-size:2rem;"><i class="fa-solid fa-gauge-high"></i></div>
+              <div class="artikel-isi">
+                <h3>Hipertensi Si Pembunuh Senyap</h3>
+                <p>Sering tanpa gejala, namun paling sering jadi pemicu stroke &amp; serangan jantung.</p>
+              </div>
+            </a>
+          </div>
+        </section>
+
+        <section class="lainnya">
+          <h2 style="font-size:1.1rem;margin:0 0 14px;">Kalkulator lainnya</h2>
+          <div class="grid grid-kecil">
+            <a class="card-kecil" href="imt.html"><span class="mini-ikon"><i class="fa-solid fa-weight-scale"></i></span><h3>IMT</h3><span class="go">→</span></a>
+            <a class="card-kecil" href="kalori.html"><span class="mini-ikon"><i class="fa-solid fa-apple-whole"></i></span><h3>Kalori</h3><span class="go">→</span></a>
+            <a class="card-kecil" href="egfr-ginjal.html"><span class="mini-ikon"><i class="fa-solid fa-vial"></i></span><h3>eGFR</h3><span class="go">→</span></a>
+            <a class="card-kecil" href="tekanan-darah.html"><span class="mini-ikon"><i class="fa-solid fa-gauge-high"></i></span><h3>Tekanan Darah</h3><span class="go">→</span></a>
+            <a class="card-kecil" href="detak-jantung.html"><span class="mini-ikon"><i class="fa-solid fa-heart-pulse"></i></span><h3>Detak Jantung</h3><span class="go">→</span></a>
+            <a class="card-kecil" href="risiko-diabetes.html"><span class="mini-ikon"><i class="fa-solid fa-syringe"></i></span><h3>Diabetes</h3><span class="go">→</span></a>
+            <a class="card-kecil" href="masa-subur.html"><span class="mini-ikon"><i class="fa-solid fa-baby"></i></span><h3>Masa Subur</h3><span class="go">→</span></a>
+            <a class="card-kecil" href="asma-act.html"><span class="mini-ikon"><i class="fa-solid fa-lungs"></i></span><h3>Asma ACT</h3><span class="go">→</span></a>
+          </div>
+        </section>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap">
+      <p>Proyek tugas web kelompok. Rumus mengacu pada panduan kesehatan yang dicantumkan di tiap kalkulator.</p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/risiko-stroke.js"></script>
+</body>
+</html>
