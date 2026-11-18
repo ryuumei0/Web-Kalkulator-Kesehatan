@@ -1,89 +1,70 @@
-/* ============================================================
-   Kalkulator eGFR — CKD-EPI 2021 (race-free)
-   Referensi: Inker LA et al. NEJM 2021; KDIGO 2012/2024
-   ============================================================ */
+// Kalkulator Kalori Harian (Mifflin-St Jeor)
+(function () {
+  var form = document.getElementById('form-kalori');
+  if (!form) return;
 
-const form    = document.getElementById('egfrForm');
-const errorEl = document.getElementById('error');
-const hasilEl = document.getElementById('hasil');
+  var jk = document.getElementById('jk');
+  var usia = document.getElementById('usia');
+  var tb = document.getElementById('tb');
+  var bb = document.getElementById('bb');
+  var aktivitas = document.getElementById('aktivitas');
+  var error = document.getElementById('kalori-error');
+  var hasil = document.getElementById('hasil-kalori');
+  
+  var elNilai = document.getElementById('kalori-nilai');
+  var elKategori = document.getElementById('kalori-kategori');
+  var elBmr = document.getElementById('kalori-bmr');
+  var elTurun = document.getElementById('kalori-turun');
+  var elNaik = document.getElementById('kalori-naik');
+  var elKarbo = document.getElementById('kalori-karbo');
+  var elProt = document.getElementById('kalori-prot');
+  var elLemak = document.getElementById('kalori-lemak');
+  var elSaran = document.getElementById('kalori-saran');
 
-function showError(msg) {
-  errorEl.textContent = msg;
-  errorEl.hidden = false;
-}
-
-function clearError() {
-  errorEl.textContent = '';
-  errorEl.hidden = true;
-}
-
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
-  clearError();
-
-  const jk   = document.getElementById('jk').value;
-  const usia = parseFloat(document.getElementById('usia').value);
-  const scr  = parseFloat(document.getElementById('scr').value);
-
-  if ([usia, scr].some(Number.isNaN)) {
-    showError('Lengkapi usia dan kreatinin serum terlebih dahulu.');
-    return;
-  }
-  if (usia < 18 || usia > 120) return showError('Rumus eGFR ini untuk usia ≥ 18 tahun.');
-  if (scr < 0.1 || scr > 20)   return showError('Kreatinin serum harus 0,1–20 mg/dL.');
-
-  // Konstanta CKD-EPI 2021
-  const kappa = jk === 'P' ? 0.7  : 0.9;
-  const alpha = jk === 'P' ? -0.241 : -0.302;
-  const ratio = scr / kappa;
-
-  let egfr = 142
-    * Math.pow(Math.min(ratio, 1), alpha)
-    * Math.pow(Math.max(ratio, 1), -1.200)
-    * Math.pow(0.9938, usia);
-
-  if (jk === 'P') egfr *= 1.012;
-  egfr = Math.round(egfr);
-
-  // Stadium KDIGO
-  let stadium, badgeClass, interpretasi;
-  if (egfr >= 90) {
-    stadium = 'G1 — Normal / Tinggi';
-    badgeClass = 'normal';
-    interpretasi = 'Fungsi ginjal normal. Jaga hidrasi & tekanan darah.';
-  } else if (egfr >= 60) {
-    stadium = 'G2 — Penurunan Ringan';
-    badgeClass = 'normal';
-    interpretasi = 'Penurunan ringan. Cek ulang berkala, waspadai faktor risiko.';
-  } else if (egfr >= 45) {
-    stadium = 'G3a — Ringan–Sedang';
-    badgeClass = 'kurang';
-    interpretasi = 'Penurunan ringan–sedang. Evaluasi albuminuria & penyebab.';
-  } else if (egfr >= 30) {
-    stadium = 'G3b — Sedang–Berat';
-    badgeClass = 'gemuk';
-    interpretasi = 'Penurunan sedang–berat. Rujuk ke dokter spesialis ginjal.';
-  } else if (egfr >= 15) {
-    stadium = 'G4 — Berat';
-    badgeClass = 'obes1';
-    interpretasi = 'Penurunan berat. Persiapan terapi pengganti ginjal perlu dipertimbangkan.';
-  } else {
-    stadium = 'G5 — Gagal Ginjal';
-    badgeClass = 'obes2';
-    interpretasi = 'Gagal ginjal. Segera konsultasi ke dokter spesialis ginjal (nefrologi).';
+  function angka(value) {
+    return parseFloat(String(value).replace(',', '.'));
   }
 
-  hasilEl.innerHTML = `
-    <div class="hasil-atas">
-      <span class="hasil-label">eGFR (mL/min/1,73 m²)</span>
-      <span class="hasil-angka">${egfr}</span>
-      <span class="badge-kategori ${badgeClass}">${stadium}</span>
-    </div>
-    <div class="hasil-baris"><span>Kreatinin serum</span><strong>${scr.toFixed(2)} mg/dL</strong></div>
-    <div class="hasil-baris"><span>Usia</span><strong>${usia} tahun</strong></div>
-    <div class="hasil-baris"><span>Jenis kelamin</span><strong>${jk === 'L' ? 'Laki-laki' : 'Perempuan'}</strong></div>
-    <div class="hasil-baris"><span>Stadium KDIGO</span><strong>${stadium}</strong></div>
-    <p class="saran">${interpretasi} Nilai eGFR dapat dipengaruhi kondisi akut (dehidrasi, infeksi, konsumsi obat tertentu). <strong>Konsultasikan hasil ini ke dokter</strong> untuk interpretasi klinis.</p>
-    <p class="rumus">Rumus: CKD-EPI 2021 — eGFR = 142 × min(Scr/κ,1)^α × max(Scr/κ,1)^−1,200 × 0,9938^Usia × (1,012 jika perempuan). κ = 0,7 (P) / 0,9 (L).</p>
-  `;
-});
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    var u = angka(usia.value);
+    var t = angka(tb.value);
+    var b = angka(bb.value);
+    var faktor = angka(aktivitas.value);
+
+    if (!u || !t || !b || !faktor || u <= 0 || t <= 0 || b <= 0) {
+      error.hidden = false;
+      hasil.hidden = true;
+      return;
+    }
+    error.hidden = true;
+
+    // Rumus Mifflin-St Jeor
+    var bmr = (10 * b) + (6.25 * t) - (5 * u);
+    bmr += (jk.value === 'L') ? 5 : -161;
+
+    var tdee = bmr * faktor;
+    
+    // Hitungan makronutrien (50% karbo, 25% protein, 25% lemak)
+    var karbo = (tdee * 0.50) / 4;
+    var prot = (tdee * 0.25) / 4;
+    var lemak = (tdee * 0.25) / 9;
+
+    // Tampilkan hasil
+    elNilai.textContent = Math.round(tdee);
+    elKategori.textContent = 'kkal/hari';
+    elKategori.className = 'badge-kategori normal';
+    
+    elBmr.textContent = Math.round(bmr) + ' kkal';
+    elTurun.textContent = Math.round(tdee - 500) + ' kkal';
+    elNaik.textContent = Math.round(tdee + 500) + ' kkal';
+    elKarbo.textContent = Math.round(karbo) + ' g';
+    elProt.textContent = Math.round(prot) + ' g';
+    elLemak.textContent = Math.round(lemak) + ' g';
+
+    elSaran.textContent = 'Ini adalah estimasi kebutuhan kalori Anda. Untuk menurunkan berat badan, ciptakan defisit 500 kkal/hari. Pastikan asupan gizi seimbang (Isi Piringku) dan rutin berolahraga.';
+
+    hasil.hidden = false;
+  });
+})();
