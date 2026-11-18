@@ -1,106 +1,126 @@
-const formDiabetes = document.getElementById("form-diabetes");
-const hasilDiabetes = document.getElementById("hasil-diabetes");
+const form = document.getElementById("form-diabetes");
+const hasil = document.getElementById("hasil-diabetes");
 
-formDiabetes.addEventListener("submit", function(event) {
+form.addEventListener("submit", function(event) {
     event.preventDefault();
 
-    // Mengambil data pengguna
+    // Mengambil data dari HTML
     const usia = Number(document.getElementById("usia").value);
     const berat = Number(document.getElementById("berat").value);
     const tinggi = Number(document.getElementById("tinggi").value);
-    const gender = document.getElementById("gender").value;
-    const lingkar = Number(document.getElementById("lingkar").value);
 
+    const gender = document.getElementById("gender").value;
     const keluarga = document.getElementById("keluarga").value;
     const aktivitas = document.getElementById("aktivitas").value;
     const tekanan = document.getElementById("tekanan").value;
 
-    // Validasi input
+    // Validasi data
     if (
-        !Number.isFinite(usia) || usia <= 0 || usia > 120 ||
-        !Number.isFinite(berat) || berat <= 0 ||
-        !Number.isFinite(tinggi) || tinggi <= 0 ||
-        !Number.isFinite(lingkar) || lingkar <= 0 ||
+        !Number.isFinite(usia) ||
+        !Number.isFinite(berat) ||
+        !Number.isFinite(tinggi) ||
+        usia < 1 || usia > 120 ||
+        berat <= 0 || berat > 500 ||
+        tinggi < 50 || tinggi > 250 ||
         !gender || !keluarga || !aktivitas || !tekanan
     ) {
-        alert("Mohon isi semua data dengan benar!");
+        alert("Periksa kembali data yang kamu masukkan!");
         return;
     }
 
-    // Menghitung IMT
+    // Menghitung BMI
     const tinggiMeter = tinggi / 100;
-    const imt = berat / (tinggiMeter * tinggiMeter);
+    const bmi = berat / (tinggiMeter * tinggiMeter);
 
-    if (!Number.isFinite(imt)) {
-        alert("Data tinggi atau berat badan tidak valid!");
-        return;
-    }
-
-    // Menghitung skor simulasi
+    // Menghitung skor risiko sederhana
     let skor = 0;
 
-    if (usia >= 40) skor += 2;
-    if (usia >= 60) skor += 1;
-
-    if (imt >= 25) skor += 2;
-    if (imt >= 30) skor += 1;
-
-    // Lingkar perut
-    if (gender === "pria" && lingkar >= 90) {
+    // Faktor usia
+    if (usia >= 60) {
+        skor += 3;
+    } else if (usia >= 50) {
         skor += 2;
+    } else if (usia >= 40) {
+        skor += 1;
     }
 
-    if (gender === "wanita" && lingkar >= 80) {
+    // Faktor BMI
+    if (bmi >= 30) {
         skor += 2;
+    } else if (bmi >= 25) {
+        skor += 1;
     }
 
     // Riwayat keluarga
-    if (keluarga === "ya") skor += 2;
+    if (keluarga === "ya") {
+        skor += 2;
+    }
 
-    // Aktivitas fisik
-    if (aktivitas === "tidak") skor += 1;
+    // Jarang melakukan aktivitas fisik
+    if (aktivitas === "ya") {
+        skor += 1;
+    }
 
-    // Tekanan darah tinggi
-    if (tekanan === "ya") skor += 2;
+    // Riwayat tekanan darah tinggi
+    if (tekanan === "ya") {
+        skor += 1;
+    }
 
-    // Menentukan kategori
-    let kategori;
-    let saran;
+    // Menentukan kategori risiko
+    let kategori = "";
+    let keterangan = "";
 
     if (skor <= 2) {
-        kategori = "Risiko relatif rendah";
-        saran = "Pertahankan pola hidup sehat dan aktivitas fisik.";
+        kategori = "Risiko Rendah";
+        keterangan =
+            "Faktor risiko yang terhitung relatif sedikit. Tetap jaga pola hidup sehat.";
     } else if (skor <= 5) {
-        kategori = "Risiko perlu diperhatikan";
-        saran = "Perbaiki pola makan, olahraga, dan pantau kesehatan.";
+        kategori = "Risiko Sedang";
+        keterangan =
+            "Terdapat beberapa faktor risiko. Perhatikan pola makan dan aktivitas fisik.";
     } else {
-        kategori = "Faktor risiko lebih banyak ditemukan";
-        saran = "Konsultasikan kondisi kesehatan dan pertimbangkan pemeriksaan gula darah.";
+        kategori = "Risiko Tinggi";
+        keterangan =
+            "Terdapat beberapa faktor risiko. Sebaiknya konsultasikan kondisi kesehatan dan lakukan pemeriksaan gula darah.";
     }
 
     // Menampilkan hasil
-    hasilDiabetes.style.display = "block";
+    hasil.style.display = "block";
 
-    hasilDiabetes.innerHTML = `
-        <h2>Hasil Perhitungan</h2>
-        <h3>IMT: ${imt.toFixed(2)}</h3>
-        <h3>Skor Simulasi: ${skor}</h3>
+    hasil.innerHTML = `
+        <h3>Hasil Perhitungan Risiko Diabetes</h3>
+
+        <p><strong>Usia:</strong> ${usia} tahun</p>
+        <p><strong>Berat badan:</strong> ${berat} kg</p>
+        <p><strong>Tinggi badan:</strong> ${tinggi} cm</p>
+        <p><strong>Jenis kelamin:</strong> ${gender}</p>
+
+        <hr>
+
+        <p><strong>Indeks Massa Tubuh (BMI):</strong>
+        ${bmi.toFixed(1)}</p>
+
+        <p><strong>Skor risiko:</strong> ${skor} dari 9</p>
+
         <h3>${kategori}</h3>
-        <p>${saran}</p>
-        <p>
-            Hasil ini hanya menunjukkan faktor risiko
-            berdasarkan data yang dimasukkan.
-        </p>
+
+        <p>${keterangan}</p>
+
+        <p><strong>Perhatian:</strong>
+        Hasil ini hanya simulasi edukasi, bukan diagnosis medis.
+        Untuk mengetahui kondisi sebenarnya, lakukan pemeriksaan gula darah
+        di fasilitas kesehatan.</p>
     `;
 
-    hasilDiabetes.scrollIntoView({
+    // Mengarahkan tampilan ke hasil
+    hasil.scrollIntoView({
         behavior: "smooth",
-        block: "center"
+        block: "nearest"
     });
 });
 
-// Reset hasil perhitungan
-formDiabetes.addEventListener("reset", function() {
-    hasilDiabetes.style.display = "none";
-    hasilDiabetes.innerHTML = "";
+// Menghapus hasil ketika tombol reset ditekan
+form.addEventListener("reset", function() {
+    hasil.style.display = "none";
+    hasil.innerHTML = "";
 });
