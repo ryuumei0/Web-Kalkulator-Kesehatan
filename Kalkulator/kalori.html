@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Kalkulator Kebutuhan Kalori Harian — SehatKu</title>
-  <meta name="description" content="Hitung BMR dan kebutuhan kalori harian (TDEE) dengan rumus Mifflin-St Jeor.">
+  <title>Kalkulator Kebutuhan Kalori Harian</title>
+  <meta name="description" content="Hitung kebutuhan kalori harian (TDEE) dan BMR dengan rumus Mifflin-St Jeor.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -12,22 +12,11 @@
   <link rel="stylesheet" href="../css/style.css">
   <style>
     .field select {
-      width: 100%;
-      font: inherit;
-      font-size: 0.95rem;
-      color: var(--hijau-900);
-      background: var(--putih);
-      border: 1px solid var(--abu-200);
-      border-radius: 10px;
-      padding: 12px 14px;
-      outline: none;
-      cursor: pointer;
-      transition: border-color .2s ease, box-shadow .2s ease;
+      width: 100%; font: inherit; font-size: 0.95rem; color: var(--hijau-900);
+      background: var(--putih); border: 1px solid var(--abu-200); border-radius: 10px;
+      padding: 12px 14px; outline: none; cursor: pointer; transition: border-color .2s ease, box-shadow .2s ease;
     }
-    .field select:focus {
-      border-color: var(--hijau-500);
-      box-shadow: 0 0 0 3px var(--hijau-100);
-    }
+    .field select:focus { border-color: var(--hijau-500); box-shadow: 0 0 0 3px var(--hijau-100); }
   </style>
 </head>
 <body>
@@ -37,7 +26,7 @@
       <a class="brand" href="../index.html">SehatKu<span class="brand-dot">.</span></a>
       <nav class="menu" aria-label="Menu utama">
         <a href="../index.html">Beranda</a>
-        <a href="../index.html#kalkulator" aria-current="page">Kalkulator</a>
+        <a href="../index.html#kalkulator" aria-current="location">Kalkulator</a>
       </nav>
     </div>
   </header>
@@ -45,27 +34,22 @@
   <main>
     <section class="hero hero-kecil">
       <div class="wrap">
-        <p class="crumb">
-          <a href="../index.html">Beranda</a> /
-          <a href="../index.html#kalkulator">Kalkulator</a> /
-          Kalori Harian
-        </p>
+        <p class="crumb"><a href="../index.html">Beranda</a> / <a href="../index.html#kalkulator">Kalkulator Kesehatan</a> / Kalori</p>
         <h1 class="judul-hero">
           <span class="judul-ikon" aria-hidden="true"><i class="fa-solid fa-apple-whole"></i></span>
           Kebutuhan Kalori Harian
         </h1>
-        <p class="lead">Hitung <strong>BMR</strong> dan <strong>TDEE</strong> (total kebutuhan kalori harian) dengan rumus Mifflin-St Jeor, lengkap dengan target turun/naik berat badan dan panduan pola makan sehat.</p>
+        <p class="lead">Hitung BMR dan total kebutuhan kalori harian (TDEE) dengan rumus Mifflin-St Jeor, lengkap dengan target berat badan dan panduan pola makan sehat.</p>
       </div>
     </section>
 
     <div class="wrap konten-utama">
       <div class="konten-kiri">
-        <section class="kalkulator" aria-labelledby="judul-kalkulator">
+        <section class="kalkulator" aria-labelledby="judul-hitung">
           <div class="kalkulator-grid">
-
-            <form class="kalkulator-form" id="kaloriForm" novalidate>
-              <h2 id="judul-kalkulator">Data Tubuh &amp; Aktivitas</h2>
-              <p>Isi data dengan benar untuk hasil akurat.</p>
+            <form class="kalkulator-form" id="form-kalori" novalidate>
+              <h2 id="judul-hitung">Masukkan data Anda</h2>
+              <p>Isi data tubuh dan tingkat aktivitas harian Anda.</p>
 
               <div class="field">
                 <label for="jk"><i class="fa-solid fa-venus-mars"></i> Jenis Kelamin</label>
@@ -77,17 +61,17 @@
 
               <div class="field">
                 <label for="usia"><i class="fa-solid fa-cake-candles"></i> Usia (tahun)</label>
-                <input type="number" id="usia" placeholder="25" min="10" max="120" required>
+                <input type="number" id="usia" min="10" max="120" placeholder="Contoh: 25" required>
               </div>
 
               <div class="field">
                 <label for="tb"><i class="fa-solid fa-ruler-vertical"></i> Tinggi Badan (cm)</label>
-                <input type="number" id="tb" placeholder="170" min="80" max="250" step="0.1" required>
+                <input type="number" id="tb" step="0.1" min="50" placeholder="Contoh: 170" required>
               </div>
 
               <div class="field">
                 <label for="bb"><i class="fa-solid fa-weight-scale"></i> Berat Badan (kg)</label>
-                <input type="number" id="bb" placeholder="60" min="20" max="400" step="0.1" required>
+                <input type="number" id="bb" step="0.1" min="20" placeholder="Contoh: 60" required>
               </div>
 
               <div class="field">
@@ -101,77 +85,121 @@
                 </select>
               </div>
 
-              <p class="error" id="error" hidden></p>
-              <button type="submit" class="btn-hitung">
-                <i class="fa-solid fa-calculator"></i> Hitung Kalori
+              <p class="error" id="kalori-error" hidden>Masukkan data dengan angka yang valid.</p>
+
+              <button class="btn-hitung" type="submit">
+                <i class="fa-solid fa-calculator" aria-hidden="true"></i> Hitung Kalori
               </button>
             </form>
 
-            <div class="hasil" id="hasil" aria-live="polite">
+            <div class="hasil" id="hasil-kalori" hidden aria-live="polite">
               <div class="hasil-atas">
-                <span class="hasil-label">Kebutuhan kalori harian (kkal)</span>
-                <span class="hasil-angka" id="angka">&mdash;</span>
-                <span class="badge-kategori" id="badge">Menunggu input</span>
+                <span class="hasil-label">Kebutuhan Kalori (TDEE)</span>
+                <strong class="hasil-angka" id="kalori-nilai">0</strong>
+                <span class="badge-kategori" id="kalori-kategori">kkal/hari</span>
               </div>
-              <p class="saran">Isi form di samping lalu klik tombol <strong>Hitung Kalori</strong> untuk melihat kebutuhan kalori &amp; panduan pola makan.</p>
+              <div class="hasil-baris">
+                <span>BMR (Metabolisme Basal)</span>
+                <strong id="kalori-bmr">–</strong>
+              </div>
+              <div class="hasil-baris">
+                <span>Target Turun BB (-500 kkal)</span>
+                <strong id="kalori-turun">–</strong>
+              </div>
+              <div class="hasil-baris">
+                <span>Target Naik BB (+500 kkal)</span>
+                <strong id="kalori-naik">–</strong>
+              </div>
+              <div class="hasil-baris">
+                <span>Karbohidrat (50%)</span>
+                <strong id="kalori-karbo">–</strong>
+              </div>
+              <div class="hasil-baris">
+                <span>Protein (25%)</span>
+                <strong id="kalori-prot">–</strong>
+              </div>
+              <div class="hasil-baris">
+                <span>Lemak (25%)</span>
+                <strong id="kalori-lemak">–</strong>
+              </div>
+              <p class="saran" id="kalori-saran"></p>
+              <p class="rumus">Rumus: Mifflin-St Jeor — BMR = (10 × BB) + (6.25 × TB) - (5 × Usia) + (5 pria / -161 wanita)</p>
             </div>
+          </div>
+        </section>
 
+        <section class="lainnya" aria-labelledby="judul-lain">
+          <div class="tools-head">
+            <h2 id="judul-lain">Coba kalkulator lain</h2>
+            <p class="count">8 alat tersedia</p>
+          </div>
+          <div class="grid grid-kecil">
+            <a class="card-kecil" href="imt.html"><span class="mini-ikon"><i class="fa-solid fa-weight-scale"></i></span><h3>IMT</h3><span class="go">&#8594;</span></a>
+            <a class="card-kecil" href="egfr-ginjal.html"><span class="mini-ikon"><i class="fa-solid fa-vial"></i></span><h3>Fungsi Ginjal</h3><span class="go">&#8594;</span></a>
+            <a class="card-kecil" href="masa-subur.html"><span class="mini-ikon"><i class="fa-solid fa-baby"></i></span><h3>Masa Subur</h3><span class="go">&#8594;</span></a>
+            <a class="card-kecil" href="tekanan-darah.html"><span class="mini-ikon"><i class="fa-solid fa-gauge-high"></i></span><h3>Tekanan Darah</h3><span class="go">&#8594;</span></a>
+            <a class="card-kecil" href="detak-jantung.html"><span class="mini-ikon"><i class="fa-solid fa-heart-pulse"></i></span><h3>Detak Jantung</h3><span class="go">&#8594;</span></a>
+            <a class="card-kecil" href="risiko-stroke.html"><span class="mini-ikon"><i class="fa-solid fa-brain"></i></span><h3>Risiko Stroke</h3><span class="go">&#8594;</span></a>
+            <a class="card-kecil" href="risiko-diabetes.html"><span class="mini-ikon"><i class="fa-solid fa-syringe"></i></span><h3>Diabetes</h3><span class="go">&#8594;</span></a>
+            <a class="card-kecil" href="asma-act.html"><span class="mini-ikon"><i class="fa-solid fa-lungs"></i></span><h3>Asma ACT</h3><span class="go">&#8594;</span></a>
           </div>
         </section>
       </div>
 
-      <aside>
-        <section class="artikel">
-          <h2 style="font-size:1.1rem;margin:0 0 14px;">Artikel terkait</h2>
-          <div class="artikel-grid">
-            <a class="artikel-card" href="#" onclick="return false;">
-              <div class="artikel-thumb" style="display:grid;place-items:center;color:var(--hijau-700);font-size:2rem;"><i class="fa-solid fa-utensils"></i></div>
-              <div class="artikel-isi">
-                <h3>Isi Piringku: Panduan Porsi Makan Sehat</h3>
-                <p>50% sayur &amp; buah, 25% protein, 25% karbohidrat — sesuai anjuran Kemenkes RI.</p>
-              </div>
-            </a>
-            <a class="artikel-card" href="#" onclick="return false;">
-              <div class="artikel-thumb" style="display:grid;place-items:center;color:var(--hijau-700);font-size:2rem;"><i class="fa-solid fa-dumbbell"></i></div>
-              <div class="artikel-isi">
-                <h3>Defisit Kalori yang Sehat untuk Turun BB</h3>
-                <p>Target penurunan 0,5–1 kg/minggu dengan defisit 500 kkal per hari — jangan ekstrem.</p>
-              </div>
-            </a>
-            <a class="artikel-card" href="#" onclick="return false;">
-              <div class="artikel-thumb" style="display:grid;place-items:center;color:var(--hijau-700);font-size:2rem;"><i class="fa-solid fa-leaf"></i></div>
-              <div class="artikel-isi">
-                <h3>Karbohidrat Kompleks vs Sederhana</h3>
-                <p>Pilih nasi merah, oat, dan umbi-umbian sebagai sumber energi berkelanjutan.</p>
-              </div>
-            </a>
-          </div>
-        </section>
+      <!-- ========================================== -->
+      <!-- BAGIAN ARTIKEL YANG SUDAH DIPERBARUI TOTAL -->
+      <!-- ========================================== -->
+      <aside class="artikel" aria-labelledby="judul-artikel">
+        <div class="tools-head">
+          <h2 id="judul-artikel">Artikel terkait</h2>
+          <p class="count">Bacaan seputar kalori & nutrisi</p>
+        </div>
+        <div class="artikel-grid">
+          
+          <!-- Artikel 1: Sumber Alodokter (Des 2025) -->
+          <a class="artikel-card" href="https://www.alodokter.com/berapa-kalori-yang-harus-dibakar-setiap-hari-ini-penjelasannya" target="_blank" rel="noopener noreferrer">
+            <img class="artikel-thumb" src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?q=80&w=480&auto=format&fit=crop" alt="Ilustrasi piring makanan sehat untuk menghitung kalori" loading="lazy" width="480" height="240">
+            <span class="artikel-isi">
+              <span class="tag">Kalori Harian</span>
+              <h3>Berapa Kalori yang Harus Dibakar Setiap Hari?</h3>
+              <p>Pahami cara menghitung TDEE (Total Daily Energy Expenditure) agar target diet atau olahraga Anda tidak sia-sia. Ditinjau secara medis.</p>
+              <span class="go">Baca artikel <span aria-hidden="true">&#8594;</span></span>
+            </span>
+          </a>
 
-        <section class="lainnya">
-          <h2 style="font-size:1.1rem;margin:0 0 14px;">Kalkulator lainnya</h2>
-          <div class="grid grid-kecil">
-            <a class="card-kecil" href="imt.html"><span class="mini-ikon"><i class="fa-solid fa-weight-scale"></i></span><h3>IMT</h3><span class="go">→</span></a>
-            <a class="card-kecil" href="egfr-ginjal.html"><span class="mini-ikon"><i class="fa-solid fa-vial"></i></span><h3>eGFR</h3><span class="go">→</span></a>
-            <a class="card-kecil" href="tekanan-darah.html"><span class="mini-ikon"><i class="fa-solid fa-gauge-high"></i></span><h3>Tekanan Darah</h3><span class="go">→</span></a>
-            <a class="card-kecil" href="detak-jantung.html"><span class="mini-ikon"><i class="fa-solid fa-heart-pulse"></i></span><h3>Detak Jantung</h3><span class="go">→</span></a>
-            <a class="card-kecil" href="risiko-stroke.html"><span class="mini-ikon"><i class="fa-solid fa-brain"></i></span><h3>Risiko Stroke</h3><span class="go">→</span></a>
-            <a class="card-kecil" href="risiko-diabetes.html"><span class="mini-ikon"><i class="fa-solid fa-syringe"></i></span><h3>Diabetes</h3><span class="go">→</span></a>
-            <a class="card-kecil" href="masa-subur.html"><span class="mini-ikon"><i class="fa-solid fa-baby"></i></span><h3>Masa Subur</h3><span class="go">→</span></a>
-            <a class="card-kecil" href="asma-act.html"><span class="mini-ikon"><i class="fa-solid fa-lungs"></i></span><h3>Asma ACT</h3><span class="go">→</span></a>
-          </div>
-        </section>
+          <!-- Artikel 2: Sumber Halodoc (2026) -->
+          <a class="artikel-card" href="https://www.halodoc.com/artikel/rahasia-tetap-kenyang-saat-defisit-kalori-tips-mengatur-menu-harian" target="_blank" rel="noopener noreferrer">
+            <img class="artikel-thumb" src="https://images.unsplash.com/photo-1543362906-acfc16c67564?q=80&w=480&auto=format&fit=crop" alt="Ilustrasi menu makanan sehat untuk defisit kalori" loading="lazy" width="480" height="240">
+            <span class="artikel-isi">
+              <span class="tag">Defisit Kalori</span>
+              <h3>Rahasia Tetap Kenyang Saat Defisit Kalori</h3>
+              <p>Jangan sampai diet bikin lemas! Simak tips mengatur menu harian agar tetap kenyang dan berenergi meski asupan kalori dikurangi.</p>
+              <span class="go">Baca artikel <span aria-hidden="true">&#8594;</span></span>
+            </span>
+          </a>
+
+          <!-- Artikel 3: Sumber Alodokter (Sep 2025) -->
+          <a class="artikel-card" href="https://www.alodokter.com/kebutuhan-kalori-harian-wanita-dan-cara-memenuhinya" target="_blank" rel="noopener noreferrer">
+            <img class="artikel-thumb" src="https://images.unsplash.com/photo-1586201375761-83865001e31c?q=80&w=480&auto=format&fit=crop" alt="Ilustrasi biji-bijian dan karbohidrat kompleks" loading="lazy" width="480" height="240">
+            <span class="artikel-isi">
+              <span class="tag">Nutrisi</span>
+              <h3>Kebutuhan Kalori Harian & Cara Memenuhinya</h3>
+              <p>Panduan lengkap angka kecukupan gizi dan cara memenuhinya dengan makanan bergizi seimbang, termasuk sumber karbohidrat kompleks.</p>
+              <span class="go">Baca artikel <span aria-hidden="true">&#8594;</span></span>
+            </span>
+          </a>
+
+        </div>
       </aside>
+
     </div>
   </main>
 
-  <footer class="foot">
+  <footer class="foot" id="tentang">
     <div class="wrap">
       <p>Proyek tugas web kelompok. Rumus mengacu pada panduan kesehatan yang dicantumkan di tiap kalkulator.</p>
     </div>
   </footer>
-
-  <script src="../js/main.js"></script>
   <script src="../js/kalori.js"></script>
 </body>
 </html>
