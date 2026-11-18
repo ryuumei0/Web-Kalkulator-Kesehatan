@@ -3,17 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kalkulator Asma ACT</title>
+
+    <title>Kalkulator Asma ACT - SehatKu</title>
 
     <link rel="stylesheet" href="../css/style.css">
 
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
     <style>
+        body {
+            margin: 0;
+            background: #f5f8f7;
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+
+        /* HEADER */
+        .topbar {
+            background: white;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .topbar-in {
+            max-width: 1100px;
+            margin: auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            font-size: 26px;
+            font-weight: bold;
+            color: #168b83;
+            text-decoration: none;
+        }
+
+        .brand-dot {
+            color: orange;
+        }
+
+        .menu {
+            display: flex;
+            gap: 25px;
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .menu a:hover {
+            color: #168b83;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 23px;
+            color: #168b83;
+            cursor: pointer;
+        }
+
+        /* KALKULATOR */
         .asma-container {
             max-width: 750px;
-            margin: 30px auto;
+            margin: 35px auto;
             padding: 25px;
             background: white;
             border-radius: 12px;
+            box-shadow: 0 3px 10px #ddd;
+        }
+
+        .asma-container h1 {
+            color: #168b83;
         }
 
         .asma-question {
@@ -25,7 +96,7 @@
 
         .asma-question label {
             display: block;
-            margin: 10px 0;
+            margin: 12px 0;
             cursor: pointer;
         }
 
@@ -36,6 +107,7 @@
             padding: 12px 20px;
             border-radius: 7px;
             cursor: pointer;
+            margin: 5px 3px;
         }
 
         .asma-btn:hover {
@@ -49,14 +121,101 @@
             background: #e5f5f0;
             border-radius: 8px;
         }
+
+        /* ARTIKEL */
+        .artikel {
+            max-width: 750px;
+            margin: 35px auto;
+            padding: 25px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px #ddd;
+            line-height: 1.8;
+        }
+
+        .artikel h2,
+        .artikel h3 {
+            color: #168b83;
+        }
+
+        .artikel li {
+            margin-bottom: 8px;
+        }
+
+        /* FOOTER */
+        .foot {
+            background: #168b83;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        /* RESPONSIVE */
+        @media(max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .menu {
+                display: none;
+                position: absolute;
+                top: 65px;
+                left: 0;
+                width: 100%;
+                padding: 20px;
+                background: white;
+                flex-direction: column;
+                box-sizing: border-box;
+            }
+
+            .menu.active {
+                display: flex;
+            }
+
+            .asma-container,
+            .artikel {
+                margin: 20px 12px;
+                padding: 18px;
+            }
+        }
     </style>
 </head>
 
 <body>
 
+<!-- HEADER DAN NAVBAR -->
+<header class="topbar">
+    <div class="topbar-in">
+
+        <a href="../index.html" class="brand">
+            SehatKu<span class="brand-dot">.</span>
+        </a>
+
+        <button class="menu-toggle" id="menuToggle"
+                aria-label="Buka menu"
+                aria-expanded="false">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <nav class="menu" id="menuUtama">
+            <a href="../index.html">Beranda</a>
+            <a href="../index.html#kalkulator">Kalkulator</a>
+            <a href="#artikel">Artikel</a>
+            <a href="../index.html#tentang">Tentang</a>
+        </nav>
+
+    </div>
+</header>
+
+
+<!-- KALKULATOR ASMA ACT -->
 <div class="asma-container">
 
-    <h1>Kalkulator Asma ACT</h1>
+    <h1>
+        <i class="fa-solid fa-lungs"></i>
+        Kalkulator Asma ACT
+    </h1>
 
     <p>
         Penilaian sederhana untuk membantu mengetahui
@@ -127,12 +286,83 @@
 
     <div id="hasil-asma" aria-live="polite"></div>
 
-    <p style="font-size: 13px; color: #666;">
-        Catatan: Ini merupakan simulasi edukasi dengan sistem skor
-        5–25, bukan kuesioner ACT resmi dan bukan diagnosis medis.
+    <p style="font-size:13px;color:#666;">
+        Catatan: Simulasi edukasi ini bukan kuesioner ACT resmi
+        dan bukan pengganti diagnosis dokter.
     </p>
 
 </div>
+
+
+<!-- ARTIKEL ASMA -->
+<section class="artikel" id="artikel">
+
+    <h2>
+        <i class="fa-solid fa-book-open"></i>
+        Mengenal Penyakit Asma
+    </h2>
+
+    <p>
+        Asma merupakan penyakit yang menyerang saluran
+        pernapasan. Kondisi ini menyebabkan peradangan
+        dan penyempitan saluran napas sehingga seseorang
+        dapat mengalami kesulitan bernapas.
+    </p>
+
+    <h3>1. Gejala Penyakit Asma</h3>
+
+    <ul>
+        <li>Sesak napas.</li>
+        <li>Batuk secara berulang.</li>
+        <li>Dada terasa berat.</li>
+        <li>Napas berbunyi mengi.</li>
+        <li>Gejala sering memburuk pada malam hari.</li>
+    </ul>
+
+    <h3>2. Penyebab dan Pemicu Asma</h3>
+
+    <p>
+        Gejala asma dapat dipicu oleh debu, asap rokok,
+        udara dingin, polusi, alergi, dan aktivitas fisik.
+        Pemicu setiap orang bisa berbeda-beda.
+    </p>
+
+    <h3>3. Cara Menjaga Kesehatan Pernapasan</h3>
+
+    <ul>
+        <li>Menghindari asap rokok dan debu.</li>
+        <li>Menjaga kebersihan lingkungan.</li>
+        <li>Mengenali pemicu asma.</li>
+        <li>Melakukan aktivitas fisik sesuai kemampuan.</li>
+        <li>Mengikuti pengobatan sesuai anjuran dokter.</li>
+    </ul>
+
+    <h3>4. Pentingnya Pemeriksaan Asma</h3>
+
+    <p>
+        Pemeriksaan kesehatan penting untuk mengetahui
+        kondisi pernapasan dan menentukan penanganan
+        yang sesuai. Jika mengalami sesak napas berat,
+        segera cari pertolongan medis.
+    </p>
+
+    <h3>Kesimpulan</h3>
+
+    <p>
+        Menjaga kesehatan pernapasan merupakan hal yang
+        penting. Dengan mengenali gejala, menghindari
+        pemicu, dan melakukan pemeriksaan, penderita
+        asma dapat lebih baik dalam mengelola kondisinya.
+    </p>
+
+</section>
+
+
+<!-- FOOTER -->
+<footer class="foot" id="tentang">
+    <p>SehatKu - Website Informasi dan Kalkulator Kesehatan.</p>
+</footer>
+
 
 <script src="../js/asma-act.js"></script>
 
