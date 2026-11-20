@@ -1,11 +1,8 @@
-/* ============================================================
-   Kalkulator Kebutuhan Kalori — Mifflin-St Jeor
-   Referensi: Mifflin MD et al. Am J Clin Nutr 1990
-   ============================================================ */
+/* Kalkulator Kebutuhan Kalori (Mifflin-St Jeor) */
 
-const form     = document.getElementById('kaloriForm');
-const errorEl  = document.getElementById('error');
-const hasilEl  = document.getElementById('hasil');
+const form = document.getElementById('kaloriForm');
+const errorEl = document.getElementById('error');
+const hasilEl = document.getElementById('hasil');
 
 function showError(msg) {
   errorEl.textContent = msg;
@@ -21,35 +18,30 @@ form.addEventListener('submit', (e) => {
   e.preventDefault();
   clearError();
 
-  const jk        = document.getElementById('jk').value;
-  const usia      = parseFloat(document.getElementById('usia').value);
-  const tb        = parseFloat(document.getElementById('tb').value);
-  const bb        = parseFloat(document.getElementById('bb').value);
+  const jk = document.getElementById('jk').value;
+  const usia = parseFloat(document.getElementById('usia').value);
+  const tb = parseFloat(document.getElementById('tb').value);
+  const bb = parseFloat(document.getElementById('bb').value);
   const aktivitas = parseFloat(document.getElementById('aktivitas').value);
 
   if ([usia, tb, bb, aktivitas].some(Number.isNaN)) {
     showError('Lengkapi seluruh data terlebih dahulu.');
     return;
   }
-  if (usia < 10 || usia > 120)  return showError('Usia harus 10–120 tahun.');
-  if (tb < 80 || tb > 250)      return showError('Tinggi badan harus 80–250 cm.');
-  if (bb < 20 || bb > 400)      return showError('Berat badan harus 20–400 kg.');
+  if (usia < 10 || usia > 120) return showError('Usia harus 10–120 tahun.');
+  if (tb < 80 || tb > 250) return showError('Tinggi badan harus 80–250 cm.');
+  if (bb < 20 || bb > 400) return showError('Berat badan harus 20–400 kg.');
 
-  // BMR — Mifflin-St Jeor
   const bmr = jk === 'L'
     ? (10 * bb) + (6.25 * tb) - (5 * usia) + 5
     : (10 * bb) + (6.25 * tb) - (5 * usia) - 161;
 
-  const tdee    = bmr * aktivitas;
-  const turun   = tdee - 500;   // defisit aman
-  const naik    = tdee + 500;   // surplus
-
-  // Makronutrien (panduan 50% karbo, 25% protein, 25% lemak)
-  const karbo = (tdee * 0.50) / 4;   // 4 kkal/gram
-  const prot  = (tdee * 0.25) / 4;
-  const lemak = (tdee * 0.25) / 9;   // 9 kkal/gram
-
-  // IMT untuk info tambahan
+  const tdee = bmr * aktivitas;
+  const turun = tdee - 500;
+  const naik = tdee + 500;
+  const karbo = (tdee * 0.50) / 4;
+  const prot = (tdee * 0.25) / 4;
+  const lemak = (tdee * 0.25) / 9;
   const imt = bb / Math.pow(tb / 100, 2);
 
   hasilEl.innerHTML = `

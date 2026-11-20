@@ -1,7 +1,4 @@
-/* ============================================================
-   SehatKu — tema hijau & putih
-   ============================================================ */
-
+/* ===== Variabel & tema ===== */
 :root {
   --hijau-900: #0d4229;
   --hijau-800: #115c39;
@@ -22,6 +19,7 @@
   --font-teks: "Plus Jakarta Sans", sans-serif;
 }
 
+/* ===== Reset & dasar ===== */
 * { box-sizing: border-box; }
 
 html { scroll-behavior: smooth; }
@@ -49,6 +47,7 @@ h1, h2, h3 {
   margin: 0;
 }
 
+/* ===== Utilitas & layout ===== */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -66,7 +65,9 @@ h1, h2, h3 {
   margin-inline: auto;
 }
 
-/* ---------- Header ---------- */
+.hero, .tools, .foot { scroll-margin-top: 68px; }
+
+/* ===== Header & navigasi ===== */
 .topbar {
   background: var(--putih);
   border-bottom: 1px solid var(--abu-200);
@@ -120,10 +121,7 @@ h1, h2, h3 {
   font-weight: 600;
 }
 
-/* Supaya anchor tidak tertutup header yang sticky */
-.hero, .tools, .foot { scroll-margin-top: 68px; }
-
-/* ---------- Hero ---------- */
+/* ===== Hero & breadcrumb ===== */
 .hero {
   background:
     radial-gradient(circle at 85% 15%, rgba(47, 163, 107, 0.16), transparent 42%),
@@ -131,6 +129,8 @@ h1, h2, h3 {
   border-bottom: 1px solid var(--abu-200);
   padding: 54px 0 58px;
 }
+
+.hero-kecil { padding: 38px 0 42px; }
 
 .crumb {
   margin: 0 0 16px;
@@ -179,7 +179,7 @@ h1, h2, h3 {
   color: var(--abu-700);
 }
 
-/* ---------- Toolbar ---------- */
+/* ===== Beranda: toolbar, filter & pencarian ===== */
 .tools { padding: 48px 0 72px; }
 
 .tools-head {
@@ -279,7 +279,7 @@ h1, h2, h3 {
   box-shadow: 0 0 0 3px var(--hijau-100);
 }
 
-/* ---------- Kartu ---------- */
+/* ===== Beranda: kartu kalkulator ===== */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -381,7 +381,7 @@ h1, h2, h3 {
 .go span { transition: transform 0.2s ease; }
 .card:hover .go span { transform: translateX(5px); }
 
-/* ---------- Kosong & catatan ---------- */
+/* ===== Status & pemberitahuan ===== */
 .empty {
   margin: 28px 0 0;
   padding: 22px;
@@ -406,7 +406,7 @@ h1, h2, h3 {
 
 .notice strong { color: var(--hijau-800); }
 
-/* ---------- Footer ---------- */
+/* ===== Footer ===== */
 .foot {
   background: var(--hijau-900);
   color: var(--hijau-100);
@@ -419,9 +419,7 @@ h1, h2, h3 {
   text-align: center;
 }
 
-/* ---------- Halaman kalkulator ---------- */
-.hero-kecil { padding: 38px 0 42px; }
-
+/* ===== Halaman kalkulator: tata letak & form ===== */
 .konten-utama {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 320px;
@@ -473,7 +471,8 @@ h1, h2, h3 {
 
 .field label i { color: var(--hijau-500); width: 18px; }
 
-.field input {
+.field input,
+.field select {
   width: 100%;
   font: inherit;
   font-size: 0.95rem;
@@ -486,9 +485,12 @@ h1, h2, h3 {
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
+.field select { cursor: pointer; }
+
 .field input::placeholder { color: #9aa8a0; }
 
-.field input:focus {
+.field input:focus,
+.field select:focus {
   border-color: var(--hijau-500);
   box-shadow: 0 0 0 3px var(--hijau-100);
 }
@@ -524,6 +526,7 @@ h1, h2, h3 {
   border-radius: 8px;
 }
 
+/* ===== Halaman kalkulator: hasil ===== */
 .hasil { border-top: 4px solid var(--hijau-500); }
 
 .hasil-atas {
@@ -589,7 +592,7 @@ h1, h2, h3 {
 
 .rumus { margin: 14px 0 0; font-size: 0.8rem; color: var(--abu-500); }
 
-/* ---------- Kalkulator lain & artikel terkait ---------- */
+/* ===== Halaman kalkulator: artikel terkait & kalkulator lain ===== */
 .lainnya { padding-top: 30px; }
 .artikel { padding: 0; }
 
@@ -643,7 +646,6 @@ h1, h2, h3 {
   flex: 1;
 }
 
-/* ---------- Kartu kalkulator lain (versi kecil) ---------- */
 .grid-kecil {
   grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
   gap: 10px;
@@ -700,7 +702,7 @@ h1, h2, h3 {
   color: var(--hijau-500);
 }
 
-/* ---------- Responsif ---------- */
+/* ===== Responsif ===== */
 @media (max-width: 960px) {
   .konten-utama { grid-template-columns: 1fr; }
   .artikel-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }

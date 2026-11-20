@@ -179,11 +179,9 @@
 
 <body>
 
-    <!-- HEADER -->
     <header class="header-diabetes">
         <nav>
             <div class="brand">SehatKu.</div>
-
             <div>
                 <a href="../index.html">Beranda</a>
                 <a href="../index.html#kalkulator">Kalkulator</a>
@@ -192,15 +190,12 @@
         </nav>
     </header>
 
-    <!-- HERO -->
     <section class="hero-diabetes">
         <h1>Kalkulator Risiko Diabetes</h1>
         <p>Kenali faktor risiko diabetes sejak dini dengan mengisi data berikut.</p>
     </section>
 
     <main class="container">
-
-        <!-- ARTIKEL -->
         <article class="article" id="artikel">
             <h2>Mengenal Penyakit Diabetes</h2>
 
@@ -293,29 +288,24 @@
             </ul>
         </article>
 
-        <!-- KALKULATOR -->
         <section class="diabetes-container">
             <h2>Hitung Risiko Diabetes</h2>
             <p>Isi seluruh data di bawah ini dengan benar.</p>
 
             <form id="form-diabetes">
-
                 <div class="form-group">
                     <label for="usia">Usia (tahun)</label>
-                    <input type="number" id="usia" min="1" max="120"
-                           placeholder="Contoh: 25" required>
+                    <input type="number" id="usia" min="1" max="120" placeholder="Contoh: 25" required>
                 </div>
 
                 <div class="form-group">
                     <label for="berat">Berat Badan (kg)</label>
-                    <input type="number" id="berat" min="1" max="500"
-                           step="0.1" placeholder="Contoh: 60" required>
+                    <input type="number" id="berat" min="1" max="500" step="0.1" placeholder="Contoh: 60" required>
                 </div>
 
                 <div class="form-group">
                     <label for="tinggi">Tinggi Badan (cm)</label>
-                    <input type="number" id="tinggi" min="50" max="250"
-                           step="0.1" placeholder="Contoh: 165" required>
+                    <input type="number" id="tinggi" min="50" max="250" step="0.1" placeholder="Contoh: 165" required>
                 </div>
 
                 <div class="form-group">
@@ -328,9 +318,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="keluarga">
-                        Apakah ada keluarga yang memiliki diabetes?
-                    </label>
+                    <label for="keluarga">Apakah ada keluarga yang memiliki diabetes?</label>
                     <select id="keluarga" required>
                         <option value="">Pilih jawaban</option>
                         <option value="ya">Ya</option>
@@ -339,9 +327,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="aktivitas">
-                        Apakah kamu jarang melakukan aktivitas fisik?
-                    </label>
+                    <label for="aktivitas">Apakah kamu jarang melakukan aktivitas fisik?</label>
                     <select id="aktivitas" required>
                         <option value="">Pilih jawaban</option>
                         <option value="ya">Ya</option>
@@ -350,9 +336,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="tekanan">
-                        Apakah kamu memiliki riwayat tekanan darah tinggi?
-                    </label>
+                    <label for="tekanan">Apakah kamu memiliki riwayat tekanan darah tinggi?</label>
                     <select id="tekanan" required>
                         <option value="">Pilih jawaban</option>
                         <option value="ya">Ya</option>
@@ -361,31 +345,20 @@
                 </div>
 
                 <div class="button-group">
-                    <button type="submit" class="btn-hitung">
-                        Hitung Risiko
-                    </button>
-
-                    <button type="reset" class="btn-reset">
-                        Reset
-                    </button>
+                    <button type="submit" class="btn-hitung">Hitung Risiko</button>
+                    <button type="reset" class="btn-reset">Reset</button>
                 </div>
-
             </form>
 
-            <!-- HASIL PERHITUNGAN -->
             <div id="hasil-diabetes" aria-live="polite"></div>
 
             <p class="catatan">
-                Catatan: Kalkulator ini merupakan simulasi edukasi berdasarkan
-                beberapa faktor risiko sederhana, bukan alat diagnosis medis
-                dan bukan skor resmi Kementerian Kesehatan RI. Hasil tidak
-                menggantikan pemeriksaan gula darah atau konsultasi dokter.
+                Catatan: Kalkulator ini merupakan simulasi edukasi berdasarkan beberapa faktor risiko sederhana, bukan alat diagnosis medis dan bukan skor resmi Kementerian Kesehatan RI. Hasil tidak menggantikan pemeriksaan gula darah atau konsultasi dokter.
             </p>
         </section>
 
     </main>
 
-    <!-- FOOTER -->
     <footer class="footer">
         <p>&copy; 2026 SehatKu. Informasi Kesehatan Digital.</p>
     </footer>

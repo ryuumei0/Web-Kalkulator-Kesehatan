@@ -1,121 +1,61 @@
 document.addEventListener("DOMContentLoaded", function () {
+  const menuToggle = document.getElementById("menuToggle");
+  const menuUtama = document.getElementById("menuUtama");
 
-    // =========================
-    // NAVBAR
-    // =========================
+  if (menuToggle && menuUtama) {
+    menuToggle.addEventListener("click", function () {
+      menuUtama.classList.toggle("active");
+      menuToggle.setAttribute("aria-expanded", menuUtama.classList.contains("active"));
+    });
 
-    const menuToggle = document.getElementById("menuToggle");
-    const menuUtama = document.getElementById("menuUtama");
+    menuUtama.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", function () {
+        menuUtama.classList.remove("active");
+        menuToggle.setAttribute("aria-expanded", "false");
+      });
+    });
+  }
 
-    if (menuToggle && menuUtama) {
+  const formAsma = document.getElementById("form-asma");
+  const hasilAsma = document.getElementById("hasil-asma");
 
-        menuToggle.addEventListener("click", function () {
+  if (formAsma && hasilAsma) {
+    formAsma.addEventListener("submit", function (event) {
+      event.preventDefault();
 
-            menuUtama.classList.toggle("active");
+      let total = 0;
+      for (let i = 1; i <= 5; i++) {
+        const jawaban = formAsma.querySelector(`input[name="q${i}"]:checked`);
+        if (!jawaban) {
+          alert("Silakan jawab semua pertanyaan terlebih dahulu!");
+          return;
+        }
+        total += Number(jawaban.value);
+      }
 
-            const status = menuUtama.classList.contains("active");
+      let keterangan = "";
+      if (total >= 20) {
+        keterangan = "Asma terkontrol dengan baik.";
+      } else if (total >= 16) {
+        keterangan = "Asma belum terkontrol sepenuhnya.";
+      } else {
+        keterangan = "Asma mungkin belum terkontrol dengan baik.";
+      }
 
-            menuToggle.setAttribute("aria-expanded", status);
+      hasilAsma.style.display = "block";
+      hasilAsma.innerHTML = `
+        <h3>Hasil Tes Asma ACT</h3>
+        <h2>${total} / 25</h2>
+        <p>${keterangan}</p>
+        <p>Hasil ini hanya simulasi edukasi, bukan diagnosis medis.</p>
+      `;
 
-        });
+      hasilAsma.scrollIntoView({ behavior: "smooth", block: "center" });
+    });
 
-        const linkMenu = menuUtama.querySelectorAll("a");
-
-        linkMenu.forEach(function(link) {
-
-            link.addEventListener("click", function() {
-
-                menuUtama.classList.remove("active");
-
-                menuToggle.setAttribute("aria-expanded", "false");
-
-            });
-
-        });
-    }
-
-
-    // =========================
-    // KALKULATOR ASMA ACT
-    // =========================
-
-    const formAsma = document.getElementById("form-asma");
-    const hasilAsma = document.getElementById("hasil-asma");
-
-    if (formAsma && hasilAsma) {
-
-        formAsma.addEventListener("submit", function(event) {
-
-            event.preventDefault();
-
-            let total = 0;
-
-            for (let i = 1; i <= 5; i++) {
-
-                const jawaban = formAsma.querySelector(
-                    `input[name="q${i}"]:checked`
-                );
-
-                if (!jawaban) {
-
-                    alert("Silakan jawab semua pertanyaan terlebih dahulu!");
-
-                    return;
-                }
-
-                total += Number(jawaban.value);
-
-            }
-
-            let keterangan = "";
-
-            if (total >= 20) {
-
-                keterangan = "Asma terkontrol dengan baik.";
-
-            } else if (total >= 16) {
-
-                keterangan = "Asma belum terkontrol sepenuhnya.";
-
-            } else {
-
-                keterangan = "Asma mungkin belum terkontrol dengan baik.";
-
-            }
-
-            hasilAsma.style.display = "block";
-
-            hasilAsma.innerHTML = `
-                <h3>Hasil Tes Asma ACT</h3>
-
-                <h2>${total} / 25</h2>
-
-                <p>${keterangan}</p>
-
-                <p>
-                    Hasil ini hanya simulasi edukasi,
-                    bukan diagnosis medis.
-                </p>
-            `;
-
-            hasilAsma.scrollIntoView({
-                behavior: "smooth",
-                block: "center"
-            });
-
-        });
-
-
-        // TOMBOL RESET
-
-        formAsma.addEventListener("reset", function() {
-
-            hasilAsma.style.display = "none";
-
-            hasilAsma.innerHTML = "";
-
-        });
-
-    }
-
+    formAsma.addEventListener("reset", function () {
+      hasilAsma.style.display = "none";
+      hasilAsma.innerHTML = "";
+    });
+  }
 });
