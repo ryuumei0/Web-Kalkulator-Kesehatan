@@ -1,4 +1,4 @@
-kami dari kelompok 3 ingin membuat web dasar tentang rumah sakit
+kami dari kelompok 3 akan membuat web dasar tentang rumah sakit
 
 anjay gurinjay anjg
 
