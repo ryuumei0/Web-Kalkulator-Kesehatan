@@ -1,8 +1,20 @@
 /* Kalkulator Kebutuhan Kalori (Mifflin-St Jeor) */
 
-const form = document.getElementById('kaloriForm');
-const errorEl = document.getElementById('error');
-const hasilEl = document.getElementById('hasil');
+const form = document.getElementById('form-kalori');
+const errorEl = document.getElementById('kalori-error');
+const hasilEl = document.getElementById('hasil-kalori');
+
+const out = {
+  nilai: document.getElementById('kalori-nilai'),
+  kategori: document.getElementById('kalori-kategori'),
+  bmr: document.getElementById('kalori-bmr'),
+  turun: document.getElementById('kalori-turun'),
+  naik: document.getElementById('kalori-naik'),
+  karbo: document.getElementById('kalori-karbo'),
+  prot: document.getElementById('kalori-prot'),
+  lemak: document.getElementById('kalori-lemak'),
+  saran: document.getElementById('kalori-saran')
+};
 
 function showError(msg) {
   errorEl.textContent = msg;
@@ -14,8 +26,17 @@ function clearError() {
   errorEl.hidden = true;
 }
 
+/* Klasifikasi IMT Asia-Pasifik (WHO / PERKENI) */
+function kategoriIMT(imt) {
+  if (imt < 18.5) return 'Kurang';
+  if (imt < 23) return 'Normal';
+  if (imt < 25) return 'Berisiko';
+  if (imt < 30) return 'Obesitas I';
+  return 'Obesitas II';
+}
+
 form.addEventListener('submit', (e) => {
-  e.preventDefault();
+  e.preventDefault();      // ← ini yang tadinya tidak jalan, makanya halaman refresh
   clearError();
 
   const jk = document.getElementById('jk').value;
@@ -28,40 +49,49 @@ form.addEventListener('submit', (e) => {
     showError('Lengkapi seluruh data terlebih dahulu.');
     return;
   }
-  if (usia < 10 || usia > 120) return showError('Usia harus 10–120 tahun.');
-  if (tb < 80 || tb > 250) return showError('Tinggi badan harus 80–250 cm.');
-  if (bb < 20 || bb > 400) return showError('Berat badan harus 20–400 kg.');
+  if (usia < 10 || usia > 120) { showError('Usia harus 10–120 tahun.'); return; }
+  if (tb < 50 || tb > 250) { showError('Tinggi badan harus 50–250 cm.'); return; }
+  if (bb < 20 || bb > 400) { showError('Berat badan harus 20–400 kg.'); return; }
 
+  /* BMR — Mifflin-St Jeor */
   const bmr = jk === 'L'
     ? (10 * bb) + (6.25 * tb) - (5 * usia) + 5
     : (10 * bb) + (6.25 * tb) - (5 * usia) - 161;
 
-  const tdee = bmr * aktivitas;
+  const tdee  = bmr * aktivitas;
   const turun = tdee - 500;
-  const naik = tdee + 500;
+  const naik  = tdee + 500;
+
+  /* Makronutrien: karbo 50%, protein 25%, lemak 25% */
   const karbo = (tdee * 0.50) / 4;
-  const prot = (tdee * 0.25) / 4;
+  const prot  = (tdee * 0.25) / 4;
   const lemak = (tdee * 0.25) / 9;
+
   const imt = bb / Math.pow(tb / 100, 2);
 
-  hasilEl.innerHTML = `
-    <div class="hasil-atas">
-      <span class="hasil-label">Kebutuhan kalori harian (kkal)</span>
-      <span class="hasil-angka">${Math.round(tdee)}</span>
-      <span class="badge-kategori normal">Target pertahankan</span>
-    </div>
-    <div class="hasil-baris"><span>BMR (metabolisme basal)</span><strong>${Math.round(bmr)} kkal</strong></div>
-    <div class="hasil-baris"><span>Target turun BB (−500 kkal)</span><strong>${Math.round(turun)} kkal</strong></div>
-    <div class="hasil-baris"><span>Target naik BB (+500 kkal)</span><strong>${Math.round(naik)} kkal</strong></div>
-    <div class="hasil-baris"><span>IMT Anda</span><strong>${imt.toFixed(1)} kg/m²</strong></div>
-    <div class="hasil-baris"><span>Karbohidrat (50%)</span><strong>± ${Math.round(karbo)} g/hari</strong></div>
-    <div class="hasil-baris"><span>Protein (25%)</span><strong>± ${Math.round(prot)} g/hari</strong></div>
-    <div class="hasil-baris"><span>Lemak (25%)</span><strong>± ${Math.round(lemak)} g/hari</strong></div>
-    <p class="saran">
-      <strong>Panduan Isi Piringku:</strong> 50% sayur &amp; buah, 25% protein (ikan, ayam tanpa kulit, tempe, tahu),
-      25% karbohidrat kompleks (nasi merah, oat, ubi). Batasi gula &lt;50 g/hari, garam &lt;5 g/hari, dan
-      minum 8 gelas air setiap hari.
-    </p>
-    <p class="rumus">Rumus: Mifflin-St Jeor — BMR = 10×BB + 6,25×TB − 5×Usia + (5 pria / −161 wanita). TDEE = BMR × faktor aktivitas.</p>
+  /* Tulis hasil ke elemen yang sudah ada di HTML */
+  out.nilai.textContent = Math.round(tdee).toLocaleString('id-ID');
+  out.kategori.textContent = 'kkal/hari';
+
+  out.bmr.textContent   = Math.round(bmr).toLocaleString('id-ID') + ' kkal';
+  out.turun.textContent = Math.round(turun).toLocaleString('id-ID') + ' kkal';
+  out.naik.textContent  = Math.round(naik).toLocaleString('id-ID') + ' kkal';
+  out.karbo.textContent = '± ' + Math.round(karbo) + ' g/hari';
+  out.prot.textContent  = '± ' + Math.round(prot) + ' g/hari';
+  out.lemak.textContent = '± ' + Math.round(lemak) + ' g/hari';
+
+  out.saran.innerHTML = `
+    <strong>IMT Anda: ${imt.toFixed(1)} kg/m² (${kategoriIMT(imt)}).</strong><br>
+    <strong>Panduan Isi Piringku:</strong> 50% sayur &amp; buah, 25% protein (ikan, ayam tanpa kulit, tempe, tahu),
+    25% karbohidrat kompleks (nasi merah, oat, ubi). Batasi gula &lt;50 g/hari, garam &lt;5 g/hari, dan
+    minum 8 gelas air setiap hari.
   `;
+
+  /* Tampilkan panel hasil */
+  hasilEl.hidden = false;
+
+  /* Di layar kecil, geser ke panel hasil biar langsung kelihatan */
+  if (window.matchMedia('(max-width: 960px)').matches) {
+    hasilEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 });
