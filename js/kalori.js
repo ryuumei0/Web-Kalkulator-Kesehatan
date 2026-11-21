@@ -1,4 +1,3 @@
-/* Kalkulator Kebutuhan Kalori (Mifflin-St Jeor) */
 
 const form = document.getElementById('form-kalori');
 const errorEl = document.getElementById('kalori-error');
@@ -26,7 +25,6 @@ function clearError() {
   errorEl.hidden = true;
 }
 
-/* Klasifikasi IMT Asia-Pasifik (WHO / PERKENI) */
 function kategoriIMT(imt) {
   if (imt < 18.5) return 'Kurang';
   if (imt < 23) return 'Normal';
@@ -36,7 +34,7 @@ function kategoriIMT(imt) {
 }
 
 form.addEventListener('submit', (e) => {
-  e.preventDefault();      // ← ini yang tadinya tidak jalan, makanya halaman refresh
+  e.preventDefault();    
   clearError();
 
   const jk = document.getElementById('jk').value;
@@ -53,7 +51,6 @@ form.addEventListener('submit', (e) => {
   if (tb < 50 || tb > 250) { showError('Tinggi badan harus 50–250 cm.'); return; }
   if (bb < 20 || bb > 400) { showError('Berat badan harus 20–400 kg.'); return; }
 
-  /* BMR — Mifflin-St Jeor */
   const bmr = jk === 'L'
     ? (10 * bb) + (6.25 * tb) - (5 * usia) + 5
     : (10 * bb) + (6.25 * tb) - (5 * usia) - 161;
@@ -62,14 +59,12 @@ form.addEventListener('submit', (e) => {
   const turun = tdee - 500;
   const naik  = tdee + 500;
 
-  /* Makronutrien: karbo 50%, protein 25%, lemak 25% */
   const karbo = (tdee * 0.50) / 4;
   const prot  = (tdee * 0.25) / 4;
   const lemak = (tdee * 0.25) / 9;
 
   const imt = bb / Math.pow(tb / 100, 2);
 
-  /* Tulis hasil ke elemen yang sudah ada di HTML */
   out.nilai.textContent = Math.round(tdee).toLocaleString('id-ID');
   out.kategori.textContent = 'kkal/hari';
 
@@ -87,7 +82,6 @@ form.addEventListener('submit', (e) => {
     minum 8 gelas air setiap hari.
   `;
 
-  /* Tampilkan panel hasil */
   hasilEl.hidden = false;
 
   /* Di layar kecil, geser ke panel hasil biar langsung kelihatan */
