@@ -11,23 +11,19 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
 <!-- HEADER -->
 <header class="topbar">
-    <div class="topbar-in">
-
-        <a href="../index.html" class="brand">
-            SehatKu.
-        </a>
-
-        <nav class="menu">
+    <div class="wrap topbar-in">
+        <a class="brand" href="../index.html">SehatKu<span class="brand-dot">.</span></a>
+        <nav class="menu" aria-label="Menu utama">
             <a href="../index.html">Beranda</a>
-            <a href="egfr-ginjal.html" class="active">Kalkulator</a>
+            <a href="../index.html#kalkulator" aria-current="page">Kalkulator</a>
         </nav>
-
     </div>
 </header>
 
@@ -457,119 +453,11 @@
 
 </div>
 
-<!-- ================= TOP HEADER ================= -->
-
-<header class="top-header">
-
-    <div class="top-header-container">
-
-        <div class="alamat">
-            📍 Jl. Indrapura No.17, Krembangan Sel, Surabaya
-        </div>
-
-        <div class="kontak">
-
-            <span>
-                Contact Center <b>1500056</b>
-            </span>
-
-            <span>
-                ◉ WA Customer Care <b>0823-3597-5557</b>
-            </span>
-
-            <span>
-                🚑 SPGDT
-            </span>
-
-            <div class="bahasa">
-                🇮🇩 ID
-                <span>🇬🇧 EN</span>
-            </div>
-
-        </div>
-
+<footer class="foot" id="tentang">
+    <div class="wrap">
+      <p>Proyek tugas web kelompok. Rumus mengacu pada panduan kesehatan yang dicantumkan di tiap kalkulator.</p>
     </div>
+</footer>
 
-</header>
-
-
-<!-- ================= NAVBAR ================= -->
-
-<nav class="navbar">
-
-    <div class="navbar-container">
-
-        <!-- LOGO -->
-        <a href="../index.html" class="logo">
-
-            <span class="logo-icon">
-                ✚
-            </span>
-
-            <div>
-                <strong>SehatKu.</strong>
-                <small>Kesehatan</small>
-            </div>
-
-        </a>
-
-
-        <!-- MENU -->
-        <div class="nav-menu">
-
-            <a href="../index.html">
-                Beranda
-            </a>
-
-            <a href="#">
-                Tentang Kami
-                <span>⌄</span>
-            </a>
-
-            <a href="#">
-                Layanan
-                <span>⌄</span>
-            </a>
-
-            <a href="#">
-                Fasilitas
-            </a>
-
-            <a href="#">
-                Informasi Pasien
-                <span>⌄</span>
-            </a>
-
-            <a href="#">
-                Publikasi
-                <span>⌄</span>
-            </a>
-
-            <a href="#">
-                Lainnya
-                <span>⌄</span>
-            </a>
-
-        </div>
-
-
-        <!-- ACTION -->
-        <div class="nav-action">
-
-            <button class="search">
-                🔍
-            </button>
-
-            <button class="cart">
-                🛒
-            </button>
-
-            <button class="daftar">
-                Daftar Online
-            </button>
-
-        </div>
-
-    </div>
-
-</nav>
+</body>
+</html>

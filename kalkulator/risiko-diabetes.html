@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kalkulator Risiko Diabetes - SehatKu</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="../css/style.css">
 
     <style>
@@ -12,38 +16,7 @@
             box-sizing: border-box;
         }
 
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f5f8fa;
-            color: #263238;
-            line-height: 1.6;
-        }
-
-        .header-diabetes {
-            background: #087f6e;
-            color: white;
-            padding: 18px 7%;
-        }
-
-        .header-diabetes nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .brand {
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        .header-diabetes a {
-            color: white;
-            text-decoration: none;
-            margin-left: 15px;
-        }
+        /* Header dan footer memakai gaya bersama dari css/style.css */
 
         .hero-diabetes {
             background: #e0f2ef;
@@ -151,24 +124,7 @@
             margin-top: 15px;
         }
 
-        .footer {
-            background: #087f6e;
-            color: white;
-            text-align: center;
-            padding: 20px;
-            margin-top: 40px;
-        }
-
         @media (max-width: 600px) {
-            .header-diabetes nav {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .header-diabetes a {
-                margin: 0 12px 0 0;
-            }
-
             .article,
             .diabetes-container {
                 padding: 18px;
@@ -179,15 +135,14 @@
 
 <body>
 
-    <header class="header-diabetes">
-        <nav>
-            <div class="brand">SehatKu.</div>
-            <div>
+    <header class="topbar">
+        <div class="wrap topbar-in">
+            <a class="brand" href="../index.html">SehatKu<span class="brand-dot">.</span></a>
+            <nav class="menu" aria-label="Menu utama">
                 <a href="../index.html">Beranda</a>
-                <a href="../index.html#kalkulator">Kalkulator</a>
-                <a href="#artikel">Artikel</a>
-            </div>
-        </nav>
+                <a href="../index.html#kalkulator" aria-current="page">Kalkulator</a>
+            </nav>
+        </div>
     </header>
 
     <section class="hero-diabetes">
@@ -359,8 +314,10 @@
 
     </main>
 
-    <footer class="footer">
-        <p>&copy; 2026 SehatKu. Informasi Kesehatan Digital.</p>
+    <footer class="foot" id="tentang">
+        <div class="wrap">
+            <p>Proyek tugas web kelompok. Rumus mengacu pada panduan kesehatan yang dicantumkan di tiap kalkulator.</p>
+        </div>
     </footer>
 
     <script src="../js/risiko-diabetes.js"></script>
