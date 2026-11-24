@@ -93,5 +93,4 @@
   function tampilkanHasil(html) {
     hasilSubur.innerHTML = html;
     hasilSubur.style.display = "block";
-  }
-});
+  };
