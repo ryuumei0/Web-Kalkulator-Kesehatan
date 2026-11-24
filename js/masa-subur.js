@@ -1,4 +1,4 @@
-// tes tes WebTransportErrordocument.addEventListener("DOMContentLoaded", function () {
+(function () {
   const formSubur = document.getElementById("form-subur");
   const hasilSubur = document.getElementById("hasil-subur");
 
@@ -95,4 +95,4 @@
     hasilSubur.innerHTML = html;
     hasilSubur.style.display = "block";
   }
-});
+})();
