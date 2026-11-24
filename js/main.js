@@ -34,13 +34,15 @@
 
 // Garis bawah menu mengikuti bagian yang sedang dilihat
 (function () {
-  var links = Array.prototype.slice.call(document.querySelectorAll('.menu a[href^="#"]'));
+  // Link boleh berupa "#kalkulator" maupun "index.html#kalkulator"
+  var links = Array.prototype.slice.call(document.querySelectorAll('.menu a[href*="#"]'));
 
   var bagian = links.map(function (link) {
-    return {
-      link: link,
-      el: document.querySelector(link.getAttribute('href'))
-    };
+    var el = null;
+    if (link.hash && link.hash.length > 1) {
+      try { el = document.querySelector(link.hash); } catch (e) { el = null; }
+    }
+    return { link: link, el: el };
   }).filter(function (item) {
     return item.el !== null;
   });
