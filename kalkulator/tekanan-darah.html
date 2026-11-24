@@ -4,12 +4,79 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Cek Kategori Tekanan Darah - SehatKu</title>
-  <meta name="description" content="Pemeriksaan kategori tekanan darah.">
+  <meta name="description" content="Cek apakah tekanan darah Anda normal, meningkat, hipertensi stadium 1–2, atau krisis berdasarkan panduan ACC/AHA.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <link rel="stylesheet" href="../css/style.css">
+
+  <style>
+    * { box-sizing: border-box; }
+
+    .tensi-stack { display: grid; gap: 24px; margin-top: 24px; margin-bottom: 40px; }
+    .tensi-card { background: #ffffff; padding: 24px; border-radius: 12px; box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06); }
+    .tensi-card h2, .tensi-card h3 { color: #087f6e; margin-top: 0; }
+    .tensi-card a { color: #087f6e; overflow-wrap: anywhere; }
+
+    /* Judul langkah */
+    .langkah { display: flex; align-items: center; gap: 12px; margin-bottom: 4px; }
+    .langkah-no { width: 32px; height: 32px; border-radius: 50%; background: #087f6e; color: #fff; display: inline-flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0; }
+    .langkah h2 { margin: 0; }
+    .sub { margin: 0 0 20px 44px; font-size: 14px; color: #59666b; }
+
+    /* Form */
+    .baris-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .form-group { margin-bottom: 18px; }
+    .form-group label { display: block; margin-bottom: 7px; font-weight: 600; }
+    .input-unit { position: relative; }
+    .input-unit input { width: 100%; padding: 12px 64px 12px 12px; border: 1px solid #ccd5d8; border-radius: 7px; font-size: 18px; font-family: inherit; }
+    .input-unit input:focus { outline: 2px solid #087f6e; border-color: #087f6e; }
+    .input-unit span { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: #59666b; font-size: 14px; pointer-events: none; }
+
+    /* Tombol */
+    .button-group { display: flex; gap: 10px; flex-wrap: wrap; }
+    .btn-hitung, .btn-reset { border: none; padding: 12px 22px; border-radius: 7px; cursor: pointer; font-size: 15px; font-family: inherit; font-weight: 600; }
+    .btn-hitung { background: #087f6e; color: #ffffff; }
+    .btn-hitung:hover { background: #066b5d; }
+    .btn-reset { background: #e1e6e8; color: #263238; }
+    .btn-reset:hover { background: #d2d8da; }
+
+    /* Hasil */
+    #hasil-tensi { display: none; margin-top: 24px; padding: 24px; border-radius: 10px; background: #e8f5f2; border-left: 5px solid #087f6e; }
+    #hasil-tensi h3 { color: #087f6e; margin-top: 0; margin-bottom: 14px; }
+    #hasil-tensi p { line-height: 1.7; }
+    #hasil-tensi hr { border: none; border-top: 1px solid #c8ded9; margin: 20px 0; }
+    .nilai-tensi { font-size: 30px; font-weight: 700; color: #087f6e; margin: 4px 0 14px; }
+    .kategori-tensi { display: inline-block; padding: 8px 14px; color: #ffffff; border-radius: 6px; font-weight: 600; margin-bottom: 14px; }
+    .k-normal { background: #087f6e; }
+    .k-meningkat { background: #8a6d00; }
+    .k-stadium1 { background: #b45309; }
+    .k-stadium2 { background: #c2410c; }
+    .k-krisis { background: #b91c1c; }
+    .peringatan-tensi { margin: 14px 0; padding: 12px 14px; border-radius: 8px; background: #fdecea; border-left: 4px solid #b91c1c; color: #7f1d1d; line-height: 1.6; }
+
+    /* Tabel kategori */
+    .tabel-wrap { overflow-x: auto; margin: 12px 0 8px; }
+    .tabel-tensi { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 420px; }
+    .tabel-tensi th, .tabel-tensi td { padding: 10px 12px; border-bottom: 1px solid #e1e6e8; text-align: left; }
+    .tabel-tensi th { background: #e8f5f2; color: #087f6e; }
+    .tabel-tensi tr.aktif td { background: #fff4d6; font-weight: 700; }
+
+    .catatan { font-size: 13px; color: #59666b; margin-top: 15px; line-height: 1.6; }
+    .sumber-list { padding-left: 20px; }
+    .sumber-list li { margin-bottom: 8px; }
+    .link-lain { display: flex; flex-wrap: wrap; gap: 10px; padding: 0; margin: 0; list-style: none; }
+    .link-lain a { display: inline-block; padding: 8px 14px; border: 1px solid #ccd5d8; border-radius: 999px; text-decoration: none; font-size: 14px; }
+    .link-lain a:hover { background: #e8f5f2; }
+
+    @media (max-width: 600px) {
+      .tensi-card { padding: 18px; }
+      .baris-2 { grid-template-columns: 1fr; }
+      .btn-hitung, .btn-reset { width: 100%; }
+      .sub { margin-left: 0; }
+    }
+  </style>
 </head>
 <body>
 
@@ -29,14 +96,106 @@
         <p class="crumb"><a href="../index.html">Beranda</a> / <a href="../index.html#kalkulator">Kalkulator Kesehatan</a> / Tekanan Darah</p>
         <h1 class="judul-hero">
           <span class="judul-ikon" aria-hidden="true"><i class="fa-solid fa-gauge-high"></i></span>
-          Cek Kategori Tekanan Darah
+          Kalkulator Kategori Tekanan Darah
         </h1>
-        <p class="lead">Halaman kalkulator ini sedang disiapkan. Sementara itu, silakan pilih kalkulator lain yang sudah tersedia.</p>
+        <p class="lead">Tekanan darah normal dewasa: sistole &lt; 120 dan diastole &lt; 80 mmHg. Angka ≥ 130/80 mmHg sudah termasuk hipertensi menurut panduan ACC/AHA.</p>
       </div>
     </section>
 
-    <section class="wrap tools">
-      <p class="notice">Kembali ke <a href="../index.html#kalkulator">daftar kalkulator kesehatan</a>.</p>
+    <section class="wrap tensi-stack">
+
+      <!-- KALKULATOR -->
+      <section class="tensi-card">
+
+        <div class="langkah">
+          <span class="langkah-no">1</span>
+          <h2>Isi data Anda</h2>
+        </div>
+        <p class="sub">Dihitung langsung di browser, tidak dikirim ke mana pun.</p>
+
+        <form id="form-tensi" novalidate>
+          <div class="baris-2">
+            <div class="form-group">
+              <label for="sistolik">Sistole (atas)</label>
+              <div class="input-unit">
+                <input type="number" id="sistolik" inputmode="numeric" min="50" max="300" placeholder="120" required>
+                <span>mmHg</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="diastolik">Diastole (bawah)</label>
+              <div class="input-unit">
+                <input type="number" id="diastolik" inputmode="numeric" min="30" max="200" placeholder="80" required>
+                <span>mmHg</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="button-group">
+            <button type="submit" class="btn-hitung"><i class="fa-solid fa-calculator"></i> Hitung sekarang</button>
+            <button type="reset" class="btn-reset"><i class="fa-solid fa-rotate-left"></i> Reset</button>
+          </div>
+        </form>
+
+        <!-- HASIL (diisi oleh JavaScript) -->
+        <div id="hasil-tensi" aria-live="polite"></div>
+
+        <p class="catatan">
+          <strong>Catatan:</strong>
+          Hasil kalkulator ini bersifat edukasi untuk dewasa (≥ 18 tahun) dan bukan pengganti diagnosis dokter. Jika Anda sedang minum obat tekanan darah, jangan mengubah dosis tanpa arahan dokter.
+        </p>
+      </section>
+
+      <!-- KATEGORI -->
+      <section class="tensi-card">
+        <h2>Kategori tekanan darah dewasa</h2>
+        <div class="tabel-wrap">
+          <table class="tabel-tensi">
+            <thead>
+              <tr><th>Kategori</th><th>Sistole</th><th></th><th>Diastole</th></tr>
+            </thead>
+            <tbody>
+              <tr data-kat="normal"><td>Normal</td><td>&lt; 120</td><td>dan</td><td>&lt; 80</td></tr>
+              <tr data-kat="meningkat"><td>Meningkat (Elevated)</td><td>120 – 129</td><td>dan</td><td>&lt; 80</td></tr>
+              <tr data-kat="stadium1"><td>Hipertensi Stadium 1</td><td>130 – 139</td><td>atau</td><td>80 – 89</td></tr>
+              <tr data-kat="stadium2"><td>Hipertensi Stadium 2</td><td>≥ 140</td><td>atau</td><td>≥ 90</td></tr>
+              <tr data-kat="krisis"><td>Krisis Hipertensi</td><td>&gt; 180</td><td>dan/atau</td><td>&gt; 120</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="catatan">Bila sistole dan diastole jatuh pada kategori berbeda, kategori yang lebih tinggi yang dipakai. Klasifikasi antar panduan (misalnya panduan Eropa/PERHI) dapat sedikit berbeda, sehingga penilaian akhir tetap oleh dokter.</p>
+
+        <h3>Agar pengukuran akurat</h3>
+        <ul>
+          <li>Duduk tenang bersandar selama 5 menit sebelum mengukur.</li>
+          <li>Hindari kopi, rokok, dan olahraga berat minimal 30 menit sebelumnya.</li>
+          <li>Kaki menapak lantai, tidak menyilang, lengan setinggi jantung.</li>
+          <li>Ukur 2 kali dengan jeda 1–2 menit, lalu catat rata-ratanya.</li>
+        </ul>
+      </section>
+
+      <!-- SUMBER -->
+      <section class="tensi-card">
+        <h2>Sumber rumus &amp; klasifikasi</h2>
+        <ul class="sumber-list">
+          <li>
+            Whelton PK, et al. 2017 ACC/AHA Guideline for the Prevention, Detection, Evaluation, and Management of High Blood Pressure in Adults. <em>Hypertension</em>.
+            <a href="https://doi.org/10.1161/HYP.0000000000000066" target="_blank" rel="noopener noreferrer">Buka sumber</a>
+          </li>
+          <li><a href="https://www.kemkes.go.id/" target="_blank" rel="noopener noreferrer">Kementerian Kesehatan Republik Indonesia (Kemkes RI)</a></li>
+          <li><a href="https://p2ptm.kemkes.go.id/" target="_blank" rel="noopener noreferrer">Direktorat P2PTM Kemenkes RI</a></li>
+        </ul>
+      </section>
+
+      <!-- KALKULATOR LAIN -->
+      <section class="tensi-card">
+        <h2>Coba kalkulator lainnya</h2>
+        <ul class="link-lain">
+          <li><a href="kesehatan-ginjal.html">Kalkulator Fungsi Ginjal (eGFR)</a></li>
+          <li><a href="../index.html#kalkulator">Semua kalkulator</a></li>
+        </ul>
+      </section>
+
     </section>
   </main>
 
@@ -46,5 +205,6 @@
     </div>
   </footer>
 
+  <script src="../js/tekanan-darah.js"></script>
 </body>
 </html>
