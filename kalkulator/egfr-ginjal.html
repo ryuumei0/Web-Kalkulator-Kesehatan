@@ -1,246 +1,445 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Kalkulator Kesehatan Ginjal (eGFR) - SehatKu</title>
-<meta name="description" content="Kalkulator estimasi laju filtrasi glomerulus (eGFR) untuk memantau fungsi ginjal.">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Kalkulator Kesehatan Ginjal (eGFR) - SehatKu</title>
+    <meta
+      name="description"
+      content="Kalkulator estimasi laju filtrasi glomerulus (eGFR) untuk memantau fungsi ginjal."
+    />
 
-<!-- Google Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
 
-<!-- Font Awesome -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
 
-<!-- CSS utama -->
-<link rel="stylesheet" href="../css/style.css">
+    <!-- CSS utama -->
+    <link rel="stylesheet" href="../css/style.css" />
 
-<style>
-* { box-sizing: border-box; }
+    <style>
+      * {
+        box-sizing: border-box;
+      }
 
-/* CARD GINJAL */
-.ginjal-stack { display: grid; gap: 24px; margin-top: 24px; margin-bottom: 40px; }
-.ginjal-card { background: #ffffff; padding: 24px; border-radius: 12px; box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06); }
-.ginjal-card h2, .ginjal-card h3 { color: #087f6e; margin-top: 0; }
-.ginjal-card a { color: #087f6e; overflow-wrap: anywhere; }
+      /* CARD GINJAL */
+      .ginjal-stack {
+        display: grid;
+        gap: 24px;
+        margin-top: 24px;
+        margin-bottom: 40px;
+      }
+      .ginjal-card {
+        background: #ffffff;
+        padding: 24px;
+        border-radius: 12px;
+        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+      }
+      .ginjal-card h2,
+      .ginjal-card h3 {
+        color: #087f6e;
+        margin-top: 0;
+      }
+      .ginjal-card a {
+        color: #087f6e;
+        overflow-wrap: anywhere;
+      }
 
-/* FORM */
-.form-group { margin-bottom: 18px; }
-.form-group label { display: block; margin-bottom: 7px; font-weight: 600; }
-.form-group input, .form-group select { width: 100%; padding: 12px; border: 1px solid #ccd5d8; border-radius: 7px; font-size: 15px; font-family: inherit; }
-.form-group input:focus, .form-group select:focus { outline: 2px solid #087f6e; border-color: #087f6e; }
+      /* FORM */
+      .form-group {
+        margin-bottom: 18px;
+      }
+      .form-group label {
+        display: block;
+        margin-bottom: 7px;
+        font-weight: 600;
+      }
+      .form-group input,
+      .form-group select {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccd5d8;
+        border-radius: 7px;
+        font-size: 15px;
+        font-family: inherit;
+      }
+      .form-group input:focus,
+      .form-group select:focus {
+        outline: 2px solid #087f6e;
+        border-color: #087f6e;
+      }
 
-/* BUTTON */
-.button-group { display: flex; gap: 10px; flex-wrap: wrap; }
-.btn-hitung, .btn-reset { border: none; padding: 12px 22px; border-radius: 7px; cursor: pointer; font-size: 15px; font-family: inherit; font-weight: 600; }
-.btn-hitung { background: #087f6e; color: #ffffff; }
-.btn-hitung:hover { background: #066b5d; }
-.btn-reset { background: #e1e6e8; color: #263238; }
-.btn-reset:hover { background: #d2d8da; }
+      /* BUTTON */
+      .button-group {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .btn-hitung,
+      .btn-reset {
+        border: none;
+        padding: 12px 22px;
+        border-radius: 7px;
+        cursor: pointer;
+        font-size: 15px;
+        font-family: inherit;
+        font-weight: 600;
+      }
+      .btn-hitung {
+        background: #087f6e;
+        color: #ffffff;
+      }
+      .btn-hitung:hover {
+        background: #066b5d;
+      }
+      .btn-reset {
+        background: #e1e6e8;
+        color: #263238;
+      }
+      .btn-reset:hover {
+        background: #d2d8da;
+      }
 
-/* HASIL KALKULATOR */
-#hasil-ginjal { display: none; margin-top: 24px; padding: 24px; border-radius: 10px; background: #e8f5f2; border-left: 5px solid #087f6e; }
-#hasil-ginjal h3 { color: #087f6e; margin-top: 0; margin-bottom: 18px; }
-#hasil-ginjal p { line-height: 1.7; }
-.nilai-egfr { font-size: 28px; font-weight: 700; color: #087f6e; margin: 8px 0 20px; }
-.kategori-egfr { display: inline-block; padding: 8px 14px; background: #087f6e; color: #ffffff; border-radius: 6px; font-weight: 600; margin-bottom: 15px; }
-#hasil-ginjal hr { border: none; border-top: 1px solid #c8ded9; margin: 20px 0; }
+      /* HASIL KALKULATOR */
+      #hasil-ginjal {
+        display: none;
+        margin-top: 24px;
+        padding: 24px;
+        border-radius: 10px;
+        background: #e8f5f2;
+        border-left: 5px solid #087f6e;
+      }
+      #hasil-ginjal h3 {
+        color: #087f6e;
+        margin-top: 0;
+        margin-bottom: 18px;
+      }
+      #hasil-ginjal p {
+        line-height: 1.7;
+      }
+      .nilai-egfr {
+        font-size: 28px;
+        font-weight: 700;
+        color: #087f6e;
+        margin: 8px 0 20px;
+      }
+      .kategori-egfr {
+        display: inline-block;
+        padding: 8px 14px;
+        background: #087f6e;
+        color: #ffffff;
+        border-radius: 6px;
+        font-weight: 600;
+        margin-bottom: 15px;
+      }
+      #hasil-ginjal hr {
+        border: none;
+        border-top: 1px solid #c8ded9;
+        margin: 20px 0;
+      }
 
-/* CATATAN */
-.catatan { font-size: 13px; color: #59666b; margin-top: 15px; line-height: 1.6; }
+      /* CATATAN */
+      .catatan {
+        font-size: 13px;
+        color: #59666b;
+        margin-top: 15px;
+        line-height: 1.6;
+      }
 
-/* SUMBER */
-.sumber-list { padding-left: 20px; }
-.sumber-list li { margin-bottom: 8px; }
+      /* SUMBER */
+      .sumber-list {
+        padding-left: 20px;
+      }
+      .sumber-list li {
+        margin-bottom: 8px;
+      }
 
-/* RESPONSIVE */
-@media (max-width: 600px) {
-    .ginjal-card { padding: 18px; }
-    .nilai-egfr { font-size: 23px; }
-    .btn-hitung, .btn-reset { width: 100%; }
-}
-</style>
-</head>
+      /* RESPONSIVE */
+      @media (max-width: 600px) {
+        .ginjal-card {
+          padding: 18px;
+        }
+        .nilai-egfr {
+          font-size: 23px;
+        }
+        .btn-hitung,
+        .btn-reset {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
 
-<body>
-
-<!-- HEADER -->
-<header class="topbar">
-    <div class="wrap topbar-in">
-        <a class="brand" href="../index.html">SehatKu<span class="brand-dot">.</span></a>
+  <body>
+    <!-- HEADER -->
+    <header class="topbar">
+      <div class="wrap topbar-in">
+        <a class="brand" href="../index.html"
+          >SehatKu<span class="brand-dot">.</span></a
+        >
         <nav class="menu" aria-label="Menu utama">
-            <a href="../index.html">Beranda</a>
-            <a href="../index.html#kalkulator" aria-current="page">Kalkulator</a>
+          <a href="../index.html">Beranda</a>
+          <a href="../index.html#kalkulator" aria-current="page">Kalkulator</a>
         </nav>
-    </div>
-</header>
+      </div>
+    </header>
 
-<!-- MAIN -->
-<main>
-
-    <!-- HERO -->
-    <section class="hero hero-kecil">
+    <!-- MAIN -->
+    <main>
+      <!-- HERO -->
+      <section class="hero hero-kecil">
         <div class="wrap">
-            <p class="crumb">
-                <a href="../index.html">Beranda</a> /
-                <a href="../index.html#kalkulator">Kalkulator Kesehatan</a> /
-                Ginjal
-            </p>
-            <h1 class="judul-hero">
-                <span class="judul-ikon" aria-hidden="true"><i class="fa-solid fa-heart-pulse"></i></span>
-                Kalkulator Kesehatan Ginjal (eGFR)
-            </h1>
-            <p class="lead">
-                Perkirakan laju filtrasi glomerulus (eGFR) untuk memantau fungsi penyaringan ginjal pada dewasa sejak dini.
-            </p>
+          <p class="crumb">
+            <a href="../index.html">Beranda</a> /
+            <a href="../index.html#kalkulator">Kalkulator Kesehatan</a> / Ginjal
+          </p>
+          <h1 class="judul-hero">
+            <span class="judul-ikon" aria-hidden="true"
+              ><i class="fa-solid fa-heart-pulse"></i
+            ></span>
+            Kalkulator Kesehatan Ginjal (eGFR)
+          </h1>
+          <p class="lead">
+            Perkirakan laju filtrasi glomerulus (eGFR) untuk memantau fungsi
+            penyaringan ginjal pada dewasa sejak dini.
+          </p>
         </div>
-    </section>
+      </section>
 
-    <!-- CONTENT -->
-    <section class="wrap ginjal-stack">
-
+      <!-- CONTENT -->
+      <section class="wrap ginjal-stack">
         <!-- ARTIKEL -->
         <article class="ginjal-card" id="artikel">
+          <h2>Mengenal Fungsi Ginjal dan eGFR</h2>
 
-            <h2>Mengenal Fungsi Ginjal dan eGFR</h2>
+          <p>
+            Ginjal berperan menyaring sisa metabolisme, kelebihan cairan, dan
+            zat limbah dari darah menjadi urine, sekaligus membantu menjaga
+            keseimbangan elektrolit, tekanan darah, serta produksi sel darah
+            merah. Salah satu ukuran penting untuk menilai fungsi penyaringan
+            ginjal adalah
+            <strong
+              >eGFR (<em>estimated Glomerular Filtration Rate</em>)</strong
+            >
+            dengan satuan <code>mL/min/1,73 m²</code>.
+          </p>
 
-            <p>
-                Ginjal berperan menyaring sisa metabolisme, kelebihan cairan, dan zat limbah dari darah menjadi urine, sekaligus membantu menjaga keseimbangan elektrolit, tekanan darah, serta produksi sel darah merah. Salah satu ukuran penting untuk menilai fungsi penyaringan ginjal adalah
-                <strong>eGFR (<em>estimated Glomerular Filtration Rate</em>)</strong>
-                dengan satuan <code>mL/min/1,73 m²</code>.
-            </p>
+          <h3>Kategori Stadium eGFR (GFR Categories)</h3>
 
-            <h3>Kategori Stadium eGFR (GFR Categories)</h3>
+          <p>
+            <strong>G1 — Normal atau Tinggi (≥ 90 mL/min/1,73 m²)</strong><br />
+            Laju filtrasi tergolong normal atau tinggi; penilaian kerusakan
+            ginjal juga mempertimbangkan pemeriksaan penunjang lain seperti
+            albuminuria.
+          </p>
 
-            <p>
-                <strong>G1 — Normal atau Tinggi (≥ 90 mL/min/1,73 m²)</strong><br>
-                Laju filtrasi tergolong normal atau tinggi; penilaian kerusakan ginjal juga mempertimbangkan pemeriksaan penunjang lain seperti albuminuria.
-            </p>
+          <p>
+            <strong>G2 — Penurunan Ringan (60 – 89 mL/min/1,73 m²)</strong
+            ><br />
+            Penurunan ringan laju filtrasi; perlu dicermati bila disertai faktor
+            risiko atau tanda gangguan ginjal.
+          </p>
 
-            <p>
-                <strong>G2 — Penurunan Ringan (60 – 89 mL/min/1,73 m²)</strong><br>
-                Penurunan ringan laju filtrasi; perlu dicermati bila disertai faktor risiko atau tanda gangguan ginjal.
-            </p>
+          <p>
+            <strong
+              >G3a &amp; G3b — Penurunan Ringan-Sedang hingga Sedang-Berat (30 –
+              59 mL/min/1,73 m²)</strong
+            ><br />
+            Terdiri atas G3a (45 – 59 mL/min/1,73 m²) dan G3b (30 – 44
+            mL/min/1,73 m²); memerlukan pemantauan medis serta pengendalian
+            faktor risiko.
+          </p>
 
-            <p>
-                <strong>G3a &amp; G3b — Penurunan Ringan-Sedang hingga Sedang-Berat (30 – 59 mL/min/1,73 m²)</strong><br>
-                Terdiri atas G3a (45 – 59 mL/min/1,73 m²) dan G3b (30 – 44 mL/min/1,73 m²); memerlukan pemantauan medis serta pengendalian faktor risiko.
-            </p>
+          <p>
+            <strong
+              >G4 &amp; G5 — Penurunan Berat hingga Gagal Ginjal (&lt; 30
+              mL/min/1,73 m²)</strong
+            ><br />
+            G4 berada pada 15 – 29 mL/min/1,73 m² dan G5 &lt; 15 mL/min/1,73 m²;
+            membutuhkan penanganan lanjutan oleh dokter spesialis.
+          </p>
 
-            <p>
-                <strong>G4 &amp; G5 — Penurunan Berat hingga Gagal Ginjal (&lt; 30 mL/min/1,73 m²)</strong><br>
-                G4 berada pada 15 – 29 mL/min/1,73 m² dan G5 &lt; 15 mL/min/1,73 m²; membutuhkan penanganan lanjutan oleh dokter spesialis.
-            </p>
+          <h3>Gejala yang Perlu Diwaspadai</h3>
+          <ul>
+            <li>
+              Pembengkakan (edema) pada tungkai, pergelangan kaki, wajah, atau
+              tangan.
+            </li>
+            <li>
+              Perubahan pola buang air kecil atau tampilan urine (berbusa
+              berlebihan, keruh, atau kemerahan).
+            </li>
+            <li>Mudah lelah, lemas, atau penurunan konsentrasi.</li>
+            <li>
+              Mual, nafsu makan turun, atau keluhan menetap lainnya pada kondisi
+              lanjut.
+            </li>
+          </ul>
 
-            <h3>Gejala yang Perlu Diwaspadai</h3>
-            <ul>
-                <li>Pembengkakan (edema) pada tungkai, pergelangan kaki, wajah, atau tangan.</li>
-                <li>Perubahan pola buang air kecil atau tampilan urine (berbusa berlebihan, keruh, atau kemerahan).</li>
-                <li>Mudah lelah, lemas, atau penurunan konsentrasi.</li>
-                <li>Mual, nafsu makan turun, atau keluhan menetap lainnya pada kondisi lanjut.</li>
-            </ul>
+          <h3>Faktor Risiko Gangguan Ginjal</h3>
+          <p>
+            Beberapa faktor yang dapat meningkatkan risiko gangguan ginjal
+            antara lain diabetes, hipertensi (tekanan darah tinggi), riwayat
+            penyakit ginjal dalam keluarga, pertambahan usia, obesitas, merokok,
+            serta penggunaan obat tertentu dalam jangka panjang tanpa pengawasan
+            tenaga medis.
+          </p>
 
-            <h3>Faktor Risiko Gangguan Ginjal</h3>
-            <p>
-                Beberapa faktor yang dapat meningkatkan risiko gangguan ginjal antara lain diabetes, hipertensi (tekanan darah tinggi), riwayat penyakit ginjal dalam keluarga, pertambahan usia, obesitas, merokok, serta penggunaan obat tertentu dalam jangka panjang tanpa pengawasan tenaga medis.
-            </p>
+          <h3>Cara Menjaga Kesehatan Ginjal</h3>
+          <ul>
+            <li>Mengontrol tekanan darah dan kadar gula darah secara rutin.</li>
+            <li>
+              Mencukupi kebutuhan cairan dan membatasi konsumsi garam
+              berlebihan.
+            </li>
+            <li>
+              Menerapkan pola makan bergizi seimbang serta menjaga berat badan
+              ideal.
+            </li>
+            <li>Berolahraga secara teratur dan tidak merokok.</li>
+            <li>
+              Berkonsultasi dengan dokter sebelum mengonsumsi obat atau suplemen
+              rutin.
+            </li>
+          </ul>
 
-            <h3>Cara Menjaga Kesehatan Ginjal</h3>
-            <ul>
-                <li>Mengontrol tekanan darah dan kadar gula darah secara rutin.</li>
-                <li>Mencukupi kebutuhan cairan dan membatasi konsumsi garam berlebihan.</li>
-                <li>Menerapkan pola makan bergizi seimbang serta menjaga berat badan ideal.</li>
-                <li>Berolahraga secara teratur dan tidak merokok.</li>
-                <li>Berkonsultasi dengan dokter sebelum mengonsumsi obat atau suplemen rutin.</li>
-            </ul>
+          <h3>Pentingnya Pemeriksaan Laboratorium</h3>
+          <p>
+            Kadar kreatinin dalam darah dapat dipengaruhi oleh massa otot, pola
+            makan, dan status hidrasi. Karena itu, hasil estimasi eGFR sebaiknya
+            dibaca bersama pemeriksaan urine dan evaluasi langsung oleh tenaga
+            kesehatan.
+          </p>
 
-            <h3>Pentingnya Pemeriksaan Laboratorium</h3>
-            <p>
-                Kadar kreatinin dalam darah dapat dipengaruhi oleh massa otot, pola makan, dan status hidrasi. Karena itu, hasil estimasi eGFR sebaiknya dibaca bersama pemeriksaan urine dan evaluasi langsung oleh tenaga kesehatan.
-            </p>
-
-            <h3>Sumber Informasi Kesehatan</h3>
-            <p>Informasi lebih lanjut dapat dibaca melalui sumber resmi kesehatan Indonesia berikut:</p>
-            <ul class="sumber-list">
-                <li><a href="https://www.kemkes.go.id/" target="_blank" rel="noopener noreferrer">Kementerian Kesehatan Republik Indonesia (Kemkes RI)</a></li>
-                <li><a href="https://ayosehat.kemkes.go.id/" target="_blank" rel="noopener noreferrer">Ayo Sehat — Direktorat Promosi Kesehatan Kemenkes RI</a></li>
-                <li><a href="https://p2ptm.kemkes.go.id/" target="_blank" rel="noopener noreferrer">Direktorat Pencegahan dan Pengendalian Penyakit Tidak Menular (P2PTM Kemenkes RI)</a></li>
-            </ul>
-
+          <h3>Sumber Informasi Kesehatan</h3>
+          <p>
+            Informasi lebih lanjut dapat dibaca melalui sumber resmi kesehatan
+            Indonesia berikut:
+          </p>
+          <ul class="sumber-list">
+            <li>
+              <a
+                href="https://www.kemkes.go.id/"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Kementerian Kesehatan Republik Indonesia (Kemkes RI)</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://ayosehat.kemkes.go.id/"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Ayo Sehat — Direktorat Promosi Kesehatan Kemenkes RI</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://p2ptm.kemkes.go.id/"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Direktorat Pencegahan dan Pengendalian Penyakit Tidak Menular
+                (P2PTM Kemenkes RI)</a
+              >
+            </li>
+          </ul>
         </article>
 
         <!-- KALKULATOR -->
         <section class="ginjal-card">
+          <h2>Hitung Estimasi eGFR</h2>
+          <p>Isi seluruh data di bawah ini dengan benar (dewasa ≥ 18 tahun).</p>
 
-            <h2>Hitung Estimasi eGFR</h2>
-            <p>Isi seluruh data di bawah ini dengan benar (dewasa ≥ 18 tahun).</p>
+          <form id="form-ginjal" novalidate>
+            <div class="form-group">
+              <label for="usia">Usia (tahun)</label>
+              <input
+                type="number"
+                id="usia"
+                min="18"
+                max="120"
+                placeholder="Contoh: 35"
+                required
+              />
+            </div>
 
-            <form id="form-ginjal" novalidate>
+            <div class="form-group">
+              <label for="gender">Jenis Kelamin</label>
+              <select id="gender" required>
+                <option value="">Pilih jenis kelamin</option>
+                <option value="laki-laki">Laki-laki</option>
+                <option value="perempuan">Perempuan</option>
+              </select>
+            </div>
 
-                <div class="form-group">
-                    <label for="usia">Usia (tahun)</label>
-                    <input type="number" id="usia" min="18" max="120" placeholder="Contoh: 35" required>
-                </div>
+            <div class="form-group">
+              <label for="kreatinin">Kreatinin Serum (mg/dL)</label>
+              <input
+                type="number"
+                id="kreatinin"
+                min="0.1"
+                max="25"
+                step="0.01"
+                placeholder="Contoh: 0.95"
+                required
+              />
+            </div>
 
-                <div class="form-group">
-                    <label for="gender">Jenis Kelamin</label>
-                    <select id="gender" required>
-                        <option value="">Pilih jenis kelamin</option>
-                        <option value="laki-laki">Laki-laki</option>
-                        <option value="perempuan">Perempuan</option>
-                    </select>
-                </div>
+            <div class="form-group">
+              <label for="riwayat"
+                >Apakah memiliki riwayat hipertensi atau diabetes?</label
+              >
+              <select id="riwayat" required>
+                <option value="">Pilih jawaban</option>
+                <option value="ya">Ya</option>
+                <option value="tidak">Tidak</option>
+              </select>
+            </div>
 
-                <div class="form-group">
-                    <label for="kreatinin">Kreatinin Serum (mg/dL)</label>
-                    <input type="number" id="kreatinin" min="0.1" max="25" step="0.01" placeholder="Contoh: 0.95" required>
-                </div>
+            <div class="button-group">
+              <button type="submit" class="btn-hitung">
+                <i class="fa-solid fa-calculator"></i> Hitung eGFR
+              </button>
+              <button type="reset" class="btn-reset">
+                <i class="fa-solid fa-rotate-left"></i> Reset
+              </button>
+            </div>
+          </form>
 
-                <div class="form-group">
-                    <label for="riwayat">Apakah memiliki riwayat hipertensi atau diabetes?</label>
-                    <select id="riwayat" required>
-                        <option value="">Pilih jawaban</option>
-                        <option value="ya">Ya</option>
-                        <option value="tidak">Tidak</option>
-                    </select>
-                </div>
+          <!-- HASIL KALKULATOR (diisi oleh JavaScript di bawah) -->
+          <div id="hasil-ginjal" aria-live="polite"></div>
 
-                <div class="button-group">
-                    <button type="submit" class="btn-hitung">
-                        <i class="fa-solid fa-calculator"></i> Hitung eGFR
-                    </button>
-                    <button type="reset" class="btn-reset">
-                        <i class="fa-solid fa-rotate-left"></i> Reset
-                    </button>
-                </div>
-
-            </form>
-
-            <!-- HASIL KALKULATOR (diisi oleh JavaScript di bawah) -->
-            <div id="hasil-ginjal" aria-live="polite"></div>
-
-            <p class="catatan">
-                <strong>Catatan:</strong>
-                Kalkulator ini menggunakan persamaan estimasi eGFR (CKD-EPI 2021 berbasis kreatinin serum) untuk edukasi pemantauan awal dewasa (≥ 18 tahun), bukan alat diagnosis medis. Konsultasikan hasil pemeriksaan laboratorium dengan dokter untuk penilaian klinis yang tepat.
-            </p>
-
+          <p class="catatan">
+            <strong>Catatan:</strong>
+            Kalkulator ini menggunakan persamaan estimasi eGFR (CKD-EPI 2021
+            berbasis kreatinin serum) untuk edukasi pemantauan awal dewasa (≥ 18
+            tahun), bukan alat diagnosis medis. Konsultasikan hasil pemeriksaan
+            laboratorium dengan dokter untuk penilaian klinis yang tepat.
+          </p>
         </section>
+      </section>
+    </main>
 
-    </section>
+    <!-- FOOTER -->
+    <footer class="foot" id="tentang">
+      <div class="wrap">
+        <p>
+          Proyek tugas web kelompok. Rumus mengacu pada panduan kesehatan yang
+          dicantumkan di tiap kalkulator.
+        </p>
+      </div>
+    </footer>
 
-</main>
-
-<!-- FOOTER -->
-<footer class="foot" id="tentang">
-    <div class="wrap">
-        <p>Proyek tugas web kelompok. Rumus mengacu pada panduan kesehatan yang dicantumkan di tiap kalkulator.</p>
-    </div>
-</footer>
-
-<!-- JAVASCRIPT -->
-<script src="../js/kesehatan-ginjal.js"></script>
-
-</body>
+    <!-- JAVASCRIPT -->
+    <script src="../js/egfr-ginjal.js"></script>
+  </body>
 </html>
