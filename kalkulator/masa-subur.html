@@ -1,14 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Kalkulator Masa Subur &amp; HPL - SehatKu</title>
-  <meta name="description" content="Kalkulator masa subur, tanggal ovulasi, dan HPL.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <title>Kalkulator Masa Subur & HPL - SehatKu</title>
+
   <link rel="stylesheet" href="../css/style.css">
 
   <style>
@@ -19,26 +16,20 @@
     .subur-stack {
       display: grid;
       gap: 24px;
-      margin-top: 24px;
-      margin-bottom: 40px;
+      margin: 24px auto 40px;
     }
 
     .subur-card {
-      background: #ffffff;
+      background: #fff;
       padding: 24px;
       border-radius: 12px;
-      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+      box-shadow: 0 3px 12px rgba(0,0,0,.06);
     }
 
     .subur-card h2,
     .subur-card h3 {
       color: #087f6e;
       margin-top: 0;
-    }
-
-    .subur-card a {
-      color: #087f6e;
-      overflow-wrap: anywhere;
     }
 
     .form-group {
@@ -58,13 +49,6 @@
       border: 1px solid #ccd5d8;
       border-radius: 7px;
       font-size: 15px;
-      font-family: inherit;
-    }
-
-    .form-group input:focus,
-    .form-group select:focus {
-      outline: 2px solid #087f6e;
-      border-color: #087f6e;
     }
 
     .button-group {
@@ -80,13 +64,12 @@
       border-radius: 7px;
       cursor: pointer;
       font-size: 15px;
-      font-family: inherit;
       font-weight: 600;
     }
 
     .btn-hitung {
       background: #087f6e;
-      color: #ffffff;
+      color: white;
     }
 
     .btn-reset {
@@ -96,7 +79,7 @@
 
     #hasil-subur {
       display: none;
-      margin-top: 24px;
+      margin-top: 25px;
       padding: 20px;
       border-radius: 10px;
       background: #e8f5f2;
@@ -105,7 +88,38 @@
 
     #hasil-subur h3 {
       color: #087f6e;
-      margin-top: 0;
+    }
+
+    #hasil-subur p {
+      line-height: 1.65;
+    }
+
+    .hasil-grid {
+      display: grid;
+      grid-template-columns:
+        repeat(auto-fit, minmax(210px, 1fr));
+      gap: 12px;
+      margin: 16px 0;
+    }
+
+    .hasil-item {
+      background: white;
+      border: 1px solid #d5eae5;
+      border-radius: 8px;
+      padding: 13px;
+    }
+
+    .hasil-item strong {
+      display: block;
+      color: #087f6e;
+      margin-bottom: 5px;
+    }
+
+    .peringatan {
+      padding: 12px;
+      background: #fff7e6;
+      border-left: 4px solid #e0a12b;
+      border-radius: 6px;
     }
 
     .catatan {
@@ -121,163 +135,272 @@
     }
   </style>
 </head>
+
 <body>
 
+  <!-- HEADER -->
   <header class="topbar">
     <div class="wrap topbar-in">
-      <a class="brand" href="../index.html">SehatKu<span class="brand-dot">.</span></a>
+
+      <a class="brand" href="../index.html">
+        SehatKu<span class="brand-dot">.</span>
+      </a>
+
       <nav class="menu" aria-label="Menu utama">
         <a href="../index.html">Beranda</a>
-        <a href="../index.html#kalkulator" aria-current="page">Kalkulator</a>
+        <a href="../index.html#kalkulator">
+          Kalkulator
+        </a>
       </nav>
+
     </div>
   </header>
 
+
   <main>
+
+    <!-- HERO -->
     <section class="hero hero-kecil">
       <div class="wrap">
-        <p class="crumb"><a href="../index.html">Beranda</a> / <a href="../index.html#kalkulator">Kalkulator Kesehatan</a> / Masa Subur</p>
+
+        <p class="crumb">
+          <a href="../index.html">Beranda</a> /
+          <a href="../index.html#kalkulator">
+            Kalkulator Kesehatan
+          </a> /
+          Masa Subur
+        </p>
+
         <h1 class="judul-hero">
-          <span class="judul-ikon" aria-hidden="true"><i class="fa-solid fa-baby"></i></span>
-          Kalkulator Masa Subur &amp; HPL
+          👶 Kalkulator Masa Subur & HPL
         </h1>
-        <p class="lead">Perkirakan tanggal ovulasi, rentang masa subur, perkiraan menstruasi berikutnya, serta Hari Perkiraan Lahir (HPL) berdasarkan HPHT.</p>
+
+        <p class="lead">
+          Perkirakan tanggal ovulasi, rentang masa subur,
+          menstruasi berikutnya, serta Hari Perkiraan Lahir
+          (HPL) berdasarkan HPHT.
+        </p>
+
       </div>
     </section>
 
+
     <section class="wrap subur-stack">
+
+      <!-- ARTIKEL -->
       <article class="subur-card" id="artikel">
-        <h2>Mengenal Siklus Menstruasi, Masa Subur, dan HPL</h2>
+
+        <h2>
+          Mengenal Siklus Menstruasi, Masa Subur, dan HPL
+        </h2>
 
         <p>
-          Siklus menstruasi dihitung mulai dari <strong>Hari Pertama Haid Terakhir (HPHT)</strong>
-          hingga hari pertama siklus haid berikutnya. Pada siklus yang teratur, rata-rata
-          panjang siklus berada di kisaran 21 hingga 35 hari, dengan pelepasan sel telur
-          (<strong>ovulasi</strong>) umumnya terjadi sekitar 14 hari sebelum haid berikutnya
-          dimulai.
+          Siklus menstruasi dihitung mulai dari
+          <strong>Hari Pertama Haid Terakhir (HPHT)</strong>
+          hingga hari pertama siklus haid berikutnya.
+          Panjang siklus dapat berbeda pada setiap orang.
         </p>
 
         <h3>Memahami Masa Subur dan Ovulasi</h3>
 
         <p>
-          <strong>1. Masa Subur (<em>Fertile Window</em>)</strong><br>
-          Mencakup beberapa hari sebelum hari ovulasi hingga hari ovulasi itu sendiri,
-          karena sel sperma dapat bertahan hidup di saluran reproduksi selama beberapa hari
-          sementara sel telur bertahan sekitar 12–24 jam setelah dilepaskan.
+          <strong>1. Masa Subur</strong><br>
+          Masa subur diperkirakan mencakup lima hari
+          sebelum ovulasi hingga hari ovulasi.
         </p>
 
         <p>
           <strong>2. Hari Perkiraan Lahir (HPL)</strong><br>
-          Perkiraan waktu persalinan umumnya dihitung menggunakan aturan Naegele
-          (sekitar 280 hari atau 40 minggu dari HPHT pada siklus 28 hari, dengan
-          penyesuaian bila panjang siklus berbeda dari 28 hari).
+          HPL secara umum dihitung sekitar 280 hari
+          atau 40 minggu dari HPHT untuk siklus 28 hari.
         </p>
 
-        <h3>Tanda Perubahan Tubuh yang Sering Diamati</h3>
-        <ul>
-          <li>Perubahan lendir serviks menjadi lebih jernih dan elastis menjelang ovulasi.</li>
-          <li>Peningkatan ringan suhu basal tubuh setelah ovulasi terjadi.</li>
-          <li>Rasa tidak nyaman ringan pada perut bagian bawah atau payudara lebih sensitif.</li>
-          <li>Perubahan suasana hati atau tingkat energi selama fase siklus.</li>
-        </ul>
+        <h3>Tips Kesehatan Reproduksi</h3>
 
-        <h3>Faktor yang Memengaruhi Keteraturan Siklus</h3>
-        <p>
-          Siklus menstruasi dapat dipengaruhi oleh stres emosional, perubahan berat badan
-          drastis, pola tidur, aktivitas fisik berat, kondisi hormonal seperti PCOS atau
-          gangguan tiroid, serta masa menyusui atau penggunaan kontrasepsi hormonal.
-        </p>
-
-        <h3>Tips Perencanaan Kehamilan &amp; Kesehatan Reproduksi</h3>
         <ul>
-          <li>Catat tanggal mulai haid dan panjang siklus secara rutin selama beberapa bulan.</li>
-          <li>Penuhi kebutuhan nutrisi seimbang, termasuk asam folat saat merencanakan kehamilan.</li>
-          <li>Jaga pola tidur cukup, kelola stres, dan hindari paparan asap rokok serta alkohol.</li>
-          <li>Lakukan pemeriksaan ke dokter kandungan atau bidan bila siklus sangat tidak teratur atau muncul keluhan nyeri hebat.</li>
+          <li>Catat tanggal mulai haid secara rutin.</li>
+          <li>Penuhi kebutuhan nutrisi seimbang.</li>
+          <li>Jaga pola tidur dan kelola stres.</li>
+          <li>Konsultasikan keluhan kepada tenaga kesehatan.</li>
         </ul>
 
         <h3>Sumber Informasi Kesehatan</h3>
-        <p>
-          Informasi lebih lanjut dapat dibaca melalui sumber resmi berikut:
-        </p>
 
         <ul>
           <li>
             <a href="https://ayosehat.kemkes.go.id/"
-               target="_blank" rel="noopener noreferrer">
-              Kementerian Kesehatan Republik Indonesia (Ayo Sehat)
+               target="_blank">
+              Kementerian Kesehatan RI
             </a>
           </li>
+
           <li>
             <a href="https://www.who.int/health-topics/menstrual-health"
-               target="_blank" rel="noopener noreferrer">
-              World Health Organization (WHO)
+               target="_blank">
+              World Health Organization
             </a>
           </li>
+
           <li>
             <a href="https://www.acog.org/womens-health/faqs/your-menstrual-cycle"
-               target="_blank" rel="noopener noreferrer">
-              American College of Obstetricians and Gynecologists (ACOG)
+               target="_blank">
+              ACOG
             </a>
           </li>
         </ul>
+
       </article>
 
+
+      <!-- KALKULATOR -->
       <section class="subur-card">
-        <h2>Hitung Masa Subur &amp; HPL</h2>
-        <p>Masukkan tanggal Hari Pertama Haid Terakhir (HPHT) dan rata-rata panjang siklus Anda.</p>
+
+        <h2>Hitung Masa Subur & HPL</h2>
+
+        <p>
+          Masukkan tanggal HPHT dan rata-rata panjang
+          siklus menstruasi Anda.
+        </p>
+
 
         <form id="form-subur">
-          <div class="form-group">
-            <label for="hpht">Hari Pertama Haid Terakhir (HPHT)</label>
-            <input type="date" id="hpht" required>
-          </div>
 
           <div class="form-group">
-            <label for="siklus">Rata-Rata Panjang Siklus Menstruasi (hari)</label>
-            <input type="number" id="siklus" min="20" max="45" value="28" required>
+            <label for="hpht">
+              Hari Pertama Haid Terakhir (HPHT)
+            </label>
+
+            <input
+              type="date"
+              id="hpht"
+              name="hpht"
+              required
+            >
           </div>
 
+
           <div class="form-group">
-            <label for="keteraturan">Apakah siklus menstruasi Anda teratur?</label>
+            <label for="siklus">
+              Rata-Rata Panjang Siklus Menstruasi (hari)
+            </label>
+
+            <input
+              type="number"
+              id="siklus"
+              name="siklus"
+              min="20"
+              max="45"
+              value="28"
+              required
+            >
+          </div>
+
+
+          <div class="form-group">
+            <label for="keteraturan">
+              Apakah siklus menstruasi Anda teratur?
+            </label>
+
             <select id="keteraturan" required>
-              <option value="">Pilih jawaban</option>
-              <option value="teratur">Ya, cukup teratur</option>
-              <option value="tidak-teratur">Tidak teratur / sering berubah</option>
+
+              <option value="">
+                Pilih jawaban
+              </option>
+
+              <option value="teratur">
+                Ya, cukup teratur
+              </option>
+
+              <option value="tidak-teratur">
+                Tidak teratur / sering berubah
+              </option>
+
             </select>
           </div>
 
+
           <div class="form-group">
-            <label for="tujuan">Tujuan Perhitungan</label>
+            <label for="tujuan">
+              Tujuan Perhitungan
+            </label>
+
             <select id="tujuan" required>
-              <option value="">Pilih tujuan</option>
-              <option value="promil">Perencanaan kehamilan (masa subur)</option>
-              <option value="hpl">Perkiraan tanggal melahirkan (HPL)</option>
-              <option value="pantau-siklus">Pemantauan jadwal haid berikutnya</option>
+
+              <option value="">
+                Pilih tujuan
+              </option>
+
+              <option value="promil">
+                Perencanaan kehamilan
+              </option>
+
+              <option value="hpl">
+                Perkiraan tanggal melahirkan (HPL)
+              </option>
+
+              <option value="pantau-siklus">
+                Pemantauan jadwal haid berikutnya
+              </option>
+
             </select>
           </div>
+
 
           <div class="button-group">
-            <button type="submit" class="btn-hitung">Hitung Masa Subur &amp; HPL</button>
-            <button type="reset" class="btn-reset">Reset</button>
+
+            <button
+              type="submit"
+              class="btn-hitung">
+              Hitung Masa Subur & HPL
+            </button>
+
+            <button
+              type="reset"
+              class="btn-reset">
+              Reset
+            </button>
+
           </div>
+
         </form>
 
-        <div id="hasil-subur" aria-live="polite"></div>
+
+        <!-- HASIL PERHITUNGAN -->
+        <div
+          id="hasil-subur"
+          aria-live="polite"
+          aria-atomic="true">
+        </div>
+
 
         <p class="catatan">
-          Catatan: Kalkulator ini merupakan alat estimasi edukasi berdasarkan kalender siklus menstruasi dan HPHT, bukan metode kontrasepsi maupun diagnosis medis. Konfirmasi usia kehamilan dan HPL sebaiknya dilakukan melalui pemeriksaan tenaga kesehatan dan ultrasonografi (USG).
+          Catatan: Kalkulator ini merupakan alat estimasi
+          edukasi berdasarkan kalender siklus menstruasi
+          dan HPHT, bukan diagnosis medis. Konfirmasi
+          usia kehamilan dan HPL sebaiknya dilakukan
+          melalui pemeriksaan tenaga kesehatan dan USG.
         </p>
+
       </section>
+
     </section>
+
   </main>
 
+
+  <!-- FOOTER -->
   <footer class="foot" id="tentang">
     <div class="wrap">
-      <p>Proyek tugas web kelompok. Rumus mengacu pada panduan kesehatan yang dicantumkan di tiap kalkulator.</p>
+      <p>
+        Proyek tugas web kelompok. Rumus mengacu pada
+        panduan kesehatan yang dicantumkan di tiap kalkulator.
+      </p>
     </div>
   </footer>
 
+
+  <!-- JAVASCRIPT -->
   <script src="../js/masa-subur.js"></script>
+
 </body>
 </html>
