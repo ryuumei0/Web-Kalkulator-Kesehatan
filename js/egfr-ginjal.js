@@ -1,97 +1,231 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const formGinjal = document.getElementById("form-ginjal");
-  const hasilGinjal = document.getElementById("hasil-ginjal");
 
-  if (!formGinjal || !hasilGinjal) return;
+    const form = document.getElementById("form-ginjal");
 
-  formGinjal.addEventListener("submit", function (event) {
-    event.preventDefault();
+    const usiaInput = document.getElementById("usia");
+    const genderInput = document.getElementById("gender");
+    const kreatininInput = document.getElementById("kreatinin");
+    const riwayatInput = document.getElementById("riwayat");
 
-    const usia = parseInt(document.getElementById("usia").value, 10);
-    const gender = document.getElementById("gender").value;
-    const kreatinin = parseFloat(document.getElementById("kreatinin").value);
-    const riwayat = document.getElementById("riwayat").value;
+    const hasil = document.getElementById("hasil-ginjal");
 
-    if (isNaN(usia) || usia < 18 || usia > 120) {
-      tampilkanHasil("<p><strong>Perhatian:</strong> Persamaan dewasa berlaku untuk usia 18 – 120 tahun.</p>");
-      return;
-    }
 
-    if (!gender) {
-      tampilkanHasil("<p><strong>Perhatian:</strong> Silakan pilih jenis kelamin terlebih dahulu.</p>");
-      return;
-    }
+    /* =========================
+       FORM SUBMIT
+    ========================= */
 
-    if (isNaN(kreatinin) || kreatinin <= 0 || kreatinin > 25) {
-      tampilkanHasil("<p><strong>Perhatian:</strong> Masukkan nilai kreatinin serum yang valid (0,1 – 25 mg/dL).</p>");
-      return;
-    }
+    form.addEventListener("submit", function (event) {
 
-    // Rumus CKD-EPI 2021 berbasis kreatinin serum (mg/dL)
-    const isFemale = gender === "perempuan";
-    const kappa = isFemale ? 0.7 : 0.9;
-    const alpha = isFemale ? -0.241 : -0.302;
-    const rasio = kreatinin / kappa;
-    const faktorMin = Math.pow(Math.min(rasio, 1), alpha);
-    const faktorMax = Math.pow(Math.max(rasio, 1), -1.2);
-    const faktorUsia = Math.pow(0.9938, usia);
+        event.preventDefault();
 
-    let egfr = 142 * faktorMin * faktorMax * faktorUsia;
-    if (isFemale) {
-      egfr *= 1.012;
-    }
+        const usia = parseFloat(usiaInput.value);
+        const gender = genderInput.value;
+        const kreatinin = parseFloat(kreatininInput.value);
+        const riwayat = riwayatInput.value;
 
-    const egfrBulat = Math.round(egfr);
 
-    let stadium = "";
-    let interpretasi = "";
+        /* =========================
+           VALIDASI
+        ========================= */
 
-    if (egfrBulat >= 90) {
-      stadium = "G1 — Normal atau Tinggi (≥ 90 mL/min/1,73 m²)";
-      interpretasi = "Estimasi laju filtrasi ginjal berada pada rentang normal atau tinggi.";
-    } else if (egfrBulat >= 60) {
-      stadium = "G2 — Penurunan Ringan (60 – 89 mL/min/1,73 m²)";
-      interpretasi = "Terdapat penurunan ringan estimasi laju filtrasi glomerulus.";
-    } else if (egfrBulat >= 45) {
-      stadium = "G3a — Penurunan Ringan hingga Sedang (45 – 59 mL/min/1,73 m²)";
-      interpretasi = "Fungsi penyaringan berada pada kategori penurunan ringan-sedang dan perlu evaluasi dokter.";
-    } else if (egfrBulat >= 30) {
-      stadium = "G3b — Penurunan Sedang hingga Berat (30 – 44 mL/min/1,73 m²)";
-      interpretasi = "Fungsi penyaringan berada pada kategori penurunan sedang-berat; disarankan pemeriksaan medis lanjutan.";
-    } else if (egfrBulat >= 15) {
-      stadium = "G4 — Penurunan Berat (15 – 29 mL/min/1,73 m²)";
-      interpretasi = "Penurunan fungsi ginjal tergolong berat; segera konsultasikan dengan dokter spesialis.";
-    } else {
-      stadium = "G5 — Gagal Ginjal (< 15 mL/min/1,73 m²)";
-      interpretasi = "Estimasi laju filtrasi berada di bawah 15 mL/min/1,73 m²; diperlukan penanganan medis segera.";
-    }
+        if (
+            isNaN(usia) ||
+            isNaN(kreatinin) ||
+            gender === "" ||
+            riwayat === ""
+        ) {
 
-    let saran = "";
-    if (riwayat === "ya" && egfrBulat >= 60) {
-      saran = "Karena terdapat riwayat hipertensi atau diabetes, lakukan pemeriksaan fungsi ginjal dan urine secara berkala sesuai anjuran dokter.";
-    } else if (egfrBulat < 60) {
-      saran = "Sebaiknya diskusikan hasil laboratorium kreatinin ini dengan dokter untuk evaluasi lanjutan dan rencana pemantauan.";
-    } else {
-      saran = "Pertahankan pola hidup sehat, hidrasi yang cukup, serta kontrol tekanan darah dan gula darah secara rutin.";
-    }
+            hasil.style.display = "block";
 
-    hasilGinjal.innerHTML = `
-      <h3>Hasil Estimasi Fungsi Ginjal</h3>
-      <p><strong>Estimasi eGFR:</strong> <strong>${egfrBulat} mL/min/1,73 m²</strong></p>
-      <p><strong>Kategori Stadium:</strong> ${stadium}</p>
-      <p><strong>Interpretasi:</strong> ${interpretasi}</p>
-      <p><strong>Saran Tindak Lanjut:</strong> ${saran}</p>
-    `;
-    hasilGinjal.style.display = "block";
-  });
+            hasil.innerHTML = `
+                <h3>Data belum lengkap</h3>
 
-  formGinjal.addEventListener("reset", function () {
-    hasilGinjal.innerHTML = "";
-    hasilGinjal.style.display = "none";
-  });
+                <p>
+                    Silakan isi semua data terlebih dahulu
+                    sebelum menghitung eGFR.
+                </p>
+            `;
 
-  function tampilkanHasil(html) {
-    hasilGinjal.innerHTML = html;
-    hasilGinjal.style.display = "block";
-  }
+            return;
+        }
+
+
+        if (usia < 18 || usia > 120) {
+
+            hasil.style.display = "block";
+
+            hasil.innerHTML = `
+                <h3>Usia tidak valid</h3>
+
+                <p>
+                    Kalkulator ini digunakan untuk orang dewasa
+                    dengan usia minimal 18 tahun.
+                </p>
+            `;
+
+            return;
+        }
+
+
+        if (kreatinin <= 0) {
+
+            hasil.style.display = "block";
+
+            hasil.innerHTML = `
+                <h3>Kreatinin tidak valid</h3>
+
+                <p>
+                    Masukkan nilai kreatinin yang lebih dari 0 mg/dL.
+                </p>
+            `;
+
+            return;
+        }
+
+
+        /* =========================
+           CKD-EPI 2021
+           BERBASIS KREATININ
+        ========================= */
+
+        let k;
+        let alpha;
+
+        if (gender === "perempuan") {
+
+            k = 0.7;
+            alpha = -0.241;
+
+        } else {
+
+            k = 0.9;
+            alpha = -0.302;
+
+        }
+
+
+        const rasio = kreatinin / k;
+
+        const minRasio = Math.min(rasio, 1);
+        const maxRasio = Math.max(rasio, 1);
+
+
+        let egfr =
+            142 *
+            Math.pow(minRasio, alpha) *
+            Math.pow(maxRasio, -1.200) *
+            Math.pow(0.9938, usia);
+
+
+        /* Faktor perempuan */
+
+        if (gender === "perempuan") {
+            egfr = egfr * 1.012;
+        }
+
+
+        /* Pembulatan */
+
+        egfr = Math.round(egfr * 10) / 10;
+
+
+        /* =========================
+           KATEGORI eGFR
+        ========================= */
+
+        let kategori;
+        let keterangan;
+
+
+        if (egfr >= 90) {
+
+            kategori = "G1";
+            keterangan =
+                "Fungsi ginjal normal atau tinggi.";
+
+        } else if (egfr >= 60) {
+
+            kategori = "G2";
+            keterangan =
+                "Penurunan ringan fungsi ginjal.";
+
+        } else if (egfr >= 45) {
+
+            kategori = "G3a";
+            keterangan =
+                "Penurunan ringan hingga sedang fungsi ginjal.";
+
+        } else if (egfr >= 30) {
+
+            kategori = "G3b";
+            keterangan =
+                "Penurunan sedang hingga berat fungsi ginjal.";
+
+        } else if (egfr >= 15) {
+
+            kategori = "G4";
+            keterangan =
+                "Penurunan berat fungsi ginjal.";
+
+        } else {
+
+            kategori = "G5";
+            keterangan =
+                "Gagal ginjal atau fungsi ginjal sangat rendah.";
+
+        }
+
+
+        /* =========================
+           HASIL
+        ========================= */
+
+        hasil.style.display = "block";
+
+        hasil.innerHTML = `
+
+            <h3>
+                Hasil Perhitungan eGFR
+            </h3>
+
+            <p>
+                <strong>Nilai eGFR:</strong>
+                ${egfr} mL/min/1,73 m²
+            </p>
+
+            <p>
+                <strong>Kategori:</strong>
+                ${kategori}
+            </p>
+
+            <p>
+                ${keterangan}
+            </p>
+
+            <p>
+                <strong>Riwayat hipertensi/diabetes:</strong>
+                ${riwayat === "ya" ? "Ya" : "Tidak"}
+            </p>
+
+        `;
+
+    });
+
+
+    /* =========================
+       RESET
+    ========================= */
+
+    form.addEventListener("reset", function () {
+
+        setTimeout(function () {
+
+            hasil.innerHTML = "";
+
+            hasil.style.display = "none";
+
+        }, 10);
+
+    });
+
 });
