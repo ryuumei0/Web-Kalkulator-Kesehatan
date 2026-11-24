@@ -1,3 +1,4 @@
+(function () {
   const formSubur = document.getElementById("form-subur");
   const hasilSubur = document.getElementById("hasil-subur");
 
@@ -93,4 +94,5 @@
   function tampilkanHasil(html) {
     hasilSubur.innerHTML = html;
     hasilSubur.style.display = "block";
-  };
+  }
+})();
