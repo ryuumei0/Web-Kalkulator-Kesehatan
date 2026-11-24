@@ -1,372 +1,97 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Kalkulator Kesehatan Ginjal - SehatKu.</title>
-
-    <link rel="stylesheet" href="../css/style.css">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-</head>
-
-<body>
-
-<!-- HEADER -->
-<header class="topbar">
-    <div class="topbar-in">
-
-        <a href="../index.html" class="brand">
-            SehatKu.
-        </a>
-
-        <nav class="menu">
-            <a href="../index.html">Beranda</a>
-            <a href="egfr-ginjal.html" class="active">Kalkulator</a>
-        </nav>
-
-    </div>
-</header>
-
-
-<!-- HERO -->
-<section class="hero hero-kecil">
-
-    <div class="wrap">
-
-        <!-- Breadcrumb -->
-        <div class="crumb">
-            <a href="../index.html">Beranda</a>
-            /
-            <a href="#">Kalkulator Kesehatan</a>
-            /
-            <span>Ginjal</span>
-        </div>
-
-
-        <!-- JUDUL -->
-        <div class="hero-content">
-
-            <div class="hero-icon">
-                <span>♥</span>
-            </div>
-
-            <div>
-
-                <h1 class="judul-hero">
-                    Kalkulator Kesehatan Ginjal
-                </h1>
-
-                <p class="lead">
-                    Hitung perkiraan laju filtrasi glomerulus (eGFR) untuk
-                    membantu mengetahui gambaran fungsi ginjal berdasarkan
-                    data kesehatan yang Anda masukkan.
-                </p>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- KONTEN UTAMA -->
-<main class="konten-utama">
-
-    <div class="wrap">
-
-        <div class="content-grid">
-
-
-            <!-- ================= KALKULATOR ================= -->
-            <section class="kalkulator">
-
-                <div class="kalkulator-header">
-
-                    <h2>
-                        Masukkan data Anda
-                    </h2>
-
-                    <p>
-                        Masukkan data sesuai hasil pemeriksaan terakhir
-                        untuk mendapatkan perkiraan nilai eGFR.
-                    </p>
-
-                </div>
-
-
-                <form id="egfrForm" class="kalkulator-form">
-
-
-                    <!-- USIA -->
-                    <div class="field">
-
-                        <label for="usia">
-                            <span class="field-icon">◉</span>
-                            Usia (tahun)
-                        </label>
-
-                        <input
-                            type="number"
-                            id="usia"
-                            name="usia"
-                            placeholder="Contoh: 35"
-                            min="1"
-                            max="120"
-                            required
-                        >
-
-                    </div>
-
-
-                    <!-- JENIS KELAMIN -->
-                    <div class="field">
-
-                        <label for="jenisKelamin">
-                            <span class="field-icon">◉</span>
-                            Jenis kelamin
-                        </label>
-
-                        <select
-                            id="jenisKelamin"
-                            name="jenisKelamin"
-                            required
-                        >
-
-                            <option value="">
-                                Pilih jenis kelamin
-                            </option>
-
-                            <option value="pria">
-                                Laki-laki
-                            </option>
-
-                            <option value="wanita">
-                                Perempuan
-                            </option>
-
-                        </select>
-
-                    </div>
-
-
-                    <!-- KREATININ -->
-                    <div class="field">
-
-                        <label for="kreatinin">
-                            <span class="field-icon">◉</span>
-                            Kreatinin serum (mg/dL)
-                        </label>
-
-                        <input
-                            type="number"
-                            id="kreatinin"
-                            name="kreatinin"
-                            placeholder="Contoh: 1.0"
-                            min="0.1"
-                            step="0.01"
-                            required
-                        >
-
-                    </div>
-
-
-                    <!-- TOMBOL -->
-                    <button
-                        type="submit"
-                        class="btn-hitung"
-                    >
-                        <span>▣</span>
-                        Hitung eGFR
-                    </button>
-
-                </form>
-
-
-                <!-- ERROR -->
-                <div
-                    id="errorMessage"
-                    class="error"
-                    style="display: none;"
-                ></div>
-
-
-                <!-- ================= HASIL ================= -->
-                <div
-                    id="hasil"
-                    class="hasil"
-                    style="display: none;"
-                >
-
-                    <div class="hasil-atas">
-
-                        <div>
-
-                            <span class="hasil-label">
-                                Perkiraan eGFR
-                            </span>
-
-                            <div class="hasil-angka">
-
-                                <span id="nilaiEgfr">
-                                    0
-                                </span>
-
-                                <small>
-                                    mL/min/1,73 m²
-                                </small>
-
-                            </div>
-
-                        </div>
-
-
-                        <div
-                            id="kategoriEgfr"
-                            class="badge-kategori"
-                        >
-                            -
-                        </div>
-
-                    </div>
-
-
-                    <!-- DATA -->
-                    <div class="hasil-baris">
-
-                        <span>
-                            Usia
-                        </span>
-
-                        <strong id="hasilUsia">
-                            -
-                        </strong>
-
-                    </div>
-
-
-                    <div class="hasil-baris">
-
-                        <span>
-                            Jenis kelamin
-                        </span>
-
-                        <strong id="hasilJenisKelamin">
-                            -
-                        </strong>
-
-                    </div>
-
-
-                    <div class="hasil-baris">
-
-                        <span>
-                            Kreatinin
-                        </span>
-
-                        <strong id="hasilKreatinin">
-                            -
-                        </strong>
-
-                    </div>
-
-
-                    <!-- SARAN -->
-                    <div class="saran">
-
-                        <h3>
-                            Informasi
-                        </h3>
-
-                        <p id="pesanEgfr">
-                            Hasil perhitungan akan ditampilkan di sini.
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-
-
-            <!-- ================= ARTIKEL ================= -->
-            <aside class="artikel">
-
-                <h2>
-                    Artikel terkait
-                </h2>
-
-
-                <div class="artikel-tag">
-                    Bacaan seputar kesehatan ginjal
-                </div>
-
-
-                <!-- CARD ARTIKEL -->
-                <article class="artikel-card">
-
-                    <div class="artikel-image">
-
-                        <img
-                            src="../assets/img/ginjal.jpg"
-                            alt="Ilustrasi kesehatan ginjal"
-                        >
-
-                    </div>
-
-
-                    <div class="artikel-body">
-
-                        <span class="artikel-kategori">
-                            Ginjal
-                        </span>
-
-
-                        <h3>
-                            Mengenal Kesehatan Ginjal
-                        </h3>
-
-
-                        <p>
-                            Mengenal fungsi ginjal, pentingnya menjaga kesehatan
-                            ginjal, serta cara mengetahui gambaran fungsi ginjal.
-                        </p>
-
-                    </div>
-
-                </article>
-
-            </aside>
-
-        </div>
-
-    </div>
-
-</main>
-
-
-<!-- FOOTER -->
-<footer class="foot">
-
-    <div class="wrap">
-
-        <p>
-            © 2026 SehatKu. Semua hak dilindungi.
-        </p>
-
-    </div>
-
-</footer>
-
-
-<!-- JAVASCRIPT -->
-<script src="../js/egfr.js"></script>
-
-</body>
-</html>
+document.addEventListener("DOMContentLoaded", function () {
+  const formGinjal = document.getElementById("form-ginjal");
+  const hasilGinjal = document.getElementById("hasil-ginjal");
+
+  if (!formGinjal || !hasilGinjal) return;
+
+  formGinjal.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const usia = parseInt(document.getElementById("usia").value, 10);
+    const gender = document.getElementById("gender").value;
+    const kreatinin = parseFloat(document.getElementById("kreatinin").value);
+    const riwayat = document.getElementById("riwayat").value;
+
+    if (isNaN(usia) || usia < 18 || usia > 120) {
+      tampilkanHasil("<p><strong>Perhatian:</strong> Persamaan dewasa berlaku untuk usia 18 – 120 tahun.</p>");
+      return;
+    }
+
+    if (!gender) {
+      tampilkanHasil("<p><strong>Perhatian:</strong> Silakan pilih jenis kelamin terlebih dahulu.</p>");
+      return;
+    }
+
+    if (isNaN(kreatinin) || kreatinin <= 0 || kreatinin > 25) {
+      tampilkanHasil("<p><strong>Perhatian:</strong> Masukkan nilai kreatinin serum yang valid (0,1 – 25 mg/dL).</p>");
+      return;
+    }
+
+    // Rumus CKD-EPI 2021 berbasis kreatinin serum (mg/dL)
+    const isFemale = gender === "perempuan";
+    const kappa = isFemale ? 0.7 : 0.9;
+    const alpha = isFemale ? -0.241 : -0.302;
+    const rasio = kreatinin / kappa;
+    const faktorMin = Math.pow(Math.min(rasio, 1), alpha);
+    const faktorMax = Math.pow(Math.max(rasio, 1), -1.2);
+    const faktorUsia = Math.pow(0.9938, usia);
+
+    let egfr = 142 * faktorMin * faktorMax * faktorUsia;
+    if (isFemale) {
+      egfr *= 1.012;
+    }
+
+    const egfrBulat = Math.round(egfr);
+
+    let stadium = "";
+    let interpretasi = "";
+
+    if (egfrBulat >= 90) {
+      stadium = "G1 — Normal atau Tinggi (≥ 90 mL/min/1,73 m²)";
+      interpretasi = "Estimasi laju filtrasi ginjal berada pada rentang normal atau tinggi.";
+    } else if (egfrBulat >= 60) {
+      stadium = "G2 — Penurunan Ringan (60 – 89 mL/min/1,73 m²)";
+      interpretasi = "Terdapat penurunan ringan estimasi laju filtrasi glomerulus.";
+    } else if (egfrBulat >= 45) {
+      stadium = "G3a — Penurunan Ringan hingga Sedang (45 – 59 mL/min/1,73 m²)";
+      interpretasi = "Fungsi penyaringan berada pada kategori penurunan ringan-sedang dan perlu evaluasi dokter.";
+    } else if (egfrBulat >= 30) {
+      stadium = "G3b — Penurunan Sedang hingga Berat (30 – 44 mL/min/1,73 m²)";
+      interpretasi = "Fungsi penyaringan berada pada kategori penurunan sedang-berat; disarankan pemeriksaan medis lanjutan.";
+    } else if (egfrBulat >= 15) {
+      stadium = "G4 — Penurunan Berat (15 – 29 mL/min/1,73 m²)";
+      interpretasi = "Penurunan fungsi ginjal tergolong berat; segera konsultasikan dengan dokter spesialis.";
+    } else {
+      stadium = "G5 — Gagal Ginjal (< 15 mL/min/1,73 m²)";
+      interpretasi = "Estimasi laju filtrasi berada di bawah 15 mL/min/1,73 m²; diperlukan penanganan medis segera.";
+    }
+
+    let saran = "";
+    if (riwayat === "ya" && egfrBulat >= 60) {
+      saran = "Karena terdapat riwayat hipertensi atau diabetes, lakukan pemeriksaan fungsi ginjal dan urine secara berkala sesuai anjuran dokter.";
+    } else if (egfrBulat < 60) {
+      saran = "Sebaiknya diskusikan hasil laboratorium kreatinin ini dengan dokter untuk evaluasi lanjutan dan rencana pemantauan.";
+    } else {
+      saran = "Pertahankan pola hidup sehat, hidrasi yang cukup, serta kontrol tekanan darah dan gula darah secara rutin.";
+    }
+
+    hasilGinjal.innerHTML = `
+      <h3>Hasil Estimasi Fungsi Ginjal</h3>
+      <p><strong>Estimasi eGFR:</strong> <strong>${egfrBulat} mL/min/1,73 m²</strong></p>
+      <p><strong>Kategori Stadium:</strong> ${stadium}</p>
+      <p><strong>Interpretasi:</strong> ${interpretasi}</p>
+      <p><strong>Saran Tindak Lanjut:</strong> ${saran}</p>
+    `;
+    hasilGinjal.style.display = "block";
+  });
+
+  formGinjal.addEventListener("reset", function () {
+    hasilGinjal.innerHTML = "";
+    hasilGinjal.style.display = "none";
+  });
+
+  function tampilkanHasil(html) {
+    hasilGinjal.innerHTML = html;
+    hasilGinjal.style.display = "block";
+  }
+});
