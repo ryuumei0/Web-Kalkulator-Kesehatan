@@ -1,4 +1,3 @@
-// tes tes WebTransportErrordocument.addEventListener("DOMContentLoaded", function () {
   const formSubur = document.getElementById("form-subur");
   const hasilSubur = document.getElementById("hasil-subur");
 
