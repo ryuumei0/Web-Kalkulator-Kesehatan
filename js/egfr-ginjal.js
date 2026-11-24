@@ -1,362 +1,86 @@
 document.addEventListener("DOMContentLoaded", function () {
-
-    // Ambil elemen HTML
     const form = document.getElementById("form-ginjal");
-    const hasil = document.getElementById("hasil-ginjal");
-
-
-    // =========================================
-    // KETIKA TOMBOL "HITUNG eGFR" DITEKAN
-    // =========================================
+    const hasilBox = document.getElementById("hasil-ginjal");
 
     form.addEventListener("submit", function (event) {
-
-        // Mencegah halaman refresh
         event.preventDefault();
 
+        const usia = parseFloat(document.getElementById("usia").value);
+        const gender = document.getElementById("gender").value;
+        const kreatinin = parseFloat(document.getElementById("kreatinin").value);
+        const riwayat = document.getElementById("riwayat").value;
 
-        // =====================================
-        // AMBIL DATA DARI FORM
-        // =====================================
-
-        const usia =
-            parseFloat(document.getElementById("usia").value);
-
-        const gender =
-            document.getElementById("gender").value;
-
-        const kreatinin =
-            parseFloat(document.getElementById("kreatinin").value);
-
-        const riwayat =
-            document.getElementById("riwayat").value;
-
-
-
-        // =====================================
-        // VALIDASI
-        // =====================================
-
-        if (
-            isNaN(usia) ||
-            isNaN(kreatinin) ||
-            gender === "" ||
-            riwayat === ""
-        ) {
-
-            hasil.style.display = "block";
-
-            hasil.innerHTML = `
-                <h3>Data Belum Lengkap</h3>
-
-                <p>
-                    Silakan isi seluruh data terlebih dahulu
-                    sebelum menghitung eGFR.
-                </p>
-            `;
-
+        if (isNaN(usia) || usia < 18 || isNaN(kreatinin) || kreatinin <= 0 || !gender || !riwayat) {
+            hasilBox.innerHTML = "<p>Mohon lengkapi seluruh data dengan benar (usia minimal 18 tahun).</p>";
+            hasilBox.style.display = "block";
             return;
         }
 
+        // Rumus CKD-EPI 2021 (tanpa faktor ras)
+        const isPerempuan = gender === "perempuan";
+        const kappa = isPerempuan ? 0.7 : 0.9;
+        const alpha = isPerempuan ? -0.241 : -0.302;
+        const faktorGender = isPerempuan ? 1.012 : 1.0;
 
-
-        // =====================================
-        // VALIDASI USIA
-        // =====================================
-
-        if (usia < 18 || usia > 120) {
-
-            hasil.style.display = "block";
-
-            hasil.innerHTML = `
-                <h3>Usia Tidak Valid</h3>
-
-                <p>
-                    Kalkulator ini digunakan untuk orang dewasa
-                    dengan usia 18 tahun ke atas.
-                </p>
-            `;
-
-            return;
-        }
-
-
-
-        // =====================================
-        // PARAMETER CKD-EPI 2021
-        // =====================================
-
-        let k;
-        let alpha;
-
-
-        if (gender === "perempuan") {
-
-            k = 0.7;
-            alpha = -0.241;
-
-        } else {
-
-            k = 0.9;
-            alpha = -0.302;
-
-        }
-
-
-
-        // =====================================
-        // PERHITUNGAN eGFR
-        // =====================================
-
-        const rasio = kreatinin / k;
-
+        const rasio = kreatinin / kappa;
         const minRasio = Math.min(rasio, 1);
-
         const maxRasio = Math.max(rasio, 1);
 
-
-        let egfr =
+        const egfr =
             142 *
             Math.pow(minRasio, alpha) *
-            Math.pow(maxRasio, -1.200) *
-            Math.pow(0.9938, usia);
+            Math.pow(maxRasio, -1.2) *
+            Math.pow(0.9938, usia) *
+            faktorGender;
 
+        const egfrBulat = egfr.toFixed(1);
 
-        // Faktor perempuan
-        if (gender === "perempuan") {
-
-            egfr = egfr * 1.012;
-
-        }
-
-
-        // Bulatkan menjadi 1 angka
-        // di belakang koma
-        egfr = egfr.toFixed(1);
-
-
-
-        // =====================================
-        // TENTUKAN KATEGORI
-        // =====================================
-
-        let kategori;
-        let keterangan;
-
+        // Penentuan kategori stadium GFR sesuai artikel di halaman
+        let kategori = "";
+        let penjelasan = "";
 
         if (egfr >= 90) {
-
-            kategori =
-                "G1 — Normal atau Tinggi";
-
-            keterangan =
-                "Nilai eGFR tergolong normal atau tinggi. " +
-                "Namun, penilaian fungsi ginjal juga perlu " +
-                "mempertimbangkan pemeriksaan penunjang lainnya.";
-
+            kategori = "G1 — Normal atau Tinggi (≥ 90 mL/min/1,73 m²)";
+            penjelasan = "Laju filtrasi tergolong normal atau tinggi. Tetap pertahankan pola hidup sehat dan pantau kondisi pendukung bila ada faktor risiko.";
+        } else if (egfr >= 60) {
+            kategori = "G2 — Penurunan Ringan (60 – 89 mL/min/1,73 m²)";
+            penjelasan = "Terdapat penurunan ringan laju filtrasi. Perlu dicermati terutama jika disertai riwayat hipertensi, diabetes, atau keluhan ginjal.";
+        } else if (egfr >= 45) {
+            kategori = "G3a — Penurunan Ringan-Sedang (45 – 59 mL/min/1,73 m²)";
+            penjelasan = "Fungsi penyaringan berada pada kategori penurunan ringan-sedang. Disarankan berkonsultasi dengan dokter untuk pemantauan rutin.";
+        } else if (egfr >= 30) {
+            kategori = "G3b — Penurunan Sedang-Berat (30 – 44 mL/min/1,73 m²)";
+            penjelasan = "Fungsi penyaringan berada pada kategori penurunan sedang-berat. Sebaiknya segera periksakan diri ke dokter untuk evaluasi dan tata laksana.";
+        } else if (egfr >= 15) {
+            kategori = "G4 — Penurunan Berat (15 – 29 mL/min/1,73 m²)";
+            penjelasan = "Fungsi ginjal mengalami penurunan berat. Memerlukan penanganan dan pemantauan intensif oleh tenaga medis/dokter spesialis.";
+        } else {
+            kategori = "G5 — Gagal Ginjal (< 15 mL/min/1,73 m²)";
+            penjelasan = "Laju filtrasi berada di bawah 15 mL/min/1,73 m². Segera konsultasikan ke dokter spesialis untuk penanganan lebih lanjut.";
         }
 
-        else if (egfr >= 60) {
+        const catatanRiwayat =
+            riwayat === "ya"
+                ? `<p><strong>Faktor Risiko (Hipertensi/Diabetes):</strong> Karena Anda memiliki riwayat hipertensi atau diabetes, pengendalian tekanan darah, gula darah, serta pemeriksaan lanjutan sangat penting untuk melindungi fungsi ginjal.</p>`
+                : `<p><strong>Faktor Risiko (Hipertensi/Diabetes):</strong> Tidak tercatat riwayat hipertensi atau diabetes pada isian ini. Tetap jaga gaya hidup sehat secara konsisten.</p>`;
 
-            kategori =
-                "G2 — Penurunan Ringan";
-
-            keterangan =
-                "Nilai eGFR menunjukkan penurunan ringan. " +
-                "Hasil perlu dilihat bersama faktor risiko " +
-                "dan pemeriksaan kesehatan lainnya.";
-
-        }
-
-        else if (egfr >= 45) {
-
-            kategori =
-                "G3a — Penurunan Ringan sampai Sedang";
-
-            keterangan =
-                "Nilai eGFR berada pada kategori G3a. " +
-                "Disarankan melakukan pemantauan fungsi ginjal " +
-                "dan berkonsultasi dengan tenaga kesehatan.";
-
-        }
-
-        else if (egfr >= 30) {
-
-            kategori =
-                "G3b — Penurunan Sedang sampai Berat";
-
-            keterangan =
-                "Nilai eGFR berada pada kategori G3b. " +
-                "Sebaiknya dilakukan evaluasi dan pemantauan medis " +
-                "lebih lanjut.";
-
-        }
-
-        else if (egfr >= 15) {
-
-            kategori =
-                "G4 — Penurunan Berat";
-
-            keterangan =
-                "Nilai eGFR menunjukkan penurunan fungsi ginjal " +
-                "yang berat dan memerlukan evaluasi medis lebih lanjut.";
-
-        }
-
-        else {
-
-            kategori =
-                "G5 — Gagal Ginjal";
-
-            keterangan =
-                "Nilai eGFR berada pada kategori G5 dan " +
-                "memerlukan evaluasi serta penanganan medis lebih lanjut.";
-
-        }
-
-
-
-        // =====================================
-        // INFORMASI RIWAYAT
-        // =====================================
-
-        let infoRiwayat;
-
-
-        if (riwayat === "ya") {
-
-            infoRiwayat =
-                "Ya. Riwayat hipertensi atau diabetes " +
-                "merupakan salah satu faktor risiko gangguan ginjal.";
-
-        }
-
-        else {
-
-            infoRiwayat =
-                "Tidak memiliki riwayat hipertensi atau diabetes " +
-                "berdasarkan data yang dimasukkan.";
-
-        }
-
-
-
-        // =====================================
-        // TAMPILKAN HASIL
-        // =====================================
-
-        hasil.style.display = "block";
-
-
-        hasil.innerHTML = `
-
-            <h3>
-                Hasil Perhitungan eGFR
-            </h3>
-
-
-            <p>
-                <strong>
-                    Nilai eGFR:
-                </strong>
-            </p>
-
-
-            <div class="nilai-egfr">
-
-                ${egfr}
-                mL/min/1,73 m²
-
-            </div>
-
-
-            <p>
-                <strong>
-                    Kategori:
-                </strong>
-            </p>
-
-
-            <div class="kategori-egfr">
-
-                ${kategori}
-
-            </div>
-
-
-            <p>
-
-                <strong>
-                    Keterangan:
-                </strong>
-
-                <br>
-
-                ${keterangan}
-
-            </p>
-
-
+        // Render hasil ke #hasil-ginjal sesuai class CSS yang sudah Anda buat
+        hasilBox.innerHTML = `
+            <h3>Hasil Estimasi eGFR</h3>
+            <p>Perkiraan laju filtrasi glomerulus Anda:</p>
+            <div class="nilai-egfr">${egfrBulat} mL/min/1,73 m²</div>
+            <div class="kategori-egfr">${kategori}</div>
+            <p>${penjelasan}</p>
             <hr>
-
-
-            <p>
-
-                <strong>
-                    Riwayat hipertensi/diabetes:
-                </strong>
-
-                <br>
-
-                ${infoRiwayat}
-
-            </p>
-
-
-            <p>
-
-                <strong>
-                    Catatan:
-                </strong>
-
-                <br>
-
-                Hasil eGFR merupakan nilai estimasi
-                berdasarkan data yang dimasukkan dan
-                bukan merupakan diagnosis medis.
-
-                Konsultasikan hasil pemeriksaan
-                dengan dokter untuk penilaian klinis
-                yang lebih tepat.
-
-            </p>
-
+            ${catatanRiwayat}
         `;
 
-
-        // =====================================
-        // SCROLL KE HASIL
-        // =====================================
-
-        hasil.scrollIntoView({
-            behavior: "smooth",
-            block: "center"
-        });
-
+        hasilBox.style.display = "block";
     });
 
-
-
-    // =========================================
-    // TOMBOL RESET
-    // =========================================
-
+    // Sembunyikan kembali kotak hasil saat tombol Reset ditekan
     form.addEventListener("reset", function () {
-
-        hasil.style.display = "none";
-
-        hasil.innerHTML = "";
-
+        hasilBox.style.display = "none";
+        hasilBox.innerHTML = "";
     });
-
 });
