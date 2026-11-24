@@ -10,6 +10,116 @@
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <link rel="stylesheet" href="../css/style.css">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    .subur-stack {
+      display: grid;
+      gap: 24px;
+      margin-top: 24px;
+      margin-bottom: 40px;
+    }
+
+    .subur-card {
+      background: #ffffff;
+      padding: 24px;
+      border-radius: 12px;
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+    }
+
+    .subur-card h2,
+    .subur-card h3 {
+      color: #087f6e;
+      margin-top: 0;
+    }
+
+    .subur-card a {
+      color: #087f6e;
+      overflow-wrap: anywhere;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 7px;
+      font-weight: 600;
+    }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccd5d8;
+      border-radius: 7px;
+      font-size: 15px;
+      font-family: inherit;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      outline: 2px solid #087f6e;
+      border-color: #087f6e;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn-hitung,
+    .btn-reset {
+      border: none;
+      padding: 12px 22px;
+      border-radius: 7px;
+      cursor: pointer;
+      font-size: 15px;
+      font-family: inherit;
+      font-weight: 600;
+    }
+
+    .btn-hitung {
+      background: #087f6e;
+      color: #ffffff;
+    }
+
+    .btn-reset {
+      background: #e1e6e8;
+      color: #263238;
+    }
+
+    #hasil-subur {
+      display: none;
+      margin-top: 24px;
+      padding: 20px;
+      border-radius: 10px;
+      background: #e8f5f2;
+      border-left: 5px solid #087f6e;
+    }
+
+    #hasil-subur h3 {
+      color: #087f6e;
+      margin-top: 0;
+    }
+
+    .catatan {
+      font-size: 13px;
+      color: #59666b;
+      margin-top: 15px;
+    }
+
+    @media (max-width: 600px) {
+      .subur-card {
+        padding: 18px;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -31,12 +141,134 @@
           <span class="judul-ikon" aria-hidden="true"><i class="fa-solid fa-baby"></i></span>
           Kalkulator Masa Subur &amp; HPL
         </h1>
-        <p class="lead">Halaman kalkulator ini sedang disiapkan. Sementara itu, silakan pilih kalkulator lain yang sudah tersedia.</p>
+        <p class="lead">Perkirakan tanggal ovulasi, rentang masa subur, perkiraan menstruasi berikutnya, serta Hari Perkiraan Lahir (HPL) berdasarkan HPHT.</p>
       </div>
     </section>
 
-    <section class="wrap tools">
-      <p class="notice">Kembali ke <a href="../index.html#kalkulator">daftar kalkulator kesehatan</a>.</p>
+    <section class="wrap subur-stack">
+      <article class="subur-card" id="artikel">
+        <h2>Mengenal Siklus Menstruasi, Masa Subur, dan HPL</h2>
+
+        <p>
+          Siklus menstruasi dihitung mulai dari <strong>Hari Pertama Haid Terakhir (HPHT)</strong>
+          hingga hari pertama siklus haid berikutnya. Pada siklus yang teratur, rata-rata
+          panjang siklus berada di kisaran 21 hingga 35 hari, dengan pelepasan sel telur
+          (<strong>ovulasi</strong>) umumnya terjadi sekitar 14 hari sebelum haid berikutnya
+          dimulai.
+        </p>
+
+        <h3>Memahami Masa Subur dan Ovulasi</h3>
+
+        <p>
+          <strong>1. Masa Subur (<em>Fertile Window</em>)</strong><br>
+          Mencakup beberapa hari sebelum hari ovulasi hingga hari ovulasi itu sendiri,
+          karena sel sperma dapat bertahan hidup di saluran reproduksi selama beberapa hari
+          sementara sel telur bertahan sekitar 12–24 jam setelah dilepaskan.
+        </p>
+
+        <p>
+          <strong>2. Hari Perkiraan Lahir (HPL)</strong><br>
+          Perkiraan waktu persalinan umumnya dihitung menggunakan aturan Naegele
+          (sekitar 280 hari atau 40 minggu dari HPHT pada siklus 28 hari, dengan
+          penyesuaian bila panjang siklus berbeda dari 28 hari).
+        </p>
+
+        <h3>Tanda Perubahan Tubuh yang Sering Diamati</h3>
+        <ul>
+          <li>Perubahan lendir serviks menjadi lebih jernih dan elastis menjelang ovulasi.</li>
+          <li>Peningkatan ringan suhu basal tubuh setelah ovulasi terjadi.</li>
+          <li>Rasa tidak nyaman ringan pada perut bagian bawah atau payudara lebih sensitif.</li>
+          <li>Perubahan suasana hati atau tingkat energi selama fase siklus.</li>
+        </ul>
+
+        <h3>Faktor yang Memengaruhi Keteraturan Siklus</h3>
+        <p>
+          Siklus menstruasi dapat dipengaruhi oleh stres emosional, perubahan berat badan
+          drastis, pola tidur, aktivitas fisik berat, kondisi hormonal seperti PCOS atau
+          gangguan tiroid, serta masa menyusui atau penggunaan kontrasepsi hormonal.
+        </p>
+
+        <h3>Tips Perencanaan Kehamilan &amp; Kesehatan Reproduksi</h3>
+        <ul>
+          <li>Catat tanggal mulai haid dan panjang siklus secara rutin selama beberapa bulan.</li>
+          <li>Penuhi kebutuhan nutrisi seimbang, termasuk asam folat saat merencanakan kehamilan.</li>
+          <li>Jaga pola tidur cukup, kelola stres, dan hindari paparan asap rokok serta alkohol.</li>
+          <li>Lakukan pemeriksaan ke dokter kandungan atau bidan bila siklus sangat tidak teratur atau muncul keluhan nyeri hebat.</li>
+        </ul>
+
+        <h3>Sumber Informasi Kesehatan</h3>
+        <p>
+          Informasi lebih lanjut dapat dibaca melalui sumber resmi berikut:
+        </p>
+
+        <ul>
+          <li>
+            <a href="https://ayosehat.kemkes.go.id/"
+               target="_blank" rel="noopener noreferrer">
+              Kementerian Kesehatan Republik Indonesia (Ayo Sehat)
+            </a>
+          </li>
+          <li>
+            <a href="https://www.who.int/health-topics/menstrual-health"
+               target="_blank" rel="noopener noreferrer">
+              World Health Organization (WHO)
+            </a>
+          </li>
+          <li>
+            <a href="https://www.acog.org/womens-health/faqs/your-menstrual-cycle"
+               target="_blank" rel="noopener noreferrer">
+              American College of Obstetricians and Gynecologists (ACOG)
+            </a>
+          </li>
+        </ul>
+      </article>
+
+      <section class="subur-card">
+        <h2>Hitung Masa Subur &amp; HPL</h2>
+        <p>Masukkan tanggal Hari Pertama Haid Terakhir (HPHT) dan rata-rata panjang siklus Anda.</p>
+
+        <form id="form-subur">
+          <div class="form-group">
+            <label for="hpht">Hari Pertama Haid Terakhir (HPHT)</label>
+            <input type="date" id="hpht" required>
+          </div>
+
+          <div class="form-group">
+            <label for="siklus">Rata-Rata Panjang Siklus Menstruasi (hari)</label>
+            <input type="number" id="siklus" min="20" max="45" value="28" required>
+          </div>
+
+          <div class="form-group">
+            <label for="keteraturan">Apakah siklus menstruasi Anda teratur?</label>
+            <select id="keteraturan" required>
+              <option value="">Pilih jawaban</option>
+              <option value="teratur">Ya, cukup teratur</option>
+              <option value="tidak-teratur">Tidak teratur / sering berubah</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="tujuan">Tujuan Perhitungan</label>
+            <select id="tujuan" required>
+              <option value="">Pilih tujuan</option>
+              <option value="promil">Perencanaan kehamilan (masa subur)</option>
+              <option value="hpl">Perkiraan tanggal melahirkan (HPL)</option>
+              <option value="pantau-siklus">Pemantauan jadwal haid berikutnya</option>
+            </select>
+          </div>
+
+          <div class="button-group">
+            <button type="submit" class="btn-hitung">Hitung Masa Subur &amp; HPL</button>
+            <button type="reset" class="btn-reset">Reset</button>
+          </div>
+        </form>
+
+        <div id="hasil-subur" aria-live="polite"></div>
+
+        <p class="catatan">
+          Catatan: Kalkulator ini merupakan alat estimasi edukasi berdasarkan kalender siklus menstruasi dan HPHT, bukan metode kontrasepsi maupun diagnosis medis. Konfirmasi usia kehamilan dan HPL sebaiknya dilakukan melalui pemeriksaan tenaga kesehatan dan ultrasonografi (USG).
+        </p>
+      </section>
     </section>
   </main>
 
@@ -46,5 +278,6 @@
     </div>
   </footer>
 
+  <script src="../js/masa-subur.js"></script>
 </body>
 </html>
