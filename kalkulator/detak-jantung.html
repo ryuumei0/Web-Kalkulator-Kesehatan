@@ -1,50 +1,313 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Kalkulator Zona Detak Jantung - SehatKu</title>
-  <meta name="description" content="Kalkulator zona detak jantung berdasarkan usia.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-  <link rel="stylesheet" href="../css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Zona Detak Jantung - SehatKu</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Header dan footer memakai gaya bersama dari css/style.css */
+
+        .hero-diabetes {
+            background: #e0f2ef;
+            padding: 45px 20px;
+            text-align: center;
+        }
+
+        .hero-diabetes h1 {
+            color: #087f6e;
+            margin-bottom: 10px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 850px;
+            margin: 30px auto;
+        }
+
+        .article,
+        .diabetes-container {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+        }
+
+        .article h2,
+        .article h3 {
+            color: #087f6e;
+        }
+
+        .article a {
+            color: #087f6e;
+            overflow-wrap: anywhere;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccd5d8;
+            border-radius: 7px;
+            font-size: 15px;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: 2px solid #087f6e;
+            border-color: #087f6e;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn-hitung,
+        .btn-reset {
+            border: none;
+            padding: 12px 22px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .btn-hitung {
+            background: #087f6e;
+            color: white;
+        }
+
+        .btn-reset {
+            background: #e1e6e8;
+            color: #263238;
+        }
+
+        #hasil-jantung {
+            display: none;
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 10px;
+            background: #e8f5f2;
+            border-left: 5px solid #087f6e;
+        }
+
+        #hasil-jantung h3 {
+            color: #087f6e;
+            margin-top: 0;
+        }
+
+        .catatan {
+            font-size: 13px;
+            color: #59666b;
+            margin-top: 15px;
+        }
+
+        @media (max-width: 600px) {
+            .article,
+            .diabetes-container {
+                padding: 18px;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
-  <header class="topbar">
-    <div class="wrap topbar-in">
-      <a class="brand" href="../index.html">SehatKu<span class="brand-dot">.</span></a>
-      <nav class="menu" aria-label="Menu utama">
-        <a href="../index.html">Beranda</a>
-        <a href="../index.html#kalkulator" aria-current="page">Kalkulator</a>
-      </nav>
-    </div>
-  </header>
+    <header class="topbar">
+        <div class="wrap topbar-in">
+            <a class="brand" href="../index.html">SehatKu<span class="brand-dot">.</span></a>
+            <nav class="menu" aria-label="Menu utama">
+                <a href="../index.html">Beranda</a>
+                <a href="../index.html#kalkulator" aria-current="page">Kalkulator</a>
+            </nav>
+        </div>
+    </header>
 
-  <main>
-    <section class="hero hero-kecil">
-      <div class="wrap">
-        <p class="crumb"><a href="../index.html">Beranda</a> / <a href="../index.html#kalkulator">Kalkulator Kesehatan</a> / Detak Jantung</p>
-        <h1 class="judul-hero">
-          <span class="judul-ikon" aria-hidden="true"><i class="fa-solid fa-heart-pulse"></i></span>
-          Kalkulator Zona Detak Jantung
-        </h1>
-        <p class="lead">Halaman kalkulator ini sedang disiapkan. Sementara itu, silakan pilih kalkulator lain yang sudah tersedia.</p>
-      </div>
+    <section class="hero-diabetes">
+        <h1>Kalkulator Zona Detak Jantung</h1>
+        <p>Ketahui estimasi detak jantung maksimal dan zona intensitas latihan yang aman sesuai kondisi tubuhmu.</p>
     </section>
 
-    <section class="wrap tools">
-      <p class="notice">Kembali ke <a href="../index.html#kalkulator">daftar kalkulator kesehatan</a>.</p>
-    </section>
-  </main>
+    <main class="container">
+        <article class="article" id="artikel">
+            <h2>Mengenal Detak Jantung dan Zona Latihan</h2>
 
-  <footer class="foot" id="tentang">
-    <div class="wrap">
-      <p>Proyek tugas web kelompok. Rumus mengacu pada panduan kesehatan yang dicantumkan di tiap kalkulator.</p>
-    </div>
-  </footer>
+            <p>
+                Detak jantung (denyut nadi) adalah jumlah berapa kali jantung berdetak
+                dalam satu menit atau satuan <em>beats per minute</em> (bpm). Memantau
+                detak jantung saat istirahat maupun berolahraga membantu menilai tingkat
+                kebugaran kardiovaskular serta memastikan intensitas latihan tetap aman
+                dan efektif bagi tubuh.
+            </p>
+
+            <h3>Kategori Zona Detak Jantung</h3>
+
+            <p>
+                <strong>1. Zona Pemanasan & Pemulihan (50% – 60% HRmax)</strong><br>
+                Intensitas sangat ringan yang cocok untuk pemanasan sebelum olahraga,
+                pendinginan, atau pemulihan aktif.
+            </p>
+
+            <p>
+                <strong>2. Zona Pembakaran Lemak (60% – 70% HRmax)</strong><br>
+                Intensitas ringan hingga sedang yang nyaman dipertahankan dalam durasi
+                lama untuk membangun daya tahan dasar.
+            </p>
+
+            <p>
+                <strong>3. Zona Aerobik / Kardio (70% – 85% HRmax)</strong><br>
+                Intensitas sedang hingga berat yang efektif meningkatkan kapasitas
+                paru-paru, kekuatan otot jantung, dan stamina.
+            </p>
+
+            <h3>Gejala Detak Jantung Tidak Normal Saat Latihan</h3>
+            <ul>
+                <li>Nyeri, tekanan, atau rasa sesak di bagian dada.</li>
+                <li>Pusing, berkunang-kunang, atau terasa hampir pingsan.</li>
+                <li>Sesak napas berlebihan yang tidak membaik saat beristirahat.</li>
+                <li>Jantung berdebar sangat cepat atau tidak beraturan secara tiba-tiba.</li>
+            </ul>
+
+            <h3>Faktor yang Memengaruhi Detak Jantung</h3>
+            <p>
+                Beberapa faktor yang memengaruhi kecepatan detak jantung antara lain
+                usia, tingkat kebugaran fisik, suhu lingkungan, kecukupan cairan tubuh,
+                kualitas tidur, tingkat stres, konsumsi kafein, serta obat-obatan tertentu.
+            </p>
+
+            <h3>Cara Menjaga Kesehatan Jantung</h3>
+            <ul>
+                <li>Melakukan aktivitas fisik aerobik secara rutin minimal 150 menit per minggu.</li>
+                <li>Mengonsumsi makanan bergizi seimbang serta membatasi garam dan lemak jenuh.</li>
+                <li>Menjaga berat badan ideal dan mencukupi kebutuhan cairan tubuh.</li>
+                <li>Menghindari kebiasaan merokok dan mengelola stres dengan baik.</li>
+                <li>Melakukan pemeriksaan tekanan darah dan kesehatan jantung secara berkala.</li>
+            </ul>
+
+            <h3>Pentingnya Pemantauan Detak Jantung</h3>
+            <p>
+                Mengetahui batas aman detak jantung membantu mencegah olahraga berlebihan
+                (<em>overtraining</em>) sekaligus memaksimalkan manfaat latihan fisik.
+                Jika memiliki riwayat gangguan jantung atau tekanan darah tinggi,
+                sebaiknya berkonsultasi dengan tenaga kesehatan sebelum memulai program
+                latihan intensitas tinggi.
+            </p>
+
+            <h3>Sumber Informasi Kesehatan</h3>
+            <p>
+                Informasi lebih lanjut dapat dibaca melalui sumber resmi berikut:
+            </p>
+
+            <ul>
+                <li>
+                    <a href="https://ayosehat.kemkes.go.id/"
+                       target="_blank" rel="noopener noreferrer">
+                        Kementerian Kesehatan Republik Indonesia (Ayo Sehat)
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.who.int/health-topics/cardiovascular-diseases"
+                       target="_blank" rel="noopener noreferrer">
+                        World Health Organization (WHO)
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.cdc.gov/physical-activity-basics/measuring/heart-rate.html"
+                       target="_blank" rel="noopener noreferrer">
+                        Centers for Disease Control and Prevention (CDC)
+                    </a>
+                </li>
+            </ul>
+        </article>
+
+        <section class="diabetes-container">
+            <h2>Hitung Zona Detak Jantung</h2>
+            <p>Isi seluruh data di bawah ini dengan benar.</p>
+
+            <form id="form-jantung">
+                <div class="form-group">
+                    <label for="usia">Usia (tahun)</label>
+                    <input type="number" id="usia" min="5" max="100" placeholder="Contoh: 21" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="rhr">Detak Jantung Istirahat / RHR (bpm)</label>
+                    <input type="number" id="rhr" min="35" max="130" placeholder="Contoh: 70" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="target-zona">Target Intensitas Latihan</label>
+                    <select id="target-zona" required>
+                        <option value="">Pilih intensitas latihan</option>
+                        <option value="ringan">Ringan — Pemanasan & Pemulihan (50% – 60%)</option>
+                        <option value="sedang">Sedang — Pembakaran Lemak & Kardio Dasar (60% – 70%)</option>
+                        <option value="aerobik">Aerobik — Peningkatan Stamina (70% – 80%)</option>
+                        <option value="berat">Berat — Latihan Performa / Anaerobik (80% – 90%)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="rutin-olahraga">Apakah kamu rutin berolahraga setiap minggu?</label>
+                    <select id="rutin-olahraga" required>
+                        <option value="">Pilih jawaban</option>
+                        <option value="ya">Ya</option>
+                        <option value="tidak">Tidak</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="keluhan">Apakah sering merasakan jantung berdebar atau nyeri dada saat beraktivitas?</label>
+                    <select id="keluhan" required>
+                        <option value="">Pilih jawaban</option>
+                        <option value="ya">Ya</option>
+                        <option value="tidak">Tidak</option>
+                    </select>
+                </div>
+
+                <div class="button-group">
+                    <button type="submit" class="btn-hitung">Hitung Zona</button>
+                    <button type="reset" class="btn-reset">Reset</button>
+                </div>
+            </form>
+
+            <div id="hasil-jantung" aria-live="polite"></div>
+
+            <p class="catatan">
+                Catatan: Kalkulator ini menggunakan estimasi rumus detak jantung maksimal (Tanaka: 208 − 0,7 × usia) dan metode cadangan detak jantung (Karvonen) untuk tujuan edukasi latihan kebugaran, bukan alat diagnosis medis dan tidak menggantikan pemeriksaan dokter.
+            </p>
+        </section>
+
+    </main>
+
+    <footer class="foot" id="tentang">
+        <div class="wrap">
+            <p>Proyek tugas web kelompok. Rumus mengacu pada panduan kesehatan yang dicantumkan di tiap kalkulator.</p>
+        </div>
+    </footer>
+
+    <script src="../js/detak-jantung.js"></script>
 
 </body>
 </html>
